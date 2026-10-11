@@ -1,0 +1,187 @@
+# Pages CMS configuration — https://pagescms.org/docs
+media:
+  input: media
+  output: /media
+
+content:
+  - name: projects
+    label: Projects
+    type: collection
+    path: content/projects
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: name
+      fields: [ cover, name, sector, featured, hidden ]
+      sort: [ order, name ]
+    fields:
+      - { name: name, label: Name, type: string, required: true, description: "Client or project name. Also becomes the page address." }
+      - name: sector
+        label: Sector
+        type: select
+        required: true
+        options:
+          values: [ { value: corporate, label: "Corporate Offices" }, { value: retail, label: "Retail and Showrooms" }, { value: hospitality, label: "Hospitality" }, { value: education, label: "Education" }, { value: fitness, label: "Fitness Centres" }, { value: healthcare, label: "Healthcare" }, { value: studios, label: "Studios" }, { value: residential, label: "Residential" } ]
+      - { name: client, label: Client name, type: string, required: true, description: "Write Confidential for projects under NDA." }
+      - { name: area, label: Area (sq ft), type: number, description: "Digits only, e.g. 7500" }
+      - { name: summary, label: Summary, type: text, required: true, description: "One or two sentences. Also used for Google." }
+      - { name: cover, label: Cover image, type: image, required: true, description: "Best landscape photo, about 2400px wide." }
+      - { name: gallery, label: Photo gallery, type: image, list: true, description: "Drag to reorder." }
+      - { name: featured, label: Show on homepage, type: boolean, default: false, description: "Keep about five switched on." }
+      - { name: order, label: Order, type: number, description: "Lower numbers appear first." }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
+  - name: journal
+    label: Journal
+    type: collection
+    path: content/journal
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: title
+      fields: [ cover, title, category, date, hidden ]
+      sort: [ date ]
+    fields:
+      - { name: title, label: Title, type: string, required: true }
+      - name: category
+        label: Category
+        type: select
+        options:
+          values: [ Workplace, Vastu, Sustainability, Intelligent Living, News ]
+      - { name: date, label: Date, type: date, required: true }
+      - { name: cover, label: Cover image, type: image }
+      - { name: excerpt, label: Excerpt, type: text, required: true, description: "One sentence shown on the Journal page." }
+      - { name: body, label: Body, type: rich-text }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
+  - name: jobs
+    label: Jobs
+    type: collection
+    path: content/jobs
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: title
+      fields: [ title, type, place, hidden ]
+    fields:
+      - { name: title, label: Role, type: string, required: true }
+      - { name: type, label: Type, type: string, description: "e.g. Full-time, 6 months" }
+      - { name: place, label: Location, type: string }
+      - { name: summary, label: Summary, type: text }
+      - { name: order, label: Order, type: number }
+      - { name: hidden, label: Hide (role filled), type: boolean, default: false }
+
+  - name: clients
+    label: Clientele
+    type: file
+    path: content/clients.json
+    format: json
+    fields:
+      - { name: wall, label: Homepage “Trusted by” names, type: string, list: true }
+      - name: offices
+        label: Offices & institutions
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Client, type: string }
+          - { name: place, label: Location, type: string }
+          - { name: area, label: Area (sq ft), type: number }
+      - name: groups
+        label: Other sectors
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Group name, type: string }
+          - { name: items, label: Clients, type: string, list: true }
+      - { name: homes, label: Number of homes, type: string }
+      - { name: homeAreas, label: Residential areas, type: text }
+
+  - name: sectors
+    label: Sectors
+    type: file
+    path: content/sectors.json
+    format: json
+    list: true
+    fields:
+      - { name: id, label: ID (do not change), type: string }
+      - { name: name, label: Name, type: string }
+      - { name: blurb, label: Description, type: text }
+      - { name: image, label: Image, type: image }
+
+  - name: notifications
+    label: "Settings → Notifications"
+    type: file
+    path: content/settings/notifications.json
+    format: json
+    fields:
+      - name: forms
+        label: Who gets alerted, per form
+        type: object
+        list: true
+        fields:
+          - name: form
+            label: Form
+            type: select
+            options:
+              values: [ { value: quote, label: Get a quote }, { value: consultation, label: Book a consultation }, { value: careers, label: Careers }, { value: referral, label: Referral programme }, { value: ecovisions, label: EcoVisions } ]
+          - { name: emails, label: Email addresses, type: string, list: true }
+          - { name: whatsapp, label: "WhatsApp numbers (with 91, e.g. 919820111353)", type: string, list: true }
+
+  - name: site
+    label: "Settings → Site"
+    type: file
+    path: content/settings/site.json
+    format: json
+    fields:
+      - { name: phone, label: Phone (display), type: string }
+      - { name: phoneLink, label: Phone (for tap-to-call), type: string }
+      - { name: whatsapp, label: WhatsApp number, type: string }
+      - { name: email, label: Email, type: string }
+      - { name: hours, label: Opening hours, type: string }
+      - { name: formsEndpoint, label: Forms web app URL, type: string, description: "From Google Apps Script → Deploy. Leave alone once set." }
+      - name: stats
+        label: Homepage stats
+        type: object
+        list: true
+        fields:
+          - { name: value, label: Value, type: string }
+          - { name: label, label: Label, type: string }
+          - { name: note, label: Note, type: string }
+      - name: brochures
+        label: Brochure downloads
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: file, label: PDF, type: file }
+      - name: images
+        label: Page images
+        type: object
+        fields:
+          - { name: automation, label: Intelligent Living, type: image }
+          - { name: sustainability, label: EcoVisions, type: image }
+          - { name: vastu, label: Vastu, type: image }
+          - { name: about, label: About banner, type: image }
+          - { name: founder, label: Founder portrait, type: image }
+      - name: showreel
+        label: Homepage video
+        type: object
+        fields:
+          - { name: video, label: Vimeo background URL, type: string }
+          - { name: poster, label: Poster image, type: image }
+      - name: offices
+        label: Offices
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: address, label: Address, type: text }
+          - { name: mapQuery, label: Map search text, type: string }
+      - name: social
+        label: Social links
+        type: object
+        list: true
+        fields:
+          - { name: name, label: Network, type: string }
+          - { name: url, label: URL, type: string }
+      - { name: url, label: Website address, type: string }

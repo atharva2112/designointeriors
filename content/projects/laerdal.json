@@ -1,0 +1,16 @@
+{
+  "name": "Laerdal",
+  "sector": "corporate",
+  "client": "Laerdal",
+  "area": 6000,
+  "summary": "Reception, circulation and work areas organised around a run of red columns.",
+  "cover": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Refined%20Laerdal%20reception%20area-4.png/:/rs=w:1800,cg:true,m",
+  "gallery": [
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Sunlit%20office%20corridor%20with%20red%20columns-3.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Refined%20office%20with%20vivid%20red%20columns-1.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Sunlit%20window-side%20office-2.png/:/rs=w:1800,cg:true,m"
+  ],
+  "featured": true,
+  "order": 2,
+  "hidden": false
+}

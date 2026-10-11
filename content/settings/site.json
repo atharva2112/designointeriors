@@ -1,0 +1,96 @@
+{
+  "url": "https://designointeriors.com",
+  "phone": "+91 98201 11353",
+  "phoneLink": "+919820111353",
+  "whatsapp": "919820111353",
+  "email": "designo@designointeriors.com",
+  "hours": "Mon–Sat, 9 am – 7 pm",
+  "formsEndpoint": "",
+  "showreel": {
+    "video": "https://player.vimeo.com/video/813063779?h=f5ecabbdcb&background=1&autoplay=1&loop=1&muted=1&dnt=1",
+    "poster": "https://i.vimeocdn.com/video/1644143992-2ea86e0de2caaeac311d0ad0e14072403a971a7114dad300d3a0f86c1c4cae9b-d_1920x1080?r=pad"
+  },
+  "images": {
+    "automation": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Blue-Lit%20Circular%20Conference%20Room.png/:/rs=w:1800,cg:true,m",
+    "sustainability": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Mumbai%20conference%20room%20amid%20tropical%20greenery-.png/:/rs=w:1800,cg:true,m",
+    "vastu": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Sunlit%20window-side%20office-2.png/:/rs=w:1800,cg:true,m",
+    "about": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Tree-filled%20Mumbai%20townhall%20conference%20room-2.png/:/rs=w:1800,cg:true,m",
+    "founder": ""
+  },
+  "stats": [
+    {
+      "value": "30+",
+      "label": "Years",
+      "note": "In practice since 1991"
+    },
+    {
+      "value": "300+",
+      "label": "Projects",
+      "note": "Across industries and sectors"
+    },
+    {
+      "value": "20,00,000+",
+      "label": "Sq ft",
+      "note": "Designed and executed"
+    },
+    {
+      "value": "3×",
+      "label": "ISO certified",
+      "note": "9001 · 14001 · 45001"
+    },
+    {
+      "value": "45",
+      "label": "Day timelines",
+      "note": "Efficient, dependable delivery"
+    },
+    {
+      "value": "10",
+      "label": "Year warranty",
+      "note": "Built to last, backed by guarantee"
+    }
+  ],
+  "brochures": [
+    {
+      "name": "Commercial credentials",
+      "file": "https://img1.wsimg.com/blobby/go/8d8ce064-80f9-4eee-ae5f-83acb4b71860/downloads/Designo%20Commercial%20Credentials1.pdf?ver=1791072159940"
+    },
+    {
+      "name": "Retail credentials",
+      "file": "https://img1.wsimg.com/blobby/go/8d8ce064-80f9-4eee-ae5f-83acb4b71860/downloads/Designo%20Retail%20Creds.pdf?ver=1791072159940"
+    },
+    {
+      "name": "Residential credentials",
+      "file": "https://img1.wsimg.com/blobby/go/8d8ce064-80f9-4eee-ae5f-83acb4b71860/downloads/Designo%20Residential%20Credentials1.pdf?ver=1791072159940"
+    }
+  ],
+  "offices": [
+    {
+      "name": "Bhandup West",
+      "address": "1001 Sai Indu Tower, LBS Marg, Sonapur, Bhandup West, Mumbai 400078",
+      "mapQuery": "Sai Indu Tower, LBS Marg, Bhandup West, Mumbai 400078"
+    },
+    {
+      "name": "Powai",
+      "address": "D-1802 Raheja Vista, Raheja Vihar, Powai, Mumbai 400072",
+      "mapQuery": "Raheja Vista, Raheja Vihar, Powai, Mumbai 400072"
+    }
+  ],
+  "social": [
+    {
+      "name": "Instagram",
+      "url": "https://www.instagram.com/designointeriors"
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/company/designo-interiors"
+    },
+    {
+      "name": "Facebook",
+      "url": "https://www.facebook.com/105741477911038"
+    },
+    {
+      "name": "Pinterest",
+      "url": "https://www.pinterest.com/designointeriordesigners/_created/"
+    }
+  ]
+}

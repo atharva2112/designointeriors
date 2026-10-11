@@ -1,0 +1,12 @@
+{
+  "name": "Recording Studio",
+  "sector": "studios",
+  "client": "A.R. Rahman",
+  "area": 1500,
+  "summary": "A private recording studio at Lotus Grandeur, built around acoustic performance.",
+  "cover": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20music%20studio.jpg/:/rs=w:1800,cg:true,m",
+  "gallery": [],
+  "featured": false,
+  "order": 6,
+  "hidden": false
+}

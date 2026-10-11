@@ -1,0 +1,16 @@
+{
+  "name": "Sarla Technologies",
+  "sector": "corporate",
+  "client": "Sarla Technologies",
+  "area": 9000,
+  "summary": "A reception, glass-partitioned corridors and an open-plan floor for a technology company.",
+  "cover": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Sarla%20Technologies%20Reception%2C%20Restored-3.png/:/rs=w:1800,cg:true,m",
+  "gallery": [
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Refined%20glass-partition%20office%20corridor-4.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Refined%20Empty%20Open-Plan%20Office-2.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Refined%20Empty%20Office%20Interior-6.png/:/rs=w:1800,cg:true,m"
+  ],
+  "featured": true,
+  "order": 3,
+  "hidden": false
+}

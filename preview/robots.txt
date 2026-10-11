@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://designointeriors.com/sitemap.xml

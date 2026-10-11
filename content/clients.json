@@ -1,0 +1,224 @@
+{
+  "wall": [
+    "Castrol India",
+    "Wincor Nixdorf",
+    "Laerdal",
+    "Visible Alpha",
+    "Essel Group",
+    "Practo",
+    "Hansa Cequity",
+    "Edelweiss",
+    "Geno Pharmaceuticals",
+    "Goa University",
+    "Kuber Group",
+    "Royal Palms",
+    "Hotel Centaur",
+    "Aban Lloyd Chiles Offshore",
+    "S.S. Communication",
+    "A.R. Rahman Studio"
+  ],
+  "offices": [
+    {
+      "name": "Castrol India, R&D",
+      "place": "Wadala, Mumbai",
+      "area": 15000
+    },
+    {
+      "name": "Goa University",
+      "place": "Taleigao, Goa",
+      "area": 12000
+    },
+    {
+      "name": "Kuber Mutual Benefits, 6 branches",
+      "place": "Malad, Andheri, Dadar, Thane, Panvel, Vasai",
+      "area": 12000
+    },
+    {
+      "name": "Castrol India",
+      "place": "White House, Mumbai",
+      "area": 10000
+    },
+    {
+      "name": "Visible Alpha India",
+      "place": "Kohinoor City, Kurla",
+      "area": 10000
+    },
+    {
+      "name": "Essel Group",
+      "place": "Aurangabad",
+      "area": 9500
+    },
+    {
+      "name": "Essel Group",
+      "place": "Kohinoor City, Kurla",
+      "area": 8500
+    },
+    {
+      "name": "Hansa Cequity",
+      "place": "Kohinoor City, Kurla",
+      "area": 8500
+    },
+    {
+      "name": "Wincor Nixdorf",
+      "place": "Kohinoor City, Kurla",
+      "area": 7500
+    },
+    {
+      "name": "Marmugaon Municipal Corporation",
+      "place": "Vasco, Goa",
+      "area": 7500
+    },
+    {
+      "name": "Aban Lloyd Chiles Offshore",
+      "place": "Santacruz, Mumbai",
+      "area": 6500
+    },
+    {
+      "name": "Geno Pharmaceuticals",
+      "place": "Goa",
+      "area": 6000
+    },
+    {
+      "name": "Practo",
+      "place": "Kohinoor City, Kurla",
+      "area": 5500
+    },
+    {
+      "name": "Kuber Builders",
+      "place": "Vashi, Navi Mumbai",
+      "area": 5000
+    },
+    {
+      "name": "Royal Palms Golf & Country Club",
+      "place": "Goregaon, Mumbai",
+      "area": 5000
+    },
+    {
+      "name": "Kuber Group Head Office",
+      "place": "Nariman Point, Mumbai",
+      "area": 4500
+    },
+    {
+      "name": "S.P. Group",
+      "place": "Belapur, Navi Mumbai",
+      "area": 4000
+    },
+    {
+      "name": "Coner Engineers",
+      "place": "Powai, Mumbai",
+      "area": 3500
+    },
+    {
+      "name": "Universal Travel Services",
+      "place": "Vile Parle, Mumbai",
+      "area": 3000
+    },
+    {
+      "name": "Geno Pharmaceuticals",
+      "place": "Andheri, Mumbai",
+      "area": 3000
+    },
+    {
+      "name": "Champak Textile",
+      "place": "Andheri, Mumbai",
+      "area": 2000
+    },
+    {
+      "name": "Heatre Engineering",
+      "place": "Ghatkopar, Mumbai",
+      "area": 1500
+    },
+    {
+      "name": "Kuber Media",
+      "place": "Santacruz, Mumbai",
+      "area": 1500
+    },
+    {
+      "name": "Lumitis",
+      "place": "Bhandup, Mumbai",
+      "area": 1000
+    },
+    {
+      "name": "Saurya Enterprises",
+      "place": "Bhandup, Mumbai",
+      "area": 800
+    },
+    {
+      "name": "Laerdal",
+      "place": "Kohinoor City, Kurla",
+      "area": null
+    },
+    {
+      "name": "Edelweiss",
+      "place": "Kohinoor City, Kurla",
+      "area": null
+    },
+    {
+      "name": "Fiddertech",
+      "place": "Kurla, Mumbai",
+      "area": null
+    },
+    {
+      "name": "S.S. Communication",
+      "place": "Goregaon, Mumbai",
+      "area": null
+    }
+  ],
+  "groups": [
+    {
+      "name": "Hotels & restaurants",
+      "items": [
+        "Hotel Centaur, Vile Parle",
+        "Hotel Golden Wheel, Santacruz",
+        "Royal Palms, Goregaon",
+        "Hotel Subway, Juhu",
+        "Club X’treme, Campal, Goa",
+        "Bar-1, Panjim, Goa",
+        "Hotel Gloria Anne, Candolim, Goa",
+        "National Bakery, Mapusa, Goa",
+        "Hotel Appetite"
+      ]
+    },
+    {
+      "name": "Retail & showrooms",
+      "items": [
+        "S.S. Communication — 8 stores, Mira Road to Kandivali",
+        "Kuber Marketing, New Delhi",
+        "Rock ’n Raaga music showroom, Calangute, Goa",
+        "Finishing Touch tile showroom, Panjim, Goa"
+      ]
+    },
+    {
+      "name": "Building interiors",
+      "items": [
+        "Kuber Crown, Andheri — 7 storeys",
+        "Kuber Guest House, Andheri",
+        "Kuber Heritage, Kharghar",
+        "Kuber Residency, Nerul",
+        "Kuber Citadel, Belapur",
+        "Blue Heaven, Raheja Vihar",
+        "Octavius, Hiranandani Gardens",
+        "White Lilly Society, Dadar",
+        "Shirish Co-op Housing Society, Mahim"
+      ]
+    },
+    {
+      "name": "Studios & healthcare",
+      "items": [
+        "Recording studio for A.R. Rahman, Lotus Grandeur",
+        "Shree Nursing Home, Shivaji Park"
+      ]
+    },
+    {
+      "name": "Bungalows",
+      "items": [
+        "Hiranandani Gardens, Powai",
+        "Vashi, Navi Mumbai",
+        "Forest Trails, Bhugaon, Pune",
+        "Satara"
+      ]
+    }
+  ],
+  "homes": "65+",
+  "homeAreas": "Powai, Hiranandani Gardens, Andheri, Dadar, Mahim, Santacruz, Goregaon, Bandra, Chembur, Kandivali, Thane and Navi Mumbai"
+}

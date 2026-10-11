@@ -1,0 +1,17 @@
+{
+  "name": "Corporate Headquarters",
+  "sector": "corporate",
+  "client": "Confidential",
+  "area": 15000,
+  "summary": "Reception, lift lobby and an open bullpen workspace across a headquarters floor.",
+  "cover": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Reception.png/:/rs=w:1800,cg:true,m",
+  "gallery": [
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Lift%20Lobby-c323d9d.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Bullpen.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Hcc-1.png/:/rs=w:1800,cg:true,m",
+    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/hcc-2.png/:/rs=w:1800,cg:true,m"
+  ],
+  "featured": true,
+  "order": 5,
+  "hidden": false
+}

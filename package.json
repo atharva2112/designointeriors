@@ -1,0 +1,8 @@
+{
+  "name": "designointeriors",
+  "private": true,
+  "scripts": {
+    "build": "node build/build.js",
+    "preview": "node build/build.js --preview"
+  }
+}

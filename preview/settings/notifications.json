@@ -1,0 +1,50 @@
+{
+  "updated": "2026-10-11T19:09:28.093Z",
+  "forms": {
+    "quote": {
+      "emails": [
+        "designo@designointeriors.com",
+        "designo371@gmail.com"
+      ],
+      "whatsapp": [
+        "919820111353"
+      ]
+    },
+    "consultation": {
+      "emails": [
+        "designo@designointeriors.com",
+        "designo371@gmail.com"
+      ],
+      "whatsapp": [
+        "919820111353"
+      ]
+    },
+    "careers": {
+      "emails": [
+        "designo@designointeriors.com",
+        "designo371@gmail.com"
+      ],
+      "whatsapp": [
+        "919820111353"
+      ]
+    },
+    "referral": {
+      "emails": [
+        "designo@designointeriors.com",
+        "designo371@gmail.com"
+      ],
+      "whatsapp": [
+        "919820111353"
+      ]
+    },
+    "ecovisions": {
+      "emails": [
+        "designo@designointeriors.com",
+        "designo371@gmail.com"
+      ],
+      "whatsapp": [
+        "919820111353"
+      ]
+    }
+  }
+}

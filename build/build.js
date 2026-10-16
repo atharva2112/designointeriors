@@ -3,8 +3,8 @@
    Run: node build/build.js   (no dependencies)  */
 'use strict';
 
-const NAV = [['projects', 'Projects'], ['services', 'Services'], ['about', 'About'], ['clientele', 'Clientele'], ['sustainability', 'Sustainability'], ['journal', 'Journal'], ['contact', 'Contact']];
-const MENU = [['', 'Home'], ['projects/', 'Projects'], ['services/', 'Services'], ['about/', 'About'], ['clientele/', 'Clientele'], ['sustainability/', 'Sustainability'], ['vastu/', 'Vastu Shastra'], ['journal/', 'Journal'], ['careers/', 'Careers'], ['referral/', 'Referral programme'], ['contact/', 'Contact']];
+const NAV = [['services', 'Services'], ['sectors', 'Sectors'], ['projects', 'Projects'], ['clientele', 'Clientele'], ['about', 'About'], ['journal', 'Journal'], ['contact', 'Contact']];
+const MENU = [['', 'Home'], ['services/', 'Services'], ['sectors/', 'Sectors'], ['projects/', 'Projects'], ['clientele/', 'Clientele'], ['about/', 'About'], ['sustainability/', 'Sustainability'], ['vastu/', 'Vastu Shastra'], ['journal/', 'Journal'], ['careers/', 'Careers'], ['contact/', 'Contact']];
 const PROCESS = [
   ['Consult', 'A free first conversation, online or at our office, about your brief, budget and references.'],
   ['Estimate', 'An approximate estimate after the first call, then site measurements and a detailed requirement study.'],
@@ -100,6 +100,7 @@ async function buildSite(io, opts) {
   const projects = (await collection('content/projects')).sort(byOrder);
   const posts = (await collection('content/journal')).sort((a, b) => String(b.date).localeCompare(String(a.date)));
   const jobs = (await collection('content/jobs')).sort(byOrder);
+  const services = (await collection('content/services')).sort(byOrder);
 
   const sectorById = {};
   sectors.forEach((s, i) => { s.index = pad(i + 1); s.count = 0; sectorById[s.id] = s; });
@@ -113,10 +114,10 @@ async function buildSite(io, opts) {
     p.areaLabel = p.area ? inr(p.area) + ' sq ft' : '';
     p.meta = [p.client, p.areaLabel].filter(Boolean).join(' · ');
   });
-  sectors.forEach((s) => { s.countLabel = s.count ? s.count + (s.count === 1 ? ' project' : ' projects') : 'Enquire'; });
+  sectors.forEach((s) => { s.countLabel = s.count ? s.count + (s.count === 1 ? ' project' : ' projects') : 'Explore'; });
   posts.forEach((p) => { p.dateLabel = fmtDate(p.date); });
   const featured = (projects.filter((p) => p.featured).length ? projects.filter((p) => p.featured) : projects).slice(0, 5);
-  const D = { site, sectors, sectorById, clients, projects, posts, jobs, featured };
+  const D = { site, sectors, sectorById, clients, projects, posts, jobs, featured, services };
 
   const pages = [];
   const page = (path, fn) => pages.push([path, fn]);
@@ -124,6 +125,9 @@ async function buildSite(io, opts) {
   page('projects/', (c) => pageProjects(c, D));
   projects.forEach((p, i) => page('projects/' + p.slug + '/', (c) => pageProject(c, D, p, projects[(i + 1) % projects.length])));
   page('services/', (c) => pageServices(c, D));
+  services.forEach((x, i) => page('services/' + x.slug + '/', (c) => pageService(c, D, x, services[(i + 1) % services.length])));
+  page('sectors/', (c) => pageSectors(c, D));
+  sectors.forEach((x) => page('sectors/' + x.id + '/', (c) => pageSector(c, D, x)));
   page('about/', (c) => pageAbout(c, D));
   page('sustainability/', (c) => pageSustainability(c, D));
   page('vastu/', (c) => pageVastu(c, D));
@@ -173,6 +177,10 @@ const select = (label, name, options, o) => `<label class="field${o && o.full ? 
 const hp = '<input class="hp" name="website" tabindex="-1" autocomplete="off" aria-hidden="true">';
 const done = (label, title, text) => `<div class="done" hidden><span class="eyebrow">${label}</span><span class="d">${title}</span><span class="muted">${text || 'For anything urgent, call +91 98201 11353 or message us on WhatsApp.'}</span><button type="button" class="link" data-again>Send another</button></div>`;
 const card = (c, p, size) => `<a class="card card--${size}" href="${c.u('projects/' + p.slug + '/')}" data-cursor="View project"><div class="img">${img(c, p.cover, p.name, ' data-parallax="10"')}</div><div class="card__meta"><span class="card__title">${esc(p.name)}</span><span class="label muted">${esc([p.sectorName, p.areaLabel].filter(Boolean).join(' · '))}</span></div></a>`;
+const crumbs = (c, list) => `<nav class="crumbs" aria-label="Breadcrumb">${list.map(([p, label]) => p == null ? `<span>${esc(label)}</span>` : `<a href="${c.u(p)}">${esc(label)}</a>`).join('<span>/</span>')}</nav>`;
+const svcCard = (c, x, i) => `<a class="card" href="${c.u('services/' + x.slug + '/')}" data-cursor="Explore"><div class="img r75">${x.image ? img(c, x.image, x.title, ' data-parallax="8"') : `<div class="ph label" style="height:100%">${esc(x.title)}</div>`}</div><div class="card__meta card__idx"><span class="num">${pad(i + 1)}</span><span class="card__title">${esc(x.title)}</span></div><span class="p small">${esc(x.summary)}</span></a>`;
+const sectorCard = (c, x) => `<a class="card" href="${c.u('sectors/' + x.id + '/')}" data-cursor="Explore">${x.image ? `<div class="img r75">${img(c, x.image, x.name, ' data-parallax="8"')}</div>` : `<div class="img r75 ph label">${esc(x.name)}</div>`}<div class="card__meta"><span class="card__title">${esc(x.name)}</span><span class="label green">${x.countLabel} →</span></div><span class="p small">${esc(x.blurb)}</span></a>`;
+const promises = (c) => `<div class="wrap cells" style="--min:240px"><div><span class="d" style="font-size:68px;line-height:1">45</span><span class="label green">Day timelines</span><span class="muted small">Efficient, dependable delivery.</span></div><div><span class="d" style="font-size:68px;line-height:1">10</span><span class="label green">Year warranty</span><span class="muted small">Built to last, backed by guarantee.</span></div><div><span class="d" style="font-size:68px;line-height:1">3×</span><span class="label green">ISO certified</span><span class="muted small">9001 · 14001 · 45001.</span></div><a href="${c.u('vastu/')}"><span class="d" style="font-size:68px;line-height:1">Vastu</span><span class="label green">Compliant layouts →</span><span class="muted small">Built for balance and business success.</span></a></div>`;
 const processSteps = () => `<div class="process" data-process><div class="process__bar"><i></i></div><div class="grid" style="--min:200px;gap:0 32px">${map(PROCESS, (s, i) => `<div class="col" data-step><span class="bignum">${pad(i + 1)}</span><h3 class="d h4">${s[0]}</h3><p class="p small">${s[1]}</p></div>`)}</div></div>`;
 
 function quoteForm(c, D, extended) {
@@ -247,8 +255,9 @@ function footer(c, D, cta) {
   <div class="ftr__cols"><div class="wrap">
     <div class="ftr__grid">
       <div><img class="ftr__logo" src="${c.a('assets/logo-light-sm.png')}" alt="Designo Interiors" width="480" height="290"><p style="margin:8px 0 0;max-width:260px;font-size:14px;color:var(--pale)">Turnkey corporate and commercial interiors in Mumbai since 1991.</p></div>
-      <div><span class="label">Studio</span><a href="${c.u('projects/')}">Projects</a><a href="${c.u('services/')}">Services</a><a href="${c.u('about/')}">About &amp; certifications</a><a href="${c.u('clientele/')}">Clientele</a><a href="${c.u('journal/')}">Journal</a></div>
-      <div><span class="label">More</span><a href="${c.u('sustainability/')}">EcoVisions</a><a href="${c.u('vastu/')}">Vastu Shastra</a><a href="${c.u('referral/')}">Referral programme</a><a href="${c.u('careers/')}">Careers</a><a href="${c.u('contact/')}">Contact</a></div>
+      <div><span class="label">Services</span>${map(D.services, (x) => `<a href="${c.u('services/' + x.slug + '/')}">${esc(x.title)}</a>`)}</div>
+      <div><span class="label">Sectors</span>${map(D.sectors, (x) => `<a href="${c.u('sectors/' + x.id + '/')}">${esc(x.name)}</a>`)}</div>
+      <div><span class="label">Company</span><a href="${c.u('projects/')}">Projects</a><a href="${c.u('about/')}">About &amp; certifications</a><a href="${c.u('clientele/')}">Clientele</a><a href="${c.u('sustainability/')}">EcoVisions</a><a href="${c.u('vastu/')}">Vastu Shastra</a><a href="${c.u('journal/')}">Journal</a><a href="${c.u('careers/')}">Careers</a><a href="${c.u('referral/')}">Referral programme</a></div>
       ${map(s.offices, (o) => `<div><span class="label">${esc(o.name)}</span><span>${esc(o.address)}</span><a class="dir" href="https://maps.google.com/?q=${encodeURIComponent(o.mapQuery || o.address)}" target="_blank" rel="noopener">Directions ↗</a></div>`)}
       <div><span class="label">Contact</span><a href="tel:${esc(s.phoneLink)}">${esc(s.phone)}</a><a href="mailto:${esc(s.email)}" style="word-break:break-all">${esc(s.email)}</a><span style="color:var(--pale);font-size:14px">${esc(s.hours)}</span></div>
     </div>
@@ -287,10 +296,11 @@ function pageHome(c, D) {
 </section>
 <section class="px sec-sm"><div class="wrap stats">${map(s.stats, (x) => `<div class="stat rule rule--soft"><b data-count>${esc(x.value)}</b><span class="label">${esc(x.label)}</span><span class="muted small">${esc(x.note)}</span></div>`)}</div></section>
 <section class="px sec"><div class="wrap practice"><p class="eyebrow">01 — Practice</p><div><p class="statement" data-words>We are a turnkey interior firm. One team carries your project from the first site visit through design, procurement, civil work, joinery and installation to handover, so there is one point of accountability and one timeline.</p><a class="link" href="${c.u('about/')}">About Designo →</a></div></div></section>
-<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('02 — Selected work', 'Recent workplaces', `<a class="link" href="${c.u('projects/')}">All projects →</a>`)}<div class="work">${map(f, (p, i) => card(c, p, sizes[i] || 's'))}</div></div></section>
-<section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8"')}<div class="wrap">${head2('03 — Sectors', (WORDS[D.sectors.length] || D.sectors.length) + ' sectors, one standard', `<a class="link" href="${c.u('services/')}">Services →</a>`)}<div class="sx-list">${map(D.sectors, (x) => `<a class="sx" href="${x.count ? c.u('projects/') + '?sector=' + x.id : c.u('services/', '#' + x.id)}"${x.image ? ` data-peek="${esc(c.m(x.image))}"` : ''}><span class="num">${x.index}</span><span class="d">${esc(x.name)}</span><span class="small">${esc(x.blurb)}</span><span class="label">${x.countLabel} →</span></a>`)}</div></div></section>
-<section class="px sec"><div class="wrap">${head2('04 — How we work', 'Design to handover, under one contract')}${processSteps()}</div></section>
-<section class="px sec bg2"><div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:48px clamp(40px,6vw,104px)"><div class="img r45" style="flex:5 1 360px">${img(c, s.images && s.images.automation, 'Conference room with integrated lighting', ' data-parallax="10"')}</div><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:26px"><p class="eyebrow">05 — Smart workplaces</p><h2 class="d h2">Workplaces that respond</h2><p class="p" style="max-width:520px">We plan automation into the interiors we build, so lighting scenes, appliances and devices are controlled from one place or by voice through Alexa, and energy-efficient systems keep running costs down.</p><div class="ticks rule" style="max-width:560px">${map(AUTOMATION, (a, i) => `<div><span>${a}</span><span class="num">${pad(i + 1)}</span></div>`)}</div><a class="link" href="${c.u('services/', '#automation')}">How we integrate automation →</a></div></div></section>
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('02 — Services', 'One firm, every stage', `<a class="link" href="${c.u('services/')}">All services →</a>`)}<div class="grid" style="--min:300px;gap:0 32px">${map(D.services, (x, i) => `<a class="col rule svc" href="${c.u('services/' + x.slug + '/')}"><span class="num">${pad(i + 1)}</span><h3 class="d h4">${esc(x.title)}</h3><p class="p small">${esc(x.summary)}</p><span class="label green">More →</span></a>`)}</div></div></section>
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('03 — Selected work', 'Recent workplaces', `<a class="link" href="${c.u('projects/')}">All projects →</a>`)}<div class="work">${map(f, (p, i) => card(c, p, sizes[i] || 's'))}</div></div></section>
+<section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8"')}<div class="wrap">${head2('04 — Sectors', (WORDS[D.sectors.length] || D.sectors.length) + ' sectors, one standard', `<a class="link" href="${c.u('sectors/')}">All sectors →</a>`)}<div class="sx-list">${map(D.sectors, (x) => `<a class="sx" href="${c.u('sectors/' + x.id + '/')}"${x.image ? ` data-peek="${esc(c.m(x.image))}"` : ''}><span class="num">${x.index}</span><span class="d">${esc(x.name)}</span><span class="small">${esc(x.blurb)}</span><span class="label">${x.countLabel} →</span></a>`)}</div></div></section>
+<section class="px sec"><div class="wrap">${head2('05 — How we work', 'Design to handover, under one contract')}${processSteps()}</div></section>
+<section class="px sec bg2"><div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:48px clamp(40px,6vw,104px)"><div class="img r45" style="flex:5 1 360px">${img(c, s.images && s.images.automation, 'Conference room with integrated lighting', ' data-parallax="10"')}</div><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:26px"><p class="eyebrow">06 — Smart workplaces</p><h2 class="d h2">Workplaces that respond</h2><p class="p" style="max-width:520px">We plan automation into the interiors we build, so lighting scenes, appliances and devices are controlled from one place or by voice through Alexa, and energy-efficient systems keep running costs down.</p><div class="ticks rule" style="max-width:560px">${map(AUTOMATION, (a, i) => `<div><span>${a}</span><span class="num">${pad(i + 1)}</span></div>`)}</div><a class="link" href="${c.u('services/smart-workplace/')}">Smart workplace services →</a></div></div></section>
 <section class="px sec-top"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:24px">
   <a class="feat" href="${c.u('sustainability/')}" data-cursor="Explore">${img(c, s.images && s.images.sustainability, 'Conference room among tropical planting', ' data-parallax="8"')}<div><span class="eyebrow eyebrow--light">Designo EcoVisions</span><span class="d">Greener by specification</span><span style="max-width:460px">Low-VOC finishes, energy-efficient lighting, local sourcing and water-saving fixtures.</span><span class="label">Our sustainability work →</span></div></a>
   <a class="feat" href="${c.u('vastu/')}" data-cursor="Explore">${img(c, s.images && s.images.vastu, 'Sunlit window-side office', ' data-parallax="8"')}<div><span class="eyebrow eyebrow--light">Vastu Shastra</span><span class="d">Planned for balance</span><span style="max-width:460px">Our in-house Vastu consultant reviews orientation, light, colour and placement before a layout is final.</span><span class="label">Vastu consultancy →</span></div></a>
@@ -320,7 +330,7 @@ function pageProjects(c, D) {
 function pageProject(c, D, p, next) {
   const body = `
 <section class="intro" style="padding-top:clamp(36px,4vw,60px)">${introS()}<div class="wrap wrap--free">
-  <nav class="crumbs" aria-label="Breadcrumb"><a href="${c.u('projects/')}">Projects</a><span>/</span><a href="${c.u('projects/')}?sector=${esc(p.sector)}">${esc(p.sectorName)}</a><span>/</span><span>${esc(p.name)}</span></nav>
+  ${crumbs(c, [['projects/', 'Projects']].concat(D.sectorById[p.sector] ? [['sectors/' + p.sector + '/', p.sectorName]] : []).concat([[null, p.name]]))}
   <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:40px clamp(40px,6vw,104px);margin-top:clamp(32px,4vw,56px)"><h1 class="d" style="flex:7 1 560px;font-size:clamp(60px,9vw,156px);line-height:.96;letter-spacing:-.012em">${esc(p.name)}</h1><div style="flex:4 1 320px;display:flex;flex-direction:column;gap:24px"><p class="lede" style="font-size:19px">${esc(p.summary)}</p><dl class="rule">${p.client ? `<div class="kv"><dt>Client</dt><dd>${esc(p.client)}</dd></div>` : ''}<div class="kv"><dt>Sector</dt><dd>${esc(p.sectorName)}</dd></div>${p.areaLabel ? `<div class="kv"><dt>Area</dt><dd>${esc(p.areaLabel)}</dd></div>` : ''}</dl></div></div>
 </div></section>
 <section class="px"><div class="wrap">${p.photos[0] ? `<button type="button" class="zoom r169" data-shot="${esc(c.m(p.photos[0]))}" aria-label="Enlarge photo 1" data-cursor="Enlarge">${img(c, p.photos[0], p.name, ' loading="eager" data-parallax="8"')}</button>` : ''}${p.photos.length > 1 ? `<div class="gallery">${map(p.photos.slice(1), (src, i) => `<button type="button" class="zoom r75" data-shot="${esc(c.m(src))}" aria-label="Enlarge photo ${i + 2}" data-cursor="Enlarge">${img(c, src, p.name + ' — photo ' + (i + 2))}</button>`)}</div>` : ''}</div></section>
@@ -331,16 +341,91 @@ ${next && next !== p ? `<section class="px sec"><a class="wrap next" href="${c.u
 
 function pageServices(c, D) {
   const cols = [['Design', ['Space planning and layouts', '3D visualisation', 'Vastu review', 'Lighting and acoustic design', 'Materials, finishes and furniture']], ['Build', ['Civil work', 'Carpentry and joinery', 'Partitions and aluminium sliding windows', 'Electrical, lighting and acoustics', 'Painting, carpets and vertical blinds']], ['Manage', ['Budgeting and estimates', 'Procurement', 'Installation and site management', 'Office automation and smart controls', 'Maintenance after handover']]];
-  const s = D.site;
   const body = `
-${intro('Services', 'Turnkey<br>interiors', 'Design, planning, budgeting, procurement, execution and maintenance under one contract. Offices first, and every other sector our clients work in.', true)}
-<section class="px" style="padding-bottom:var(--sy)"><div class="wrap grid" style="--min:300px">${map(cols, ([h, items], i) => `<div class="rule" style="padding-top:28px"><span class="num">${pad(i + 1)}</span><h2 class="d" style="font-size:52px;line-height:1.05;margin:14px 0 20px">${h}</h2><div class="plain">${map(items, (x) => `<span style="display:block">${x}</span>`)}</div></div>`)}</div></section>
-<section class="px sec bg2"><div class="wrap">${head2('How a project runs', 'Five stages, one team')}${processSteps()}</div></section>
-<section class="px sec"><div class="wrap">${head2('Sectors', 'Who we design for')}<div class="grid-fill" style="--min:320px">${map(D.sectors, (x) => `<a class="card" id="${esc(x.id)}" href="${x.count ? c.u('projects/') + '?sector=' + x.id : c.u('contact/', '#quote')}" style="scroll-margin-top:120px"${x.image ? ' data-cursor="View"' : ''}>${x.image ? `<div class="img r75">${img(c, x.image, x.name, ' data-parallax="8"')}</div>` : `<div class="img r75 ph label">Photo — ${esc(x.name)}</div>`}<div class="card__meta"><span class="card__title">${esc(x.name)}</span><span class="label green">${x.countLabel} →</span></div><span class="p small">${esc(x.blurb)}</span></a>`)}</div></div></section>
-<section class="px sec dark relative" id="automation">${sMark('bigs s-draw', ' data-parallax="8" style="left:auto;right:-8%"')}<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:48px clamp(40px,6vw,104px)"><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:26px"><p class="eyebrow">Smart workplaces by Designo</p><h2 class="d h2">Automation, built in</h2><p class="p" style="max-width:540px">We plan automation alongside the interior, so lighting scenes, appliances and devices respond from one place or by voice through Alexa, and blend into the design rather than being added later.</p><div class="ticks rule" style="max-width:560px">${map(AUTOMATION, (a, i) => `<div><span>${a}</span><span class="num">${pad(i + 1)}</span></div>`)}</div></div><div class="img r45" style="flex:5 1 360px">${img(c, s.images && s.images.automation, 'Conference room with integrated lighting', ' data-parallax="10"')}</div></div></section>
-<section class="px sec-top"><div class="wrap cells" style="--min:240px"><div><span class="d" style="font-size:68px;line-height:1">45</span><span class="label green">Day timelines</span><span class="muted small">Efficient, dependable delivery.</span></div><div><span class="d" style="font-size:68px;line-height:1">10</span><span class="label green">Year warranty</span><span class="muted small">Built to last, backed by guarantee.</span></div><div><span class="d" style="font-size:68px;line-height:1">3×</span><span class="label green">ISO certified</span><span class="muted small">9001 · 14001 · 45001.</span></div><a href="${c.u('vastu/')}"><span class="d" style="font-size:68px;line-height:1">Vastu</span><span class="label green">Compliant layouts →</span><span class="muted small">Built for balance and business success.</span></a></div></section>
+${intro('Services', 'Turnkey<br>interiors', 'Design, planning, budgeting, procurement, execution and maintenance under one contract, for offices and every commercial space our clients run.', true)}
+${D.services.length ? `<section class="px" style="padding-bottom:var(--sy)"><div class="wrap grid-fill" style="--min:340px;gap:64px 24px">${map(D.services, (x, i) => svcCard(c, x, i))}</div></section>` : ''}
+<section class="px sec bg2"><div class="wrap">${head2('Capabilities', 'Design, build, manage')}<div class="grid" style="--min:300px">${map(cols, ([h, items], i) => `<div class="rule" style="padding-top:28px"><span class="num">${pad(i + 1)}</span><h2 class="d" style="font-size:52px;line-height:1.05;margin:14px 0 20px">${h}</h2><div class="plain">${map(items, (x) => `<span style="display:block">${x}</span>`)}</div></div>`)}</div></div></section>
+<section class="px sec"><div class="wrap">${head2('How a project runs', 'Five stages, one team')}${processSteps()}</div></section>
+<section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8" style="left:auto;right:-8%"')}<div class="wrap">${head2('Sectors', 'Who we design for', `<a class="link" href="${c.u('sectors/')}">All sectors →</a>`)}<div class="sx-list">${map(D.sectors, (x) => `<a class="sx" href="${c.u('sectors/' + x.id + '/')}"${x.image ? ` data-peek="${esc(c.m(x.image))}"` : ''}><span class="num">${x.index}</span><span class="d">${esc(x.name)}</span><span class="small">${esc(x.blurb)}</span><span class="label">${x.countLabel} →</span></a>`)}</div></div></section>
+<section class="px sec-top">${promises(c)}</section>
 <section class="px sec"><div class="wrap bg2" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px 64px;padding:clamp(32px,4vw,64px)"><div style="flex:1 1 480px;display:flex;flex-direction:column;gap:20px"><p class="eyebrow">Free online consultation</p><h2 class="d" style="font-size:clamp(40px,4.8vw,76px);line-height:1.02">Talk to us before you commit</h2><p class="p" style="max-width:600px">Share your ideas, budget and references during working hours. After the first call we can give you an approximate estimate, then measure the site and prepare a detailed one, with 3D views of the project.*</p><span style="font-size:13px">*Terms and conditions apply.</span></div>${btn(c.u('contact/', '#consult'), 'Book a consultation <span>→</span>', 'btn--dark')}</div></section>`;
-  return shell(c, D, { title: 'Services — Turnkey Interiors — Designo Interiors', desc: 'Turnkey interior design and build for corporate offices, retail, hospitality, education, healthcare and studios.', active: 'services', page: 'services/', body: body });
+  return shell(c, D, { title: 'Services — Turnkey Office & Commercial Interiors — Designo Interiors', desc: 'Turnkey office fit-outs, workplace design, refurbishment, project management, smart workplaces and maintenance for commercial interiors in Mumbai.', active: 'services', page: 'services/', body: body });
+}
+
+function pageSectors(c, D) {
+  const body = `
+${intro('Sectors', 'Who we<br>design for', 'Offices first, and every commercial space our clients run: showrooms, hotels and restaurants, clinics, campuses, studios and gyms.', true)}
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap grid-fill" style="--min:340px;gap:64px 24px">${map(D.sectors, (x) => sectorCard(c, x))}</div></section>
+<section class="px sec bg2"><div class="wrap">${head2('In every sector', 'One contract, one standard', `<a class="link" href="${c.u('services/')}">Our services →</a>`)}${processSteps()}</div></section>
+<section class="px sec">${promises(c)}</section>`;
+  return shell(c, D, { title: 'Sectors — Office, Retail, Hospitality & Healthcare Interiors — Designo Interiors', desc: 'Interior design and turnkey fit-outs for corporate offices, retail and showrooms, hospitality, healthcare, education, studios and fitness centres.', active: 'sectors', page: 'sectors/', body: body });
+}
+
+/* Sector, service and location pages share one layout. Every section is optional and is left out
+   when its content is empty, so a page never shows a placeholder or an empty heading. */
+function pageLanding(c, D, o) {
+  let n = 0;
+  const no = () => pad(++n) + ' — ';
+  const points = (o.points || []).filter((x) => x && x.title);
+  const items = (o.items || []).filter(Boolean);
+  const clients = (o.clients || []).filter(Boolean);
+  const related = (o.related || []).filter(Boolean);
+  const faqs = (o.faqs || []).filter((f) => f && f.question && f.answer);
+  // Consecutive sections on the same ground share one gap instead of stacking two.
+  let prev = o.image ? '' : 'white';
+  const sec = (ground, inner) => { const top = ground !== prev; prev = ground; return `<section class="px${top ? ' sec-top' : ''}${ground === 'white' ? '' : ' ' + ground}" style="padding-bottom:var(--sy)">${inner}</section>`; };
+  const parts = [
+    points.length && sec('white', `<div class="wrap">${head2(no() + (o.pointsEyebrow || 'What matters'), esc(o.pointsTitle || 'What you can expect'))}<div class="cells" style="--min:250px">${map(points, (x, i) => `<div><span class="num">${pad(i + 1)}</span><h3 class="d h4">${esc(x.title)}</h3><p class="p small">${esc(x.text)}</p></div>`)}</div></div>`),
+    items.length && sec('bg2', `<div class="wrap split"><div class="l"><p class="eyebrow">${no()}Scope</p><h2 class="d h2">${esc(o.itemsTitle || 'What we deliver')}</h2></div><div class="r ticks rule">${map(items, (x, i) => `<div><span>${esc(x)}</span><span class="num">${pad(i + 1)}</span></div>`)}</div></div>`),
+    (o.projects || []).length && sec('white', `<div class="wrap">${head2(no() + 'Selected work', esc(o.projectsTitle || 'Projects'), o.projectsLink || '')}<div class="grid-fill" style="--min:380px;gap:64px 24px">${map(o.projects, (p) => card(c, p, 'l'))}</div></div>`),
+    clients.length && sec('dark relative', `${sMark('bigs s-draw', ' data-parallax="8" style="left:auto;right:-6%"')}<div class="wrap">${head2(no() + 'Clients', esc(o.clientsTitle || 'Who we’ve built for'), `<a class="link" href="${c.u('clientele/')}">Full client list →</a>`)}<ul class="names">${map(clients, (x) => `<li>${esc(x)}</li>`)}</ul></div>`),
+    related.length && sec('white', `<div class="wrap split"><div class="l"><p class="eyebrow">${no()}${esc(o.relatedEyebrow)}</p><h2 class="d h2">${esc(o.relatedTitle)}</h2></div><div class="r ticks rule">${map(related, ([href, label]) => `<a href="${href}"><span>${esc(label)}</span><span class="green">→</span></a>`)}</div></div>`),
+    faqs.length && sec('white', `<div class="wrap split"><div class="l"><p class="eyebrow">${no()}Questions</p><h2 class="d h2">Asked and answered</h2></div><div class="r rule">${map(faqs, (f) => `<details><summary>${esc(f.question)}</summary><p>${esc(f.answer)}</p></details>`)}</div></div>`),
+    o.next && `<section class="px${prev === 'white' ? '' : ' sec-top'}" style="padding-bottom:var(--sy)">${o.next}</section>`
+  ];
+  const body = `
+<section class="intro" style="padding-top:clamp(36px,4vw,60px)">${introS()}<div class="wrap wrap--free">
+  ${crumbs(c, o.crumbs)}
+  <div class="lhead"><div class="lhead__t"><p class="eyebrow">${o.eyebrow}</p><h1 class="d">${esc(o.h1)}</h1></div><div class="lhead__r"><p class="lede">${esc(o.lede)}</p><div class="btns">${btn(c.u('contact/', '#quote'), 'Get a quote <span>→</span>', 'btn--dark')}${btn(c.u('contact/', '#consult'), 'Book a consultation', 'btn--line')}</div></div></div>
+</div></section>
+${o.image ? `<section class="px"><div class="wrap img lhero">${img(c, o.image, o.h1, ' loading="eager" data-parallax="10"')}</div></section>` : ''}
+${parts.filter(Boolean).join('\n')}`;
+  return shell(c, D, { title: o.title, desc: o.desc, active: o.active, page: o.page, body: body, image: o.image });
+}
+
+function pageSector(c, D, x) {
+  const projects = D.projects.filter((p) => p.sector === x.id);
+  const services = D.services.filter((v) => (v.sectors || []).indexOf(x.id) !== -1);
+  return pageLanding(c, D, {
+    page: 'sectors/' + x.id + '/', active: 'sectors',
+    title: (x.title || x.name) + ' in Mumbai — Designo Interiors', desc: x.metaDescription || x.intro || x.blurb,
+    crumbs: [['sectors/', 'Sectors'], [null, x.name]],
+    eyebrow: 'Sector · ' + x.index, h1: x.title || x.name, lede: x.intro || x.blurb, image: x.image,
+    points: x.points, pointsEyebrow: 'What matters', pointsTitle: 'What we focus on',
+    items: x.deliverables, itemsTitle: 'What we design and build',
+    projects: projects, projectsTitle: 'Recent work', projectsLink: `<a class="link" href="${c.u('projects/')}?sector=${esc(x.id)}">All ${projects.length} in the index →</a>`,
+    clients: x.clients,
+    related: services.map((v) => [c.u('services/' + v.slug + '/'), v.title]), relatedEyebrow: 'Services', relatedTitle: 'How we can help',
+    faqs: x.faqs
+  });
+}
+
+function pageService(c, D, x, next) {
+  const projects = (x.projects || []).map((slug) => D.projects.find((p) => p.slug === slug)).filter(Boolean);
+  const sectors = (x.sectors || []).map((id) => D.sectorById[id]).filter((s) => s && D.sectors.indexOf(s) !== -1);
+  const i = D.services.indexOf(x);
+  return pageLanding(c, D, {
+    page: 'services/' + x.slug + '/', active: 'services',
+    title: x.title + ' in Mumbai — Designo Interiors', desc: x.metaDescription || x.summary,
+    crumbs: [['services/', 'Services'], [null, x.title]],
+    eyebrow: 'Services · ' + pad(i + 1), h1: x.title, lede: x.intro || x.summary, image: x.image,
+    points: x.points, pointsEyebrow: 'Why it matters', pointsTitle: 'What you get',
+    items: x.includes, itemsTitle: 'What’s included',
+    projects: projects, projectsTitle: 'Where we’ve done it',
+    related: sectors.map((s) => [c.u('sectors/' + s.id + '/'), s.name]), relatedEyebrow: 'Sectors', relatedTitle: 'Where we deliver it',
+    faqs: x.faqs,
+    next: next && next !== x ? `<a class="wrap next rule rule--soft" style="padding-top:clamp(40px,5vw,64px)" href="${c.u('services/' + next.slug + '/')}" data-cursor="Next service"><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:22px"><span class="eyebrow">Next service</span><span class="d">${esc(next.title)} →</span></div>${next.image ? `<div class="img r75" style="flex:5 1 360px">${img(c, next.image, next.title, ' data-parallax="8"')}</div>` : ''}</a>` : ''
+  });
 }
 
 function pageAbout(c, D) {

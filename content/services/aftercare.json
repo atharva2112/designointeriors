@@ -1,0 +1,38 @@
+{
+  "title": "Warranty & maintenance",
+  "summary": "A 10-year warranty and maintenance after handover, from the team that built your space.",
+  "intro": "Our responsibility doesn’t end at handover. Every Designo interior is backed by a 10-year warranty, and the team that built your space looks after it afterwards.",
+  "image": "/media/projects/wincor-nixdorf/polished-office-with-yellow-partitions.webp",
+  "points": [
+    {
+      "title": "10-year warranty",
+      "text": "Built to last, and backed by a guarantee."
+    },
+    {
+      "title": "Maintenance after handover",
+      "text": "Upkeep from the team that knows how your space was built."
+    },
+    {
+      "title": "Durable by specification",
+      "text": "Durable materials and efficient systems keep running and maintenance costs down."
+    }
+  ],
+  "includes": [
+    "10-year warranty",
+    "Maintenance after handover",
+    "Durable, low-maintenance materials"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education",
+    "studios"
+  ],
+  "projects": [],
+  "faqs": [],
+  "metaDescription": "A 10-year warranty and maintenance after handover on every Designo Interiors fit-out.",
+  "order": 6,
+  "hidden": false
+}

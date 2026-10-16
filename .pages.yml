@@ -31,6 +31,47 @@ content:
       - { name: order, label: Order, type: number, description: "Lower numbers appear first." }
       - { name: hidden, label: Hide from site, type: boolean, default: false }
 
+  - name: services
+    label: Services
+    type: collection
+    path: content/services
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: title
+      fields: [ image, title, order, hidden ]
+      sort: [ order, title ]
+    fields:
+      - { name: title, label: Title, type: string, required: true, description: "Also becomes the page address, e.g. services/office-fit-out/." }
+      - { name: summary, label: Summary, type: text, required: true, description: "One sentence for the Services page, the homepage and the footer." }
+      - { name: intro, label: Introduction, type: text, description: "The opening paragraph at the top of the page." }
+      - { name: image, label: Image, type: image }
+      - name: points
+        label: What you get
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+      - { name: includes, label: What’s included, type: string, list: true }
+      - name: sectors
+        label: Sectors
+        type: select
+        options:
+          multiple: true
+          values: [ { value: corporate, label: "Corporate Offices" }, { value: retail, label: "Retail and Showrooms" }, { value: hospitality, label: "Hospitality" }, { value: education, label: "Education" }, { value: fitness, label: "Fitness Centres" }, { value: healthcare, label: "Healthcare" }, { value: studios, label: "Studios" } ]
+      - { name: projects, label: Example projects, type: string, list: true, description: "Page addresses of projects that show this service, e.g. wincor-nixdorf." }
+      - name: faqs
+        label: Questions and answers
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+      - { name: metaDescription, label: Google description, type: text, description: "One or two sentences shown in search results." }
+      - { name: order, label: Order, type: number, description: "Lower numbers appear first." }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
   - name: journal
     label: Journal
     type: collection
@@ -114,8 +155,27 @@ content:
     fields:
       - { name: id, label: ID (do not change), type: string }
       - { name: name, label: Name, type: string }
-      - { name: blurb, label: Description, type: text }
+      - { name: blurb, label: Description, type: text, description: "One line for lists and cards." }
       - { name: image, label: Image, type: image }
+      - { name: title, label: Page heading, type: string, description: "e.g. Corporate office interiors" }
+      - { name: intro, label: Introduction, type: text, description: "The opening paragraph of the sector page." }
+      - name: points
+        label: What we focus on
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+      - { name: deliverables, label: What we design and build, type: string, list: true }
+      - { name: clients, label: Clients to list, type: string, list: true, description: "e.g. Castrol India, R&D — Wadala" }
+      - name: faqs
+        label: Questions and answers
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+      - { name: metaDescription, label: Google description, type: text }
       - { name: hidden, label: Hide from site, type: boolean, default: false, description: "Hides the sector everywhere: lists, filters, forms and its page." }
 
   - name: notifications

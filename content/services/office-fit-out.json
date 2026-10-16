@@ -1,0 +1,63 @@
+{
+  "title": "Turnkey office fit-out",
+  "summary": "Design, civil work, joinery, electrical and finishes under one contract, from an empty floor to handover.",
+  "intro": "We take an office from an empty floor to a working space under one contract: survey, design, budgeting, procurement, civil work, joinery, electrical, finishes and installation, with one team accountable for the whole timeline.",
+  "image": "/media/projects/corporate-headquarters/bullpen.webp",
+  "points": [
+    {
+      "title": "One contract, every trade",
+      "text": "One team and one point of contact, instead of separate designers and contractors to coordinate."
+    },
+    {
+      "title": "Costs agreed up front",
+      "text": "An approximate estimate after the first conversation, then a detailed estimate once the site is measured."
+    },
+    {
+      "title": "Quality you can check",
+      "text": "Work run under ISO 9001 quality and ISO 45001 safety practices."
+    },
+    {
+      "title": "Backed after handover",
+      "text": "A 10-year warranty, and maintenance from the team that built it."
+    }
+  ],
+  "includes": [
+    "Site survey and measurements",
+    "Space planning and 3D views",
+    "Budgeting and detailed estimates",
+    "Procurement of materials and furniture",
+    "Civil work",
+    "Carpentry and joinery",
+    "Partitions and aluminium sliding windows",
+    "Electrical, lighting and acoustics",
+    "Painting, carpets and vertical blinds",
+    "Installation and site management",
+    "Handover and maintenance"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education"
+  ],
+  "projects": [
+    "wincor-nixdorf",
+    "laerdal",
+    "sarla-technologies",
+    "townhall-conference-floor"
+  ],
+  "faqs": [
+    {
+      "question": "What does turnkey mean?",
+      "answer": "One firm takes responsibility for the whole project, from design and procurement through every trade on site to handover, under one contract. You are not left coordinating separate designers and contractors."
+    },
+    {
+      "question": "How are payments staged?",
+      "answer": "Typically 50% before work starts, 40% fifteen days after work begins and the final 10% seven days after completion. The schedule is confirmed in your contract."
+    }
+  ],
+  "metaDescription": "Turnkey office fit-out in Mumbai: design, civil work, joinery, electrical and finishes under one contract, with a 10-year warranty.",
+  "order": 1,
+  "hidden": false
+}

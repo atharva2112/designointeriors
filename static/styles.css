@@ -471,6 +471,21 @@ details p{margin:0 0 22px;font-size:15px;line-height:1.65;color:var(--muted)}
 .next .d .ar{width:.48em;height:.48em;margin-left:.12em;vertical-align:.02em;stroke-width:.8;transition:transform .6s var(--ease-out)}
 .next:hover .ar{transform:translateX(10px)}
 
+/* ---------- landing pages (sectors, services, locations) ---------- */
+.lhead{display:flex;flex-wrap:wrap;align-items:flex-end;gap:40px clamp(40px,6vw,104px);margin-top:clamp(32px,4vw,56px)}
+.lhead__t{flex:7 1 560px;display:flex;flex-direction:column;gap:24px}
+.lhead__t h1{font-size:clamp(50px,7.4vw,124px);line-height:.98;letter-spacing:-.012em}
+.lhead__r{flex:4 1 320px;display:flex;flex-direction:column;gap:28px}
+.lhero{aspect-ratio:21/9}
+@media (max-width:720px){.lhero{aspect-ratio:4/3}}
+.names{margin:0;padding:0;list-style:none;columns:3 260px;column-gap:40px}
+.names li{break-inside:avoid;padding:14px 0;border-bottom:1px solid var(--hair);font-size:17px;line-height:1.45}
+.dark .names li{border-bottom-color:var(--hair-d)}
+.svc,.svc:hover{color:var(--ink)}
+.svc .d{transition:color .2s var(--ease)}
+.svc:hover .d{color:var(--green)}
+.svc .label{margin-top:auto;padding-top:6px}
+
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;background:rgba(22,33,29,.97);color:#fff;opacity:0;transition:opacity .45s var(--ease)}
 .lb.is-open{opacity:1}

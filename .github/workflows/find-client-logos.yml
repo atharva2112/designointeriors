@@ -5,7 +5,7 @@ name: Find client logos
 on:
   push:
     branches: [claude/friendly-edison-25hqh1]
-    paths: [scripts/find-client-logos.js, .github/workflows/find-client-logos.yml]
+    paths: [scripts/find-client-logos.js, scripts/fetch-logo-originals.js, scratch/logos/wanted.json, .github/workflows/find-client-logos.yml]
   workflow_dispatch:
 
 permissions:
@@ -27,7 +27,8 @@ jobs:
           node-version: 22
 
       - name: Collect candidates
-        run: node scripts/find-client-logos.js
+        run: |
+          if [ -f scratch/logos/wanted.json ]; then node scripts/fetch-logo-originals.js; else node scripts/find-client-logos.js; fi
 
       - name: Commit and push
         env:

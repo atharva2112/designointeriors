@@ -81,10 +81,10 @@ content:
         label: Client logos (homepage “Trusted by” and top of this page)
         type: object
         list: true
-        description: "Drag to reorder. The homepage scrolls the clients that have a logo; the Clientele page lists all of them, showing the name where there is no logo."
+        description: "Drag to reorder. Only clients with a logo are shown, on the homepage and at the top of the Clientele page."
         fields:
           - { name: name, label: Client, type: string, required: true }
-          - { name: logo, label: Logo, type: image, description: "SVG or a PNG with a transparent background. Shown in grey, in colour on hover." }
+          - { name: logo, label: Logo, type: image, description: "SVG or a PNG with a transparent background, cropped tight to the logo." }
       - name: offices
         label: Offices & institutions
         type: object

@@ -408,5 +408,83 @@
   });
   $$('[data-again]').forEach(function (b) { b.addEventListener('click', function () { var done = b.closest('.done'); var f = done.previousElementSibling; f.reset(); f.hidden = false; done.hidden = true; $('button[type=submit]', f).disabled = false; }); });
 
+  // Client marquee: each row is a real scroller that drifts on its own and can be swiped, dragged
+  // or scrolled by hand. It holds still under the pointer, while dragged or focused, and for a
+  // moment after a hand scroll, then carries on from wherever it was left.
+  if (motion) (function () {
+    var rows = $$('.marquee__row').map(function (el, n) {
+      var set = $('.marquee__set', el);
+      return set && { el: el, set: set, dir: n % 2 ? -1 : 1, speed: n % 2 ? 34 : 42, pos: 0, w: 0, mine: -1, hold: 0, hover: false, focus: false, touch: false, drag: null, seen: false };
+    }).filter(Boolean);
+    if (!rows.length) return;
+    // The content repeats every set width, so the position is kept between one and two sets in:
+    // a full set of room either way for hand scrolling, and every wrap lands on identical logos.
+    var norm = function (r, p) { while (p < r.w) p += r.w; while (p >= r.w * 2) p -= r.w; return p; };
+    var put = function (r, p) { r.pos = p; r.el.scrollLeft = p; r.mine = r.el.scrollLeft; };
+    var measure = function (r) {
+      r.w = r.set.offsetWidth;
+      if (!r.w) return;
+      while (r.el.scrollWidth < r.w * 3 + r.el.clientWidth) { var c = r.set.cloneNode(true); c.setAttribute('aria-hidden', 'true'); r.el.appendChild(c); }
+      put(r, norm(r, r.pos || r.w));
+    };
+    var running = false, last = 0;
+    var tick = function (t) {
+      var dt = last ? Math.min((t - last) / 1000, 0.05) : 0, live = false;
+      last = t;
+      rows.forEach(function (r) {
+        if (!r.seen || !r.w) return;
+        live = true;
+        if (r.hover || r.focus || r.touch || r.drag || t < r.hold || document.hidden) return;
+        put(r, norm(r, r.pos + r.dir * r.speed * dt));
+      });
+      if (live) requestAnimationFrame(tick); else { running = false; last = 0; }
+    };
+    var start = function () { if (!running) { running = true; requestAnimationFrame(tick); } };
+
+    rows.forEach(function (r) {
+      var el = r.el;
+      el.addEventListener('scroll', function () {
+        if (Math.abs(el.scrollLeft - r.mine) < 1.5) return; // our own move
+        r.hold = performance.now() + 2200;
+        r.pos = el.scrollLeft;
+        if (r.pos < r.w * 0.5 || r.pos > r.w * 2.5) put(r, norm(r, r.pos)); // only when far out, so a swipe's momentum isn't cut short
+        else r.mine = el.scrollLeft;
+      }, { passive: true });
+      el.addEventListener('pointerenter', function (e) { if (e.pointerType === 'mouse') r.hover = true; });
+      el.addEventListener('pointerleave', function (e) { if (e.pointerType === 'mouse') r.hover = false; });
+      el.addEventListener('focus', function () { r.focus = true; });
+      el.addEventListener('blur', function () { r.focus = false; r.hold = performance.now() + 1200; });
+      // Fingers use the browser's own scrolling; moving the row underneath one would cancel the swipe.
+      el.addEventListener('touchstart', function () { r.touch = true; }, { passive: true });
+      var lift = function () { r.touch = false; r.hold = performance.now() + 2200; };
+      el.addEventListener('touchend', lift, { passive: true });
+      el.addEventListener('touchcancel', lift, { passive: true });
+      // Mouse drag.
+      el.addEventListener('pointerdown', function (e) {
+        if (e.pointerType !== 'mouse' || e.button !== 0) return;
+        r.drag = { x: e.clientX, p: r.pos };
+        el.setPointerCapture(e.pointerId);
+        el.classList.add('is-dragging');
+        e.preventDefault();
+      });
+      el.addEventListener('pointermove', function (e) { if (r.drag) put(r, norm(r, r.drag.p - (e.clientX - r.drag.x))); });
+      var end = function () { if (!r.drag) return; r.drag = null; el.classList.remove('is-dragging'); r.hold = performance.now() + 1200; };
+      el.addEventListener('pointerup', end);
+      el.addEventListener('pointercancel', end);
+      if ('ResizeObserver' in window) new ResizeObserver(function () { measure(r); }).observe(r.set);
+      else window.addEventListener('resize', function () { measure(r); });
+      measure(r);
+    });
+    fontsReady.then(function () { rows.forEach(measure); });
+    // Only animate rows that are on screen.
+    if ('IntersectionObserver' in window) {
+      var watch = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) { rows.forEach(function (r) { if (r.el === e.target) r.seen = e.isIntersecting; }); });
+        start();
+      }, { rootMargin: '100px 0px' });
+      rows.forEach(function (r) { watch.observe(r.el); });
+    } else { rows.forEach(function (r) { r.seen = true; }); start(); }
+  })();
+
   run();
 })();

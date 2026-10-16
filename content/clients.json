@@ -275,7 +275,8 @@
         "Hotel Gloria Anne, Candolim, Goa",
         "National Bakery, Mapusa, Goa",
         "Hotel Appetite"
-      ]
+      ],
+      "hidden": false
     },
     {
       "name": "Retail & showrooms",
@@ -284,7 +285,8 @@
         "Kuber Marketing, New Delhi",
         "Rock ’n Raaga music showroom, Calangute, Goa",
         "Finishing Touch tile showroom, Panjim, Goa"
-      ]
+      ],
+      "hidden": false
     },
     {
       "name": "Building interiors",
@@ -298,14 +300,16 @@
         "Octavius, Hiranandani Gardens",
         "White Lilly Society, Dadar",
         "Shirish Co-op Housing Society, Mahim"
-      ]
+      ],
+      "hidden": false
     },
     {
       "name": "Studios & healthcare",
       "items": [
         "Recording studio for A.R. Rahman, Lotus Grandeur",
         "Shree Nursing Home, Shivaji Park"
-      ]
+      ],
+      "hidden": false
     },
     {
       "name": "Bungalows",
@@ -314,9 +318,11 @@
         "Vashi, Navi Mumbai",
         "Forest Trails, Bhugaon, Pune",
         "Satara"
-      ]
+      ],
+      "hidden": true
     }
   ],
   "homes": "65+",
-  "homeAreas": "Powai, Hiranandani Gardens, Andheri, Dadar, Mahim, Santacruz, Goregaon, Bandra, Chembur, Kandivali, Thane and Navi Mumbai"
+  "homeAreas": "Powai, Hiranandani Gardens, Andheri, Dadar, Mahim, Santacruz, Goregaon, Bandra, Chembur, Kandivali, Thane and Navi Mumbai",
+  "showHomes": false
 }

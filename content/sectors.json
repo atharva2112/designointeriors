@@ -3,48 +3,56 @@
     "id": "corporate",
     "name": "Corporate Offices",
     "blurb": "Headquarters, branch networks, R&D floors and boardrooms.",
-    "image": "/media/sectors/hcc-1.webp"
+    "image": "/media/sectors/hcc-1.webp",
+    "hidden": false
   },
   {
     "id": "retail",
     "name": "Retail & Showrooms",
     "blurb": "Flagship showrooms, supermarkets and multi-store roll-outs.",
-    "image": "/media/sectors/interior-design-for-showroom.webp"
+    "image": "/media/sectors/interior-design-for-showroom.webp",
+    "hidden": false
   },
   {
     "id": "hospitality",
     "name": "Hospitality",
     "blurb": "Hotels, restaurants, bars and clubhouses.",
-    "image": "/media/sectors/interior-designer-for-restaurants.webp"
+    "image": "/media/sectors/interior-designer-for-restaurants.webp",
+    "hidden": false
   },
   {
     "id": "education",
     "name": "Education",
     "blurb": "University buildings and institutional campuses.",
-    "image": ""
+    "image": "",
+    "hidden": false
   },
   {
     "id": "fitness",
     "name": "Fitness Centres",
     "blurb": "Gyms and wellness floors that take heavy daily use.",
-    "image": ""
+    "image": "",
+    "hidden": false
   },
   {
     "id": "healthcare",
     "name": "Healthcare",
     "blurb": "Nursing homes and clinics planned around hygiene and flow.",
-    "image": "/media/sectors/hospital-interior-designers.webp"
+    "image": "/media/sectors/hospital-interior-designers.webp",
+    "hidden": false
   },
   {
     "id": "studios",
     "name": "Studios",
     "blurb": "Recording and production rooms with acoustic treatment.",
-    "image": "/media/sectors/interior-design-for-music-studio.webp"
+    "image": "/media/sectors/interior-design-for-music-studio.webp",
+    "hidden": false
   },
   {
     "id": "residential",
     "name": "Residential",
     "blurb": "Apartments, bungalows, holiday homes and building lobbies.",
-    "image": "/media/sectors/interior-design-for-living-room.webp"
+    "image": "/media/sectors/interior-design-for-living-room.webp",
+    "hidden": true
   }
 ]

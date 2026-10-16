@@ -100,8 +100,10 @@ content:
         fields:
           - { name: name, label: Group name, type: string }
           - { name: items, label: Clients, type: string, list: true }
+          - { name: hidden, label: Hide from site, type: boolean, default: false }
       - { name: homes, label: Number of homes, type: string }
       - { name: homeAreas, label: Residential areas, type: text }
+      - { name: showHomes, label: Show the private homes block, type: boolean, default: false, description: "Residential is hidden on this site for now. Switch on to show the homes count again." }
 
   - name: sectors
     label: Sectors
@@ -114,6 +116,7 @@ content:
       - { name: name, label: Name, type: string }
       - { name: blurb, label: Description, type: text }
       - { name: image, label: Image, type: image }
+      - { name: hidden, label: Hide from site, type: boolean, default: false, description: "Hides the sector everywhere: lists, filters, forms and its page." }
 
   - name: notifications
     label: "Settings → Notifications"

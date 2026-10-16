@@ -3,8 +3,8 @@
    Run: node build/build.js   (no dependencies)  */
 'use strict';
 
-const NAV = [['services', 'Services'], ['sectors', 'Sectors'], ['projects', 'Projects'], ['clientele', 'Clientele'], ['about', 'About'], ['journal', 'Journal'], ['contact', 'Contact']];
-const MENU = [['', 'Home'], ['services/', 'Services'], ['sectors/', 'Sectors'], ['projects/', 'Projects'], ['why-designo/', 'Why Designo'], ['fit-out-process/', 'Fit-out process'], ['clientele/', 'Clientele'], ['about/', 'About'], ['sustainability/', 'Sustainability'], ['vastu/', 'Vastu Shastra'], ['journal/', 'Journal'], ['faq/', 'FAQ'], ['contact/', 'Contact']];
+const NAV = [['services', 'Services'], ['technology', 'Technology'], ['sectors', 'Sectors'], ['projects', 'Projects'], ['clientele', 'Clientele'], ['about', 'About'], ['contact', 'Contact']];
+const MENU = [['', 'Home'], ['services/', 'Services'], ['technology/', 'Technology'], ['sectors/', 'Sectors'], ['projects/', 'Projects'], ['why-designo/', 'Why Designo'], ['fit-out-process/', 'Fit-out process'], ['clientele/', 'Clientele'], ['about/', 'About'], ['sustainability/', 'Sustainability'], ['vastu/', 'Vastu Shastra'], ['journal/', 'Journal'], ['faq/', 'FAQ'], ['careers/', 'Careers'], ['referral/', 'Referral programme'], ['contact/', 'Contact']];
 const PROCESS = [
   ['Consult', 'A free first conversation, online or at our office, about your brief, budget and references.'],
   ['Estimate', 'An approximate estimate after the first call, then site measurements and a detailed requirement study.'],
@@ -12,7 +12,14 @@ const PROCESS = [
   ['Build', 'Civil work, joinery, electrical, finishes and installation, run under ISO 9001 and 45001 practices.'],
   ['Handover', 'Delivered on agreed timelines and backed by a 10-year warranty.']
 ];
-const AUTOMATION = ['Smart lighting and scenes', 'Voice control through Alexa', 'Device and appliance control', 'Energy-efficient systems'];
+const TECH_STEPS = [
+  ['Survey', 'We walk the site with your IT, security and facilities teams and record what each system must do.'],
+  ['Design', 'Drawings, equipment schedules and a budget for every system.'],
+  ['Coordinate', 'Containment, power and ceiling access agreed with the interior and electrical design.'],
+  ['Install', 'Cabling, equipment and devices installed in step with the fit-out.'],
+  ['Commission', 'Every system tested, configured and checked against the design.'],
+  ['Support', 'Training for your team, drawings and documents at handover, then maintenance.']
+];
 const CERTS = [
   ['ISO 9001', 'Quality Management', 'Consistent, efficient delivery, with processes we review and improve on every project.', 'The most widely recognised quality standard in the world. It sets out how we plan, run and continually improve project delivery, so the result is consistent from one site to the next.', 'iso-9001-white.png', 269, 269],
   ['ISO 14001', 'Environmental Management', 'Less waste, fewer resources used and pollution prevented on site and in what we specify.', 'A framework for identifying and controlling the environmental impact of our work. It guides how we cut waste, conserve resources and prevent pollution, and how we choose eco-friendly, energy-efficient materials.', 'iso-14001-white.png', 260, 251],
@@ -21,7 +28,7 @@ const CERTS = [
 // The quote form's project types follow the visible sectors, so a hidden sector drops out of the list too.
 const projectTypes = (D) => D.sectors.map((s) => s.name).concat('Office refurbishment', 'Other');
 const WORDS = ['No', 'One', 'Two', 'Three', 'Four', 'Five', 'Six', 'Seven', 'Eight', 'Nine', 'Ten', 'Eleven', 'Twelve'];
-const REDIRECTS = [['/gallery', '/projects/'], ['/about-us', '/about/'], ['/certifications', '/about/#certifications'], ['/clientele', '/clientele/'], ['/contact-us', '/contact/'], ['/online-consultation', '/contact/#consult'], ['/designo-ecovisions', '/sustainability/'], ['/blog-1', '/journal/'], ['/career-with-designo', '/careers/'], ['/referral-program', '/referral/'], ['/vastu-shastra', '/vastu/']];
+const REDIRECTS = [['/gallery', '/projects/'], ['/about-us', '/about/'], ['/certifications', '/about/#certifications'], ['/clientele', '/clientele/'], ['/contact-us', '/contact/'], ['/online-consultation', '/contact/#consult'], ['/designo-ecovisions', '/sustainability/'], ['/blog-1', '/journal/'], ['/career-with-designo', '/careers/'], ['/referral-program', '/referral/'], ['/vastu-shastra', '/vastu/'], ['/journal/voice-controlled-workplace/', '/journal/meeting-room-technology/'], ['/journal/voice-controlled-workplace', '/journal/meeting-room-technology/']];
 
 /* The brush-stroke S of the Designo lockup, traced from static/assets/s-mark-green.png
    (viewBox 0 0 492 837). It is the monogram: the home cover's aperture, the outline that
@@ -101,6 +108,9 @@ async function buildSite(io, opts) {
   const posts = (await collection('content/journal')).sort((a, b) => String(b.date).localeCompare(String(a.date)));
   const jobs = (await collection('content/jobs')).sort(byOrder);
   const services = (await collection('content/services')).sort(byOrder);
+  // Services come in two groups: interior services (/services/) and technology & systems (/technology/).
+  const isTech = (x) => x.group === 'technology';
+  const interiorServices = services.filter((x) => !isTech(x)), techServices = services.filter(isTech);
   const faqs = (await json('content/faqs.json', [])).filter((f) => f && f.question && f.answer && !f.hidden);
   const testimonials = (await json('content/testimonials.json', [])).filter((t) => t && t.quote && !t.hidden);
   const locations = (await collection('content/locations')).sort(byOrder);
@@ -125,7 +135,7 @@ async function buildSite(io, opts) {
   sectors.forEach((s) => { s.countLabel = s.count ? s.count + (s.count === 1 ? ' project' : ' projects') : 'Explore'; });
   posts.forEach((p) => { p.dateLabel = fmtDate(p.date); });
   const featured = (projects.filter((p) => p.featured).length ? projects.filter((p) => p.featured) : projects).slice(0, 5);
-  const D = { site, sectors, sectorById, clients, projects, posts, jobs, featured, services, faqs, testimonials, locations, estimator };
+  const D = { site, sectors, sectorById, clients, projects, posts, jobs, featured, services, interiorServices, techServices, faqs, testimonials, locations, estimator };
 
   const pages = [];
   const page = (path, fn) => pages.push([path, fn]);
@@ -133,7 +143,8 @@ async function buildSite(io, opts) {
   page('projects/', (c) => pageProjects(c, D));
   projects.forEach((p, i) => page('projects/' + p.slug + '/', (c) => pageProject(c, D, p, projects[(i + 1) % projects.length])));
   page('services/', (c) => pageServices(c, D));
-  services.forEach((x, i) => page('services/' + x.slug + '/', (c) => pageService(c, D, x, services[(i + 1) % services.length])));
+  [interiorServices, techServices].forEach((list) => list.forEach((x, i) => page('services/' + x.slug + '/', (c) => pageService(c, D, x, list[(i + 1) % list.length]))));
+  if (techServices.length) page('technology/', (c) => pageTechnology(c, D));
   page('sectors/', (c) => pageSectors(c, D));
   sectors.forEach((x) => page('sectors/' + x.id + '/', (c) => pageSector(c, D, x)));
   page('why-designo/', (c) => pageWhy(c, D));
@@ -196,7 +207,7 @@ const crumbs = (c, list) => `<nav class="crumbs" aria-label="Breadcrumb">${list.
 const svcCard = (c, x, i) => `<a class="card" href="${c.u('services/' + x.slug + '/')}" data-cursor="Explore"><div class="img r75">${x.image ? img(c, x.image, x.title, ' data-parallax="8"') : `<div class="ph label" style="height:100%">${esc(x.title)}</div>`}</div><div class="card__meta card__idx"><span class="num">${pad(i + 1)}</span><span class="card__title">${esc(x.title)}</span></div><span class="p small">${esc(x.summary)}</span></a>`;
 const sectorCard = (c, x) => `<a class="card" href="${c.u('sectors/' + x.id + '/')}" data-cursor="Explore">${x.image ? `<div class="img r75">${img(c, x.image, x.name, ' data-parallax="8"')}</div>` : `<div class="img r75 ph label">${esc(x.name)}</div>`}<div class="card__meta"><span class="card__title">${esc(x.name)}</span><span class="label green">${x.countLabel} →</span></div><span class="p small">${esc(x.blurb)}</span></a>`;
 const promises = (c) => `<div class="wrap cells" style="--min:240px"><div><span class="d" style="font-size:68px;line-height:1">45</span><span class="label green">Day timelines</span><span class="muted small">Efficient, dependable delivery.</span></div><div><span class="d" style="font-size:68px;line-height:1">10</span><span class="label green">Year warranty</span><span class="muted small">Built to last, backed by guarantee.</span></div><div><span class="d" style="font-size:68px;line-height:1">3×</span><span class="label green">ISO certified</span><span class="muted small">9001 · 14001 · 45001.</span></div><a href="${c.u('vastu/')}"><span class="d" style="font-size:68px;line-height:1">Vastu</span><span class="label green">Compliant layouts →</span><span class="muted small">Built for balance and business success.</span></a></div>`;
-const processSteps = () => `<div class="process" data-process><div class="process__bar"><i></i></div><div class="grid" style="--min:200px;gap:0 32px">${map(PROCESS, (s, i) => `<div class="col" data-step><span class="bignum">${pad(i + 1)}</span><h3 class="d h4">${s[0]}</h3><p class="p small">${s[1]}</p></div>`)}</div></div>`;
+const processSteps = (list) => `<div class="process" data-process><div class="process__bar"><i></i></div><div class="grid" style="--min:${list && list.length > 5 ? 170 : 200}px;gap:0 32px">${map(list || PROCESS, (s, i) => `<div class="col" data-step><span class="bignum">${pad(i + 1)}</span><h3 class="d h4">${s[0]}</h3><p class="p small">${s[1]}</p></div>`)}</div></div>`;
 
 function quoteForm(c, D, extended) {
   return `<form class="form" data-form="quote">${hp}
@@ -273,7 +284,8 @@ function footer(c, D, cta) {
   <div class="ftr__cols"><div class="wrap">
     <div class="ftr__grid">
       <div><img class="ftr__logo" src="${c.a('assets/logo-light-sm.png')}" alt="Designo Interiors" width="480" height="290"><p style="margin:8px 0 0;max-width:260px;font-size:14px;color:var(--pale)">Turnkey corporate and commercial interiors in Mumbai since 1991.</p></div>
-      <div><span class="label">Services</span>${map(D.services, (x) => `<a href="${c.u('services/' + x.slug + '/')}">${esc(x.title)}</a>`)}</div>
+      <div><span class="label">Services</span>${map(D.interiorServices, (x) => `<a href="${c.u('services/' + x.slug + '/')}">${esc(x.title)}</a>`)}</div>
+      ${D.techServices.length ? `<div><span class="label">Technology</span>${map(D.techServices, (x) => `<a href="${c.u('services/' + x.slug + '/')}">${esc(x.title)}</a>`)}</div>` : ''}
       <div><span class="label">Sectors</span>${map(D.sectors, (x) => `<a href="${c.u('sectors/' + x.id + '/')}">${esc(x.name)}</a>`)}</div>
       <div><span class="label">Company</span><a href="${c.u('projects/')}">Projects</a><a href="${c.u('about/')}">About &amp; certifications</a><a href="${c.u('clientele/')}">Clientele</a><a href="${c.u('sustainability/')}">EcoVisions</a><a href="${c.u('vastu/')}">Vastu Shastra</a><a href="${c.u('journal/')}">Journal</a><a href="${c.u('careers/')}">Careers</a><a href="${c.u('referral/')}">Referral programme</a></div>
       <div><span class="label">Resources</span><a href="${c.u('why-designo/')}">Why Designo</a><a href="${c.u('fit-out-process/')}">Fit-out process</a><a href="${c.u('faq/')}">FAQ</a>${D.estimator ? `<a href="${c.u('fit-out-cost/')}">Cost estimator</a>` : ''}<a href="${c.u('project-brief/')}">Send a brief</a><a href="${c.u('contact/')}">Contact</a></div>
@@ -315,12 +327,12 @@ function pageHome(c, D) {
   </div>
 </section>
 <section class="px sec-sm"><div class="wrap stats">${map(s.stats, (x) => `<div class="stat rule rule--soft"><b data-count>${esc(x.value)}</b><span class="label">${esc(x.label)}</span><span class="muted small">${esc(x.note)}</span></div>`)}</div></section>
-<section class="px sec"><div class="wrap practice"><p class="eyebrow">01 — Practice</p><div><p class="statement" data-words>We are a turnkey interior firm. One team carries your project from the first site visit through design, procurement, civil work, joinery and installation to handover, so there is one point of accountability and one timeline.</p><div class="btns" style="gap:12px 40px"><a class="link" href="${c.u('why-designo/')}">Why Designo →</a><a class="link" href="${c.u('about/')}">About Designo →</a></div></div></div></section>
-<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('02 — Services', 'One firm, every stage', `<a class="link" href="${c.u('services/')}">All services →</a>`)}<div class="grid" style="--min:300px;gap:0 32px">${map(D.services, (x, i) => `<a class="col rule svc" href="${c.u('services/' + x.slug + '/')}"><span class="num">${pad(i + 1)}</span><h3 class="d h4">${esc(x.title)}</h3><p class="p small">${esc(x.summary)}</p><span class="label green">More →</span></a>`)}</div></div></section>
+<section class="px sec"><div class="wrap practice"><p class="eyebrow">01 — Practice</p><div><p class="statement" data-words>We are a turnkey interior firm. One team carries your project from the first site visit through design, procurement, civil work, joinery, installation and the technology inside it to handover, so there is one point of accountability and one timeline.</p><div class="btns" style="gap:12px 40px"><a class="link" href="${c.u('why-designo/')}">Why Designo →</a><a class="link" href="${c.u('about/')}">About Designo →</a></div></div></div></section>
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('02 — Services', 'One firm, every stage', `<a class="link" href="${c.u('services/')}">All services →</a>`)}<div class="grid" style="--min:300px;gap:0 32px">${map(D.interiorServices, (x, i) => `<a class="col rule svc" href="${c.u('services/' + x.slug + '/')}"><span class="num">${pad(i + 1)}</span><h3 class="d h4">${esc(x.title)}</h3><p class="p small">${esc(x.summary)}</p><span class="label green">More →</span></a>`)}${D.techServices.length ? `<a class="col rule svc" href="${c.u('technology/')}"><span class="num">${pad(D.interiorServices.length + 1)}</span><h3 class="d h4">Technology &amp; systems</h3><p class="p small">Conference AV, networking, CCTV, access control, fire alarm, PA, automation and acoustics, built in with the interior.</p><span class="label green">More →</span></a>` : ''}</div></div></section>
 <section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('03 — Selected work', 'Recent workplaces', `<a class="link" href="${c.u('projects/')}">All projects →</a>`)}<div class="work">${map(f, (p, i) => card(c, p, sizes[i] || 's'))}</div></div></section>
 <section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8"')}<div class="wrap">${head2('04 — Sectors', (WORDS[D.sectors.length] || D.sectors.length) + ' sectors, one standard', `<a class="link" href="${c.u('sectors/')}">All sectors →</a>`)}<div class="sx-list">${map(D.sectors, (x) => `<a class="sx" href="${c.u('sectors/' + x.id + '/')}"${x.image ? ` data-peek="${esc(c.m(x.image))}"` : ''}><span class="num">${x.index}</span><span class="d">${esc(x.name)}</span><span class="small">${esc(x.blurb)}</span><span class="label">${x.countLabel} →</span></a>`)}</div></div></section>
 <section class="px sec"><div class="wrap">${head2('05 — How we work', 'Design to handover, under one contract', `<a class="link" href="${c.u('fit-out-process/')}">The process in detail →</a>`)}${processSteps()}</div></section>
-<section class="px sec bg2"><div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:48px clamp(40px,6vw,104px)"><div class="img r45" style="flex:5 1 360px">${img(c, s.images && s.images.automation, 'Conference room with integrated lighting', ' data-parallax="10"')}</div><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:26px"><p class="eyebrow">06 — Smart workplaces</p><h2 class="d h2">Workplaces that respond</h2><p class="p" style="max-width:520px">We plan automation into the interiors we build, so lighting scenes, appliances and devices are controlled from one place or by voice through Alexa, and energy-efficient systems keep running costs down.</p><div class="ticks rule" style="max-width:560px">${map(AUTOMATION, (a, i) => `<div><span>${a}</span><span class="num">${pad(i + 1)}</span></div>`)}</div><a class="link" href="${c.u('services/smart-workplace/')}">Smart workplace services →</a></div></div></section>
+<section class="px sec bg2"><div class="wrap" style="display:flex;flex-wrap:wrap;align-items:center;gap:48px clamp(40px,6vw,104px)"><div class="img r45" style="flex:5 1 360px">${img(c, s.images && s.images.automation, 'Circular conference room with integrated lighting and AV', ' data-parallax="10"')}</div><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:26px"><p class="eyebrow">06 — Workplace technology</p><h2 class="d h2">Systems built in</h2><p class="p" style="max-width:520px">Conference AV, networking, security, fire, automation and acoustics, designed and installed with the interior under one contract, so every system is hidden, reachable and working on the day you move in.</p><div class="ticks rule" style="max-width:560px">${map(D.techServices, (x, i) => `<a href="${c.u('services/' + x.slug + '/')}"><span>${esc(x.title)}</span><span class="num">${pad(i + 1)}</span></a>`)}</div><a class="link" href="${c.u('technology/')}">All technology services →</a></div></div></section>
 ${testimonials(c, D, 'Clients')}
 <section class="px sec-top"><div class="wrap" style="display:flex;flex-wrap:wrap;gap:24px">
   <a class="feat" href="${c.u('sustainability/')}" data-cursor="Explore">${img(c, s.images && s.images.sustainability, 'Conference room among tropical planting', ' data-parallax="8"')}<div><span class="eyebrow eyebrow--light">Designo EcoVisions</span><span class="d">Greener by specification</span><span style="max-width:460px">Low-VOC finishes, energy-efficient lighting, local sourcing and water-saving fixtures.</span><span class="label">Our sustainability work →</span></div></a>
@@ -365,16 +377,17 @@ ${next && next !== p ? `<section class="px sec"><a class="wrap next" href="${c.u
 }
 
 function pageServices(c, D) {
-  const cols = [['Design', ['Space planning and layouts', '3D visualisation', 'Vastu review', 'Lighting and acoustic design', 'Materials, finishes and furniture']], ['Build', ['Civil work', 'Carpentry and joinery', 'Partitions and aluminium sliding windows', 'Electrical, lighting and acoustics', 'Painting, carpets and vertical blinds']], ['Manage', ['Budgeting and estimates', 'Procurement', 'Installation and site management', 'Office automation and smart controls', 'Maintenance after handover']]];
+  const cols = [['Design', ['Space planning and layouts', '3D visualisation', 'Vastu review', 'Lighting and acoustic design', 'Materials, finishes and furniture']], ['Build', ['Civil work', 'Carpentry and joinery', 'Partitions and aluminium sliding windows', 'Electrical, lighting and acoustics', 'Painting, carpets and vertical blinds']], ['Manage', ['Budgeting and estimates', 'Procurement', 'Installation and site management', 'Testing and commissioning', 'Maintenance after handover']], ['Technology', ['Conference and meeting room AV', 'Networking and IT infrastructure', 'CCTV and access control', 'Fire alarm, PA and background music', 'Automation, IoT and acoustics']]];
   const body = `
 ${intro('Services', 'Turnkey<br>interiors', 'Design, planning, budgeting, procurement, execution and maintenance under one contract, for offices and every commercial space our clients run.', true)}
-${D.services.length ? `<section class="px" style="padding-bottom:var(--sy)"><div class="wrap grid-fill" style="--min:340px;gap:64px 24px">${map(D.services, (x, i) => svcCard(c, x, i))}</div></section>` : ''}
-<section class="px sec bg2"><div class="wrap">${head2('Capabilities', 'Design, build, manage')}<div class="grid" style="--min:300px">${map(cols, ([h, items], i) => `<div class="rule" style="padding-top:28px"><span class="num">${pad(i + 1)}</span><h2 class="d" style="font-size:52px;line-height:1.05;margin:14px 0 20px">${h}</h2><div class="plain">${map(items, (x) => `<span style="display:block">${x}</span>`)}</div></div>`)}</div></div></section>
+${D.interiorServices.length ? `<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('Interiors', 'Design, build and look after')}<div class="grid-fill" style="--min:320px;gap:64px 24px">${map(D.interiorServices, (x, i) => svcCard(c, x, i))}</div></div></section>` : ''}
+${D.techServices.length ? `<section class="px" style="padding-bottom:var(--sy)"><div class="wrap">${head2('Technology &amp; systems', 'The technology inside the space', `<a class="link" href="${c.u('technology/')}">About our technology work →</a>`)}<div class="grid-fill" style="--min:320px;gap:64px 24px">${map(D.techServices, (x, i) => svcCard(c, x, i))}</div></div></section>` : ''}
+<section class="px sec bg2"><div class="wrap">${head2('Capabilities', 'Design, build, manage, equip')}<div class="grid" style="--min:240px">${map(cols, ([h, items], i) => `<div class="rule" style="padding-top:28px"><span class="num">${pad(i + 1)}</span><h2 class="d" style="font-size:clamp(40px,4vw,52px);line-height:1.05;margin:14px 0 20px">${h}</h2><div class="plain">${map(items, (x) => `<span style="display:block">${x}</span>`)}</div></div>`)}</div></div></section>
 <section class="px sec"><div class="wrap">${head2('How a project runs', 'Five stages, one team', `<a class="link" href="${c.u('fit-out-process/')}">The process in detail →</a>`)}${processSteps()}</div></section>
 <section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8" style="left:auto;right:-8%"')}<div class="wrap">${head2('Sectors', 'Who we design for', `<a class="link" href="${c.u('sectors/')}">All sectors →</a>`)}<div class="sx-list">${map(D.sectors, (x) => `<a class="sx" href="${c.u('sectors/' + x.id + '/')}"${x.image ? ` data-peek="${esc(c.m(x.image))}"` : ''}><span class="num">${x.index}</span><span class="d">${esc(x.name)}</span><span class="small">${esc(x.blurb)}</span><span class="label">${x.countLabel} →</span></a>`)}</div></div></section>
 <section class="px sec-top">${promises(c)}</section>
 <section class="px sec"><div class="wrap bg2" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:32px 64px;padding:clamp(32px,4vw,64px)"><div style="flex:1 1 480px;display:flex;flex-direction:column;gap:20px"><p class="eyebrow">Free online consultation</p><h2 class="d" style="font-size:clamp(40px,4.8vw,76px);line-height:1.02">Talk to us before you commit</h2><p class="p" style="max-width:600px">Share your ideas, budget and references during working hours. After the first call we can give you an approximate estimate, then measure the site and prepare a detailed one, with 3D views of the project.*</p><span style="font-size:13px">*Terms and conditions apply.</span></div>${btn(c.u('contact/', '#consult'), 'Book a consultation <span>→</span>', 'btn--dark')}</div></section>`;
-  return shell(c, D, { title: 'Services — Turnkey Office & Commercial Interiors — Designo Interiors', desc: 'Turnkey office fit-outs, workplace design, refurbishment, project management, smart workplaces and maintenance for commercial interiors in Mumbai.', active: 'services', page: 'services/', body: body });
+  return shell(c, D, { title: 'Services — Turnkey Office & Commercial Interiors — Designo Interiors', desc: 'Turnkey office fit-outs, workplace design, refurbishment and project management, plus conference AV, IT, CCTV, access control, fire alarm and acoustics, for commercial interiors in Mumbai.', active: 'services', page: 'services/', body: body });
 }
 
 function pageSectors(c, D) {
@@ -438,19 +451,19 @@ function pageSector(c, D, x) {
 function pageService(c, D, x, next) {
   const projects = (x.projects || []).map((slug) => D.projects.find((p) => p.slug === slug)).filter(Boolean);
   const sectors = (x.sectors || []).map((id) => D.sectorById[id]).filter((s) => s && D.sectors.indexOf(s) !== -1);
-  const i = D.services.indexOf(x);
+  const tech = x.group === 'technology', i = (tech ? D.techServices : D.interiorServices).indexOf(x);
   return pageLanding(c, D, {
-    page: 'services/' + x.slug + '/', active: 'services',
+    page: 'services/' + x.slug + '/', active: tech ? 'technology' : 'services',
     title: x.title + ' in Mumbai — Designo Interiors', desc: x.metaDescription || x.summary,
-    crumbs: [['services/', 'Services'], [null, x.title]],
-    eyebrow: 'Services · ' + pad(i + 1), h1: x.title, lede: x.intro || x.summary, image: x.image,
+    crumbs: tech ? [['technology/', 'Technology'], [null, x.title]] : [['services/', 'Services'], [null, x.title]],
+    eyebrow: (tech ? 'Technology · ' : 'Services · ') + pad(i + 1), h1: x.title, lede: x.intro || x.summary, image: x.image,
     points: x.points, pointsEyebrow: 'Why it matters', pointsTitle: 'What you get',
     items: x.includes, itemsTitle: 'What’s included',
     projects: projects, projectsTitle: 'Where we’ve done it',
     related: sectors.map((s) => [c.u('sectors/' + s.id + '/'), s.name]), relatedEyebrow: 'Sectors', relatedTitle: 'Where we deliver it',
     faqs: x.faqs,
     ld: [{ '@context': 'https://schema.org', '@type': 'Service', name: x.title, description: x.summary, serviceType: x.title, provider: { '@id': siteOrigin(D.site) + '/#business', '@type': 'ProfessionalService', name: 'Designo Interiors', url: siteOrigin(D.site) + '/' }, areaServed: { '@type': 'City', name: 'Mumbai' }, url: siteOrigin(D.site) + '/services/' + x.slug + '/' }],
-    next: next && next !== x ? `<a class="wrap next rule rule--soft" style="padding-top:clamp(40px,5vw,64px)" href="${c.u('services/' + next.slug + '/')}" data-cursor="Next service"><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:22px"><span class="eyebrow">Next service</span><span class="d">${esc(next.title)} →</span></div>${next.image ? `<div class="img r75" style="flex:5 1 360px">${img(c, next.image, next.title, ' data-parallax="8"')}</div>` : ''}</a>` : ''
+    next: next && next !== x ? `<a class="wrap next rule rule--soft" style="padding-top:clamp(40px,5vw,64px)" href="${c.u('services/' + next.slug + '/')}" data-cursor="Next service"><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:22px"><span class="eyebrow">${tech ? 'Next system' : 'Next service'}</span><span class="d">${esc(next.title)} →</span></div>${next.image ? `<div class="img r75" style="flex:5 1 360px">${img(c, next.image, next.title, ' data-parallax="8"')}</div>` : ''}</a>` : ''
   });
 }
 
@@ -459,8 +472,8 @@ function pageProcess(c, D) {
     ['Consult', 'A free first conversation about your brief, team, budget, references and timeline.', ['Online, at our office or on site', 'Your brief, budget and references', 'Free of charge']],
     ['Estimate', 'An approximate estimate after the first call, then site measurements and a detailed requirement study.', ['Approximate estimate after the first call', 'Site survey and measurements', 'Detailed requirement study', 'Detailed estimate']],
     ['Design', 'Space planning, a Vastu review where wanted, and 3D views of the proposed interior for you to review.', ['Space planning and layouts', '3D views of the proposed interior', 'Vastu review, where wanted', 'Lighting and acoustic design', 'Materials, finishes and furniture']],
-    ['Build', 'Civil work, joinery, electrical, finishes and installation, run under ISO 9001 and 45001 practices.', ['Procurement of materials and furniture', 'Civil work', 'Carpentry and joinery', 'Partitions, electrical, lighting and acoustics', 'Painting, carpets and blinds', 'Quality and safety checks on site']],
-    ['Handover', 'Delivered on the agreed timeline and backed by a 10-year warranty.', ['Handover on the agreed timeline', '10-year warranty', 'Maintenance after handover']]
+    ['Build', 'Civil work, joinery, electrical, finishes and installation, run under ISO 9001 and 45001 practices.', ['Procurement of materials and furniture', 'Civil work', 'Carpentry and joinery', 'Partitions, electrical, lighting and acoustics', 'AV, networking, CCTV, access control and fire alarm', 'Painting, carpets and blinds', 'Quality and safety checks on site']],
+    ['Handover', 'Delivered on the agreed timeline and backed by a 10-year warranty.', ['Testing and commissioning of every system', 'Training for your team, with drawings and documents', 'Handover on the agreed timeline', '10-year warranty', 'Maintenance after handover']]
   ];
   const asks = ['Your brief: teams, headcount and the spaces you need', 'A budget range and a target move-in date', 'Floor plans or building drawings, if you have them', 'Access to the site for measurements', 'Your building’s fit-out rules, where the landlord or society sets them'];
   const pay = [['50%', 'Advance', 'Before work starts.'], ['40%', 'Second stage', 'Fifteen days after work begins.'], ['10%', 'Balance', 'Seven days after completion.']];
@@ -475,19 +488,36 @@ ${intro('The fit-out process', 'From brief<br>to handover', 'How a Designo proje
   return shell(c, D, { title: 'Office Fit-out Process: Brief to Handover — Designo Interiors', desc: 'How a Designo office fit-out runs: consultation, estimate, design, build and handover, what you receive at each stage, and how payments are staged.', page: 'fit-out-process/', body: body });
 }
 
+function pageTechnology(c, D) {
+  const s = D.site, tech = D.techServices, hero = s.images && (s.images.technology || s.images.automation);
+  const why = [['Planned at layout stage', 'Conduits, cable routes, ceiling access, rack rooms and power are fixed with the interior layout, so nothing is chased into finished walls later.'], ['One programme', 'Systems go in step with civil, electrical and ceiling work, not after them.'], ['One point of contact', 'One team accountable for the interior and every system inside it.'], ['Handed over working', 'Every system tested, commissioned and explained to your team, with drawings and documents at handover.']];
+  const faqs = D.faqs.filter((f) => f.topic === 'Technology');
+  const body = `
+<section class="intro" style="padding-top:clamp(36px,4vw,60px)">${introS()}<div class="wrap wrap--free">
+  ${crumbs(c, [['services/', 'Services'], [null, 'Technology']])}
+  <div class="lhead"><div class="lhead__t"><p class="eyebrow">Technology &amp; systems</p><h1 class="d">The technology inside the space</h1></div><div class="lhead__r"><p class="lede">Conference AV, networking, security, fire, automation and acoustics, designed and installed with your interiors under one contract, so every system is hidden, reachable and working on the day you move in.</p><div class="btns">${btn(c.u('project-brief/'), 'Send a brief <span>→</span>', 'btn--dark')}${btn(c.u('contact/', '#consult'), 'Book a consultation', 'btn--line')}</div></div></div>
+</div></section>
+${hero ? `<section class="px"><div class="wrap img lhero">${img(c, hero, 'Townhall conference room with delegate microphones and projection', ' loading="eager" data-parallax="10"')}</div></section>` : ''}
+<section class="px sec"><div class="wrap">${head2('01 — Systems', (WORDS[tech.length] || tech.length) + ' systems, one contractor')}<div class="grid-fill" style="--min:320px;gap:64px 24px">${map(tech, (x, i) => svcCard(c, x, i))}</div></div></section>
+<section class="px sec bg2"><div class="wrap">${head2('02 — Why with the interior', 'Built in, not bolted on')}<div class="cells" style="--min:250px">${map(why, (x, i) => `<div><span class="num">${pad(i + 1)}</span><h3 class="d h4">${x[0]}</h3><p class="p small">${x[1]}</p></div>`)}</div></div></section>
+<section class="px sec"><div class="wrap">${head2('03 — How we deliver', 'Survey to support')}${processSteps(TECH_STEPS)}</div></section>
+${faqs.length ? `<section class="px" style="padding-bottom:var(--sy)"><div class="wrap split"><div class="l"><p class="eyebrow">04 — Questions</p><h2 class="d h2">Asked and answered</h2><a class="link" href="${c.u('faq/')}">All questions →</a></div><div class="r rule">${map(faqs, (f) => `<details><summary>${esc(f.question)}</summary><p>${esc(f.answer)}</p></details>`)}</div></div></section>` : ''}`;
+  return shell(c, D, { title: 'Office Technology: AV, IT, CCTV, Access Control & Fire Alarm — Designo Interiors', desc: 'Conference AV, networking and IT, CCTV, access control, fire alarm, PA, automation and acoustics, designed and installed with your office interiors in Mumbai.', active: 'technology', page: 'technology/', body: body, image: hero, ld: [ldCrumbs(D, [['services/', 'Services'], [null, 'Technology']], 'technology/')].concat(faqs.length ? [ldFaq(faqs)] : []) });
+}
+
 function pageWhy(c, D) {
   const s = D.site;
   const reasons = [
     ['One point of accountability', 'Design, procurement and every trade on site under one contract and one timeline.'],
+    ['Interiors and technology together', 'Conference AV, networking, CCTV, access control, fire alarm and acoustics built in with the interior.'],
     ['Certified three times over', 'ISO 9001, 14001 and 45001: one of very few interior design firms in India certified to all three.'],
     ['Trusted since 1991', 'Offices for Castrol India, Visible Alpha, Wincor Nixdorf, Essel Group and Laerdal, and buildings for Goa University.'],
     ['Dependable delivery', '45-day timelines, agreed with you before work starts.'],
     ['Backed for a decade', 'A 10-year warranty, and maintenance from the team that built the space.'],
-    ['Vastu in-house', 'Our Vastu consultant reviews each layout before it is final.'],
     ['Greener by specification', 'Low-VOC finishes, energy-efficient lighting and local sourcing, under ISO 14001.'],
     ['Three decades of supply', 'Suppliers, contractors, craftsmen and artisans who share our standards.']
   ];
-  const compare = [['Contracts to manage', 'One', 'One per designer and contractor'], ['Accountability', 'One team, start to finish', 'Split between firms'], ['Budget', 'One estimate for design and build', 'Separate quotes, with gaps between them'], ['Timeline', 'One schedule across every trade', 'Each trade on its own schedule'], ['Quality and safety', 'ISO 9001 and 45001 practices on site', 'Depends on each contractor'], ['After handover', '10-year warranty and maintenance', 'Varies by contractor']];
+  const compare = [['Contracts to manage', 'One, for interiors and systems', 'One per designer, contractor and systems vendor'], ['Accountability', 'One team, start to finish', 'Split between firms'], ['Budget', 'One estimate for design and build', 'Separate quotes, with gaps between them'], ['Timeline', 'One schedule across every trade', 'Each trade on its own schedule'], ['Quality and safety', 'ISO 9001 and 45001 practices on site', 'Depends on each contractor'], ['After handover', '10-year warranty and maintenance', 'Varies by contractor']];
   const wall = D.clients.wall.filter((w) => w.logo).slice(0, 12);
   const body = `
 ${intro('Why Designo', 'One firm.<br>One contract.', 'For admin heads, facility managers and leadership teams who need a space delivered on time and on budget, without coordinating a dozen contractors.', true)}
@@ -517,7 +547,7 @@ function testimonials(c, D, eyebrow, list) {
 }
 
 function pageBrief(c, D) {
-  const scope = ['Design and 3D views', 'Civil and interior works', 'Furniture and joinery', 'Electrical and lighting', 'Office automation', 'Vastu review', 'Maintenance after handover'];
+  const scope = ['Design and 3D views', 'Civil and interior works', 'Furniture and joinery', 'Electrical and lighting', 'Conference AV and video conferencing', 'Networking and IT infrastructure', 'CCTV and access control', 'Fire alarm and PA', 'Automation and IoT', 'Acoustics and soundproofing', 'Digital signage and room booking', 'Vastu review', 'Maintenance after handover'];
   const part = (label) => `<span class="full label green" style="padding-bottom:12px;border-bottom:1px solid var(--ink);margin-top:8px">${label}</span>`;
   const body = `
 ${intro('Project brief · RFP', 'Send us<br>your brief', 'For new offices, relocations, refurbishments and RFPs. Share the site, the spaces you need and your timeline, and attach a floor plan or tender document if you have one.', true)}
@@ -572,7 +602,7 @@ function pageLocation(c, D, x) {
     points: x.points, pointsEyebrow: 'Why Designo here', pointsTitle: 'Local experience',
     projects: D.projects.filter((p) => hit(p.location)), projectsTitle: 'Projects in the area',
     clients: clients, clientsTitle: 'Who we’ve built for here',
-    related: D.services.map((v) => [c.u('services/' + v.slug + '/'), v.title]), relatedEyebrow: 'Services', relatedTitle: 'What we do'
+    related: D.interiorServices.map((v) => [c.u('services/' + v.slug + '/'), v.title]).concat(D.techServices.length ? [[c.u('technology/'), 'Technology & systems']] : []), relatedEyebrow: 'Services', relatedTitle: 'What we do'
   });
 }
 
@@ -689,7 +719,7 @@ function pageJournal(c, D) {
 ${lead ? `<a class="card rule" data-post-cat="${esc(lead.category)}" href="${c.u('journal/' + lead.slug + '/')}" data-cursor="Read" style="flex-direction:row;flex-wrap:wrap;align-items:flex-end;gap:32px clamp(32px,5vw,72px);padding-top:28px"><div class="img r1610" style="flex:7 1 520px">${img(c, lead.cover, lead.title, ' data-parallax="8"')}</div><div style="flex:4 1 320px;display:flex;flex-direction:column;gap:18px"><span class="label green">${esc(lead.category)} · ${lead.dateLabel}</span><span class="card__title" style="font-size:clamp(40px,4.4vw,70px);line-height:1.02;text-wrap:balance">${esc(lead.title)}</span><span class="p">${esc(lead.excerpt)}</span><span class="link">Read →</span></div></a>` : '<p class="muted">No posts yet.</p>'}
 <div class="grid-fill" style="gap:64px 24px">${map(rest, (p) => `<a data-post-cat="${esc(p.category)}" class="card rule rule--soft" href="${c.u('journal/' + p.slug + '/')}" data-cursor="Read" style="padding-top:22px"><span class="label green">${esc(p.category)} · ${p.dateLabel}</span><div class="img r75">${img(c, p.cover, p.title, ' data-parallax="8"')}</div><span class="card__title">${esc(p.title)}</span><span class="p small">${esc(p.excerpt)}</span></a>`)}</div>
 </div></section>`;
-  return shell(c, D, { title: 'Journal — Designo Interiors', desc: 'Notes on workplace design, Vastu, sustainability and automation from Designo Interiors.', active: 'journal', page: 'journal/', body: body });
+  return shell(c, D, { title: 'Journal — Designo Interiors', desc: 'Notes on workplace design, technology, Vastu and sustainability from Designo Interiors.', active: 'journal', page: 'journal/', body: body });
 }
 
 function pagePost(c, D, p, next) {

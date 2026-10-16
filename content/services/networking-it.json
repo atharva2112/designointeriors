@@ -1,0 +1,58 @@
+{
+  "title": "Networking & IT infrastructure",
+  "group": "technology",
+  "summary": "Structured cabling, racks, Wi-Fi and clean power, built into the fit-out and handed over tested and documented.",
+  "intro": "Every system in a modern office runs on the network. We plan and install the cabling, racks, switching, Wi-Fi and power your IT team needs, route it through floors, ceilings and furniture as the interior is built, and hand it over tested, labelled and documented.",
+  "image": "",
+  "points": [
+    {
+      "title": "Planned at layout stage",
+      "text": "Data points, cable routes, rack rooms and power are fixed with the furniture layout, so nothing is chased into finished walls later."
+    },
+    {
+      "title": "Tested and documented",
+      "text": "Every cable labelled and tested, with drawings and test reports at handover."
+    },
+    {
+      "title": "Coverage everywhere",
+      "text": "Wi-Fi access points placed from a survey of the floor, for reliable coverage in meeting rooms and open areas."
+    },
+    {
+      "title": "Power that stays on",
+      "text": "UPS and clean power for server rooms, network racks and critical workstations."
+    }
+  ],
+  "includes": [
+    "Structured cabling: Cat6 and Cat6A copper",
+    "Fibre backbone between floors and racks",
+    "Server, hub and rack rooms",
+    "Network racks, patch panels and cable management",
+    "Network switches and Wi-Fi access points",
+    "Wi-Fi survey and coverage planning",
+    "Firewalls and routers, set up with your IT team",
+    "UPS, power distribution and earthing for IT",
+    "Cable labelling, testing and documentation"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education",
+    "studios"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "Will you work with our IT team?",
+      "answer": "Yes. We work to your IT team’s standards for cabling, equipment and security, and coordinate configuration and switchover with them."
+    },
+    {
+      "question": "Do you provide UPS and backup power for IT?",
+      "answer": "Yes. We size and install UPS systems for server rooms, network racks and critical workstations, with the power distribution and earthing they need."
+    }
+  ],
+  "metaDescription": "Office networking and IT infrastructure in Mumbai: structured cabling, fibre, racks, Wi-Fi, server rooms and UPS, installed with your fit-out.",
+  "order": 14,
+  "hidden": false
+}

@@ -1,0 +1,53 @@
+{
+  "title": "CCTV & video surveillance",
+  "group": "technology",
+  "summary": "IP camera systems planned for full coverage, with recording, remote viewing and the storage you need.",
+  "intro": "Security cameras that cover what matters and stay out of the way. We plan camera positions from your floor plans, install IP cameras, recorders and video management software, and set up remote viewing so your team can check any camera from the security desk or a phone.",
+  "image": "",
+  "points": [
+    {
+      "title": "Coverage planned on drawings",
+      "text": "Camera positions and angles planned for entrances, corridors, cash points and stores, with no blind spots."
+    },
+    {
+      "title": "Clear images, day and night",
+      "text": "IP cameras chosen for each location, including low-light and wide-angle views."
+    },
+    {
+      "title": "Recording you can rely on",
+      "text": "Storage sized to the number of days you need to keep footage."
+    },
+    {
+      "title": "Watch from anywhere",
+      "text": "Live and recorded views on a monitor, at the security desk or on a phone."
+    }
+  ],
+  "includes": [
+    "Coverage planning from floor plans",
+    "IP dome, bullet and fisheye cameras",
+    "Network video recorders (NVR) and video management software",
+    "Storage sized to your retention period",
+    "Monitors and security-desk viewing",
+    "Remote viewing on mobile",
+    "Power over Ethernet (PoE) cabling",
+    "Integration with access control"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education",
+    "fitness"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "How long can footage be kept?",
+      "answer": "As long as you need. We size the recorders and storage to the number of cameras, the image quality and the number of days you must keep footage."
+    }
+  ],
+  "metaDescription": "CCTV and IP video surveillance for offices, showrooms and commercial spaces in Mumbai: coverage planning, recording and remote viewing.",
+  "order": 15,
+  "hidden": false
+}

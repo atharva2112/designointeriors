@@ -31,8 +31,11 @@
       "Boardrooms, conference and townhall rooms",
       "Glass partitions and acoustic treatment",
       "Pantries and breakout spaces",
-      "Lighting, electrical and smart controls",
-      "Branch and multi-site roll-outs"
+      "Branch and multi-site roll-outs",
+      "Lighting and electrical",
+      "Conference room AV and video conferencing",
+      "Networking, Wi-Fi and server rooms",
+      "CCTV, access control and fire alarm"
     ],
     "clients": [
       "Castrol India, R&D — Wadala",
@@ -96,7 +99,9 @@
       "Customer lounges and consultation areas",
       "Counters and service points",
       "Storage and back-of-house",
-      "Multi-store roll-outs"
+      "Multi-store roll-outs",
+      "CCTV and security systems",
+      "Digital signage and background music"
     ],
     "clients": [
       "S.S. Communication — 8 stores, Mira Road to Kandivali",
@@ -145,7 +150,9 @@
       "Clubhouses and lounges",
       "Bespoke bars and joinery",
       "Lighting design",
-      "Acoustic treatment"
+      "Acoustic treatment",
+      "PA and background music",
+      "CCTV and access control"
     ],
     "clients": [
       "Hotel Centaur — Vile Parle",
@@ -187,7 +194,9 @@
       "Administrative and faculty offices",
       "Meeting and seminar rooms",
       "Reception and common areas",
-      "Lighting, electrical and acoustics"
+      "Lighting, electrical and acoustics",
+      "Seminar room AV and video conferencing",
+      "Networking, Wi-Fi and CCTV"
     ],
     "clients": [
       "Goa University — Taleigao, 12,000 sq ft",
@@ -223,7 +232,9 @@
       "Workout floors",
       "Reception and lounges",
       "Changing rooms",
-      "Lighting and electrical"
+      "Lighting and electrical",
+      "Sound systems and background music",
+      "Access control and CCTV"
     ],
     "clients": [],
     "faqs": [],
@@ -256,7 +267,9 @@
       "Consultation and treatment rooms",
       "Nursing home interiors",
       "Healthcare offices",
-      "Lighting and acoustics"
+      "Lighting and acoustics",
+      "Access control, CCTV and fire alarm",
+      "Networking, Wi-Fi and IT infrastructure"
     ],
     "clients": [
       "Shree Nursing Home — Shivaji Park",

@@ -26,7 +26,17 @@
       "max": null
     },
     {
-      "name": "Office automation and smart controls",
+      "name": "Conference room AV",
+      "min": null,
+      "max": null
+    },
+    {
+      "name": "Networking and IT infrastructure",
+      "min": null,
+      "max": null
+    },
+    {
+      "name": "CCTV, access control and fire alarm",
       "min": null,
       "max": null
     }

@@ -193,7 +193,7 @@ GitHub replies `204 No Content` straight away. The run itself, with any error, s
 | Field | Required | Notes |
 | --- | --- | --- |
 | `title` | yes | A heading at the top of the body that repeats the title is removed, since the page already shows it. |
-| `category` | yes | Workplace, Vastu, Sustainability, Intelligent Living or News (any capitalisation). |
+| `category` | yes | Workplace, Vastu, Sustainability, Technology or News (any capitalisation). |
 | `body` | yes | Markdown or HTML. Remote images are downloaded into `media/`; scripts are stripped. |
 | `excerpt` | no | Taken from the first paragraph if left out. |
 | `cover` | no | An `https://` image link (downloaded), or a `/media/…` path already in the repository. |

@@ -1,0 +1,55 @@
+{
+  "title": "Acoustics & soundproofing",
+  "group": "technology",
+  "summary": "Private boardrooms and cabins, calmer open offices and studio-grade isolation where it counts.",
+  "intro": "Good acoustics make rooms private and offices calm. We design and build sound insulation for boardrooms and cabins, absorption for open floors and meeting rooms, and full isolation for studios, choosing materials that work as well acoustically as they look.",
+  "image": "/media/projects/recording-studio/interior-design-for-music-studio.webp",
+  "points": [
+    {
+      "title": "Private conversations",
+      "text": "Partitions, doors, seals and glazing built to stop speech carrying between rooms."
+    },
+    {
+      "title": "Calmer open offices",
+      "text": "Wall panels, ceiling clouds and baffles that cut echo and background noise."
+    },
+    {
+      "title": "Clear calls",
+      "text": "Meeting rooms treated so microphones pick up voices, not the room."
+    },
+    {
+      "title": "Studio-grade isolation",
+      "text": "Room-within-a-room construction for recording and production studios, as in our studio for A.R. Rahman."
+    }
+  ],
+  "includes": [
+    "Acoustic partitions, doors and seals",
+    "Double-glazed acoustic glass partitions",
+    "Wall panels and fabric-wrapped absorbers",
+    "Ceiling clouds, baffles and acoustic ceilings",
+    "Acoustic flooring and underlays",
+    "Phone booths and focus rooms",
+    "Room-within-a-room studio construction",
+    "Noise control for equipment and services"
+  ],
+  "sectors": [
+    "corporate",
+    "studios",
+    "hospitality",
+    "healthcare",
+    "education"
+  ],
+  "projects": [
+    "recording-studio",
+    "townhall-conference-floor"
+  ],
+  "faqs": [
+    {
+      "question": "Can an existing meeting room be soundproofed?",
+      "answer": "Usually, yes. We find where sound is escaping, whether through the partition, the ceiling void, the door or the glazing, and treat those first."
+    }
+  ],
+  "metaDescription": "Acoustics and soundproofing for boardrooms, cabins, open offices and studios in Mumbai: acoustic partitions, panels, ceilings and isolation.",
+  "order": 19,
+  "hidden": false
+}

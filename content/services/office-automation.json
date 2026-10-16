@@ -1,0 +1,52 @@
+{
+  "title": "Office automation & IoT",
+  "group": "technology",
+  "summary": "Lighting, climate and energy controlled from one place, with sensors that respond to how the office is used.",
+  "intro": "Automation that saves energy and makes the office easier to run. We integrate lighting, blinds, air-conditioning and power with occupancy and environmental sensors, so the space responds to how people use it, and give your facilities team one place to see and control it.",
+  "image": "",
+  "points": [
+    {
+      "title": "Lights that respond",
+      "text": "Scenes for meetings and presentations, with occupancy and daylight sensors that switch and dim lighting automatically."
+    },
+    {
+      "title": "Lower energy bills",
+      "text": "Lighting and air-conditioning run only where and when they are needed, with energy monitoring to show the savings."
+    },
+    {
+      "title": "Data on how space is used",
+      "text": "IoT sensors for occupancy, temperature and air quality, so you can plan space and comfort on real numbers."
+    },
+    {
+      "title": "One place to control it",
+      "text": "Central dashboards, schedules and mobile control for your facilities team."
+    }
+  ],
+  "includes": [
+    "Lighting control: scenes, dimming and schedules",
+    "Occupancy and daylight sensors",
+    "Motorised blinds and curtains",
+    "Air-conditioning integration and scheduling",
+    "Energy metering and monitoring",
+    "IoT sensors for occupancy, temperature and air quality",
+    "Meeting room automation",
+    "Central dashboards and mobile control"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "Can automation be added to an existing office?",
+      "answer": "Often, yes. Many lighting and sensor systems are wireless or reuse existing wiring. We survey the site and tell you what can be added without major civil work."
+    }
+  ],
+  "metaDescription": "Office automation and IoT in Mumbai: lighting control, occupancy and air-quality sensors, climate integration and energy monitoring for commercial spaces.",
+  "order": 13,
+  "hidden": false
+}

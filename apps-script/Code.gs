@@ -6,7 +6,7 @@
  *
  * What it does for every form submitted on the website:
  *   1. Adds a row to a tab named after the form (created automatically).
- *   2. Saves any uploaded CV into the Drive folder "Designo website uploads".
+ *   2. Saves any uploaded file (CVs, floor plans, RFPs) into the Drive folder "Designo website uploads".
  *   3. Emails everyone listed for that form in the admin (Settings → Notifications).
  *   4. Sends a WhatsApp alert through CallMeBot to every number listed for that form.
  *
@@ -16,7 +16,7 @@
  *   (add one CALLMEBOT_<number> line for each WhatsApp number)
  */
 
-var LABELS = { quote: 'Quotes', consultation: 'Consultations', careers: 'Careers', referral: 'Referrals', ecovisions: 'EcoVisions' };
+var LABELS = { quote: 'Quotes', brief: 'Project briefs', consultation: 'Consultations', careers: 'Careers', referral: 'Referrals', ecovisions: 'EcoVisions' };
 var FALLBACK = { emails: ['designo@designointeriors.com', 'designo371@gmail.com'], whatsapp: ['919820111353'] };
 var FOLDER = 'Designo website uploads';
 

@@ -16,12 +16,17 @@ A fast static website with a free admin panel. No website-builder subscription.
 
 ```
 content/            ← everything the admin panel edits (JSON)
-  projects/         one file per project
+  projects/         one file per project (optional case-study fields)
+  services/         one file per service page (/services/…)
+  locations/        one file per area page (/locations/…)
   journal/          one file per blog post
   jobs/             one file per opening
   clients.json      Clientele page
-  sectors.json      the eight sectors
+  sectors.json      the sectors, and the content of each sector page (/sectors/…)
+  faqs.json         the FAQ page
+  testimonials.json approved client quotes (empty until you add one)
   settings/site.json           phone, email, stats, brochures, images
+  settings/estimator.json      ₹ per sq ft rates for the cost estimator
   settings/notifications.json  who gets alerted for each form
 media/              photos and PDFs uploaded through the admin
 static/             styles.css, site.js, fonts, logo and S-monogram files
@@ -67,7 +72,7 @@ Motion respects the visitor: with *reduce motion* switched on in their system se
 
 ### 3. Admin panel (Pages CMS)
 1. Go to https://app.pagescms.org → Sign in with GitHub → install the Pages CMS app on the `designointeriors` repository.
-2. Open the repository. You'll see Projects, Journal, Jobs, Clientele, Sectors, Settings → Notifications and Settings → Site in the sidebar.
+2. Open the repository. You'll see Projects, Services, Journal, Jobs, Clientele, Sectors, Locations, FAQ, Testimonials, Settings → Notifications, Settings → Cost estimator and Settings → Site in the sidebar.
 
 ### 4. Forms (Google Sheet)
 1. Signed in as designo371@gmail.com, create a Google Sheet called **Designo enquiries**.
@@ -122,9 +127,21 @@ Old GoDaddy page addresses redirect to the new pages automatically (`_redirects`
 
 **Job opening** — Admin → Jobs → Add an entry. Tick *Hide (role filled)* when done.
 
+**Case study** — open a project and fill in *Location*, *Year completed*, *Duration*, *Scope*, and *The challenge* / *Our approach* / *The outcome*. Each one appears on the project page only once it's filled in. *Location* also lists the project on the matching area page.
+
+**Client quote** — Admin → Testimonials → add an item. Only publish quotes the client has approved. Quotes show on the homepage and the Why Designo page, and on a project page too if you enter its page address (e.g. `wincor-nixdorf`).
+
+**Services, sectors and areas** — Admin → Services, Sectors or Locations. Every section on these pages (focus points, scope, clients, questions) is optional and is left out when empty. *Hide from site* on a sector removes it from every list, filter and form; Residential is hidden this way until it gets its own section.
+
+**FAQ** — Admin → FAQ → add a question, pick a topic, Save.
+
+**Cost estimator** — Admin → Settings → Cost estimator → enter *From* and *To* rates (₹ per sq ft) for each specification level → Save. The page (/fit-out-cost/) and its links appear only once at least one level has both rates. Add-ons without rates are left out.
+
 **Change who gets alerts** — Admin → Settings → Notifications → pick the form → add or remove emails and WhatsApp numbers → Save. Changes apply within five minutes. New WhatsApp numbers also need their CallMeBot key (setup step 5).
 
-**See submissions** — open the **Designo enquiries** Google Sheet. Each form has its own tab, newest at the bottom. Uploaded CVs are in Drive → *Designo website uploads*.
+**See submissions** — open the **Designo enquiries** Google Sheet. Each form has its own tab, newest at the bottom. Uploaded CVs, floor plans and RFPs are in Drive → *Designo website uploads*.
+
+> The **Project brief** form (/project-brief/) is new. After updating `apps-script/Code.gs`, paste it into the Apps Script editor again and **Deploy → Manage deployments → Edit → New version**, so brief submissions get their own “Project briefs” tab. Without that they still arrive, in a tab named “brief”.
 
 **Admin shows broken images, "Media folder not found" or "Path must start with the media directory"** — some content still links to an image on another site. Run setup step 7 again (Actions → Import remote media). It only touches links that are still remote.
 
@@ -133,7 +150,7 @@ Landscape JPG or WebP, about 2400 px wide, under 1 MB if possible. Name files cl
 
 ### Limits worth knowing
 - Gmail accounts can send about 100 alert emails a day. Plenty for enquiries; if you outgrow it, use a Google Workspace account.
-- Uploaded CVs are limited to 5 MB.
+- Uploaded CVs are limited to 5 MB; floor plans and RFPs on the project brief to 10 MB.
 - Any single file on the site (photo, brochure PDF) must be under 25 MB, Cloudflare's limit. A bigger file is left out of the site with a warning in the build log, and its link stops working. Shrink PDFs with a free compressor such as ilovepdf.com/compress_pdf before uploading.
 - The 9 projects, 4 journal posts and 4 jobs included at launch are placeholders. Edit them in the admin.
 

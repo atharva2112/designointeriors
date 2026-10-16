@@ -1,0 +1,52 @@
+{
+  "title": "Workplace design & space planning",
+  "summary": "Layouts, 3D views, lighting, acoustics and materials, planned around how your teams work.",
+  "intro": "Good offices start with a plan that fits the way people work. We study your teams, headcount and meeting needs, then develop layouts, 3D views and a palette of materials you can review before anything is built.",
+  "image": "/media/projects/sarla-technologies/refined-empty-open-plan-office-2.webp",
+  "points": [
+    {
+      "title": "Requirement study",
+      "text": "A detailed study of your teams, headcount, meeting rooms and storage once the site is measured."
+    },
+    {
+      "title": "See it before it’s built",
+      "text": "3D views of the proposed interior, so decisions are made on screen rather than on site."
+    },
+    {
+      "title": "Vastu, where wanted",
+      "text": "Our in-house Vastu consultant reviews the layout before it is final."
+    },
+    {
+      "title": "Light and sound",
+      "text": "Lighting and acoustic design for focused work and clear meetings."
+    }
+  ],
+  "includes": [
+    "Space planning and layouts",
+    "3D visualisation",
+    "Vastu review",
+    "Lighting and acoustic design",
+    "Materials, finishes and furniture selection"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education",
+    "studios"
+  ],
+  "projects": [
+    "sarla-technologies",
+    "laerdal"
+  ],
+  "faqs": [
+    {
+      "question": "Will we see the design before work starts?",
+      "answer": "Yes. We prepare 3D views of the proposed interior so you can review and sign off the design before anything is built."
+    }
+  ],
+  "metaDescription": "Office space planning and workplace design in Mumbai: layouts, 3D views, lighting, acoustics and Vastu review.",
+  "order": 2,
+  "hidden": false
+}

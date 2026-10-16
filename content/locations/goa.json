@@ -1,0 +1,29 @@
+{
+  "name": "Goa",
+  "title": "Commercial interiors in Goa",
+  "intro": "A university, a municipal corporation, pharmaceutical offices, hotels, bars and showrooms, from Panjim and Taleigao to Vasco, Calangute and Candolim.",
+  "image": "/media/projects/restaurant-and-bar/interior-designer-for-restaurants.webp",
+  "points": [
+    {
+      "title": "Institutions",
+      "text": "12,000 sq ft for Goa University and 7,500 sq ft for the Marmugaon Municipal Corporation."
+    },
+    {
+      "title": "Hospitality and retail",
+      "text": "Hotels, bars, a bakery and showrooms in Panjim, Calangute, Candolim and Mapusa."
+    }
+  ],
+  "match": [
+    "Goa",
+    "Panjim",
+    "Calangute",
+    "Candolim",
+    "Mapusa",
+    "Vasco",
+    "Taleigao",
+    "Campal"
+  ],
+  "metaDescription": "Commercial interior designers in Goa: offices, institutions, hotels, bars and showrooms, designed and built turnkey.",
+  "order": 5,
+  "hidden": false
+}

@@ -1,0 +1,48 @@
+{
+  "title": "Office refurbishment",
+  "summary": "Upgrades to working offices, planned to keep disruption low and sites safe and clean.",
+  "intro": "When an office needs new life rather than a new address, we rework layouts, finishes, lighting and electrical in the space you already have, with safety and hygiene managed around the people still using the building.",
+  "image": "/media/projects/laerdal/sunlit-office-corridor-with-red-columns-3.webp",
+  "points": [
+    {
+      "title": "Work around your teams",
+      "text": "Works are sequenced with you so the business keeps running."
+    },
+    {
+      "title": "Safe, clean sites",
+      "text": "ISO 45001 practices protect your staff, visitors and our team in occupied buildings."
+    },
+    {
+      "title": "Keep what works",
+      "text": "We keep original features and good fittings where they matter, and replace what holds you back."
+    },
+    {
+      "title": "Less waste",
+      "text": "Usable materials from demolition are donated to local charities and recycling centres."
+    }
+  ],
+  "includes": [
+    "Re-planning and layout changes",
+    "Partitions, carpets and blinds",
+    "Painting and finishes",
+    "Lighting and electrical upgrades",
+    "Furniture and joinery",
+    "Office automation and smart controls"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "Can you work while our team is in the office?",
+      "answer": "Yes. Our ISO 45001 practices cover safety and hygiene in buildings that are already in use, and we plan the order of work with you so your teams can keep working."
+    }
+  ],
+  "metaDescription": "Office refurbishment and renovation in Mumbai, planned around working teams, with safe, clean ISO 45001 sites.",
+  "order": 3,
+  "hidden": false
+}

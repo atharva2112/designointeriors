@@ -25,9 +25,57 @@ content:
       - { name: client, label: Client name, type: string, required: true, description: "Write Confidential for projects under NDA." }
       - { name: area, label: Area (sq ft), type: number, description: "Digits only, e.g. 7500" }
       - { name: summary, label: Summary, type: text, required: true, description: "One or two sentences. Also used for Google." }
+      - { name: location, label: Location, type: string, description: "e.g. Kohinoor City, Kurla. Also places the project on the matching location page." }
+      - { name: year, label: Year completed, type: string }
+      - { name: duration, label: Duration, type: string, description: "e.g. 45 days" }
+      - { name: scope, label: Scope, type: string, list: true, description: "e.g. Design, Civil work, Joinery, Electrical, Furniture" }
+      - { name: challenge, label: The challenge, type: text, description: "Optional case study. What the client needed and what made it hard." }
+      - { name: solution, label: Our approach, type: text }
+      - { name: outcome, label: The outcome, type: text }
       - { name: cover, label: Cover image, type: image, required: true, description: "Best landscape photo, about 2400px wide." }
       - { name: gallery, label: Photo gallery, type: image, list: true, description: "Drag to reorder." }
       - { name: featured, label: Show on homepage, type: boolean, default: false, description: "Keep about five switched on." }
+      - { name: order, label: Order, type: number, description: "Lower numbers appear first." }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
+  - name: services
+    label: Services
+    type: collection
+    path: content/services
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: title
+      fields: [ image, title, order, hidden ]
+      sort: [ order, title ]
+    fields:
+      - { name: title, label: Title, type: string, required: true, description: "Also becomes the page address, e.g. services/office-fit-out/." }
+      - { name: summary, label: Summary, type: text, required: true, description: "One sentence for the Services page, the homepage and the footer." }
+      - { name: intro, label: Introduction, type: text, description: "The opening paragraph at the top of the page." }
+      - { name: image, label: Image, type: image }
+      - name: points
+        label: What you get
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+      - { name: includes, label: What’s included, type: string, list: true }
+      - name: sectors
+        label: Sectors
+        type: select
+        options:
+          multiple: true
+          values: [ { value: corporate, label: "Corporate Offices" }, { value: retail, label: "Retail and Showrooms" }, { value: hospitality, label: "Hospitality" }, { value: education, label: "Education" }, { value: fitness, label: "Fitness Centres" }, { value: healthcare, label: "Healthcare" }, { value: studios, label: "Studios" } ]
+      - { name: projects, label: Example projects, type: string, list: true, description: "Page addresses of projects that show this service, e.g. wincor-nixdorf." }
+      - name: faqs
+        label: Questions and answers
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+      - { name: metaDescription, label: Google description, type: text, description: "One or two sentences shown in search results." }
       - { name: order, label: Order, type: number, description: "Lower numbers appear first." }
       - { name: hidden, label: Hide from site, type: boolean, default: false }
 
@@ -100,8 +148,10 @@ content:
         fields:
           - { name: name, label: Group name, type: string }
           - { name: items, label: Clients, type: string, list: true }
+          - { name: hidden, label: Hide from site, type: boolean, default: false }
       - { name: homes, label: Number of homes, type: string }
       - { name: homeAreas, label: Residential areas, type: text }
+      - { name: showHomes, label: Show the private homes block, type: boolean, default: false, description: "Residential is hidden on this site for now. Switch on to show the homes count again." }
 
   - name: sectors
     label: Sectors
@@ -112,8 +162,85 @@ content:
     fields:
       - { name: id, label: ID (do not change), type: string }
       - { name: name, label: Name, type: string }
-      - { name: blurb, label: Description, type: text }
+      - { name: blurb, label: Description, type: text, description: "One line for lists and cards." }
       - { name: image, label: Image, type: image }
+      - { name: title, label: Page heading, type: string, description: "e.g. Corporate office interiors" }
+      - { name: intro, label: Introduction, type: text, description: "The opening paragraph of the sector page." }
+      - name: points
+        label: What we focus on
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+      - { name: deliverables, label: What we design and build, type: string, list: true }
+      - { name: clients, label: Clients to list, type: string, list: true, description: "e.g. Castrol India, R&D — Wadala" }
+      - name: faqs
+        label: Questions and answers
+        type: object
+        list: true
+        fields:
+          - { name: question, label: Question, type: string }
+          - { name: answer, label: Answer, type: text }
+      - { name: metaDescription, label: Google description, type: text }
+      - { name: hidden, label: Hide from site, type: boolean, default: false, description: "Hides the sector everywhere: lists, filters, forms and its page." }
+
+  - name: locations
+    label: Locations
+    type: collection
+    path: content/locations
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: name
+      fields: [ image, name, order, hidden ]
+      sort: [ order, name ]
+    fields:
+      - { name: name, label: Area name, type: string, required: true, description: "e.g. Kurla & Kohinoor City. Also becomes the page address." }
+      - { name: title, label: Page heading, type: string, required: true, description: "e.g. Office interiors in Kurla and Kohinoor City" }
+      - { name: intro, label: Introduction, type: text, required: true }
+      - { name: image, label: Image, type: image }
+      - name: points
+        label: Why Designo here
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+      - { name: match, label: Place names to match, type: string, list: true, description: "Clients (Clientele lists) and projects whose location contains any of these words are listed on the page, e.g. Kurla, Kohinoor." }
+      - { name: metaDescription, label: Google description, type: text }
+      - { name: order, label: Order, type: number }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
+  - name: faqs
+    label: FAQ
+    type: file
+    path: content/faqs.json
+    format: json
+    list: true
+    fields:
+      - name: topic
+        label: Topic
+        type: select
+        options:
+          values: [ Getting started, Cost & payment, Timelines, Standards & compliance, During works, After handover ]
+      - { name: question, label: Question, type: string, required: true }
+      - { name: answer, label: Answer, type: text, required: true }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
+  - name: testimonials
+    label: Testimonials
+    type: file
+    path: content/testimonials.json
+    format: json
+    list: true
+    fields:
+      - { name: quote, label: Quote, type: text, required: true, description: "Only publish quotes the client has approved." }
+      - { name: name, label: Name, type: string, required: true }
+      - { name: role, label: Role, type: string, description: "e.g. Head of Administration" }
+      - { name: company, label: Company, type: string }
+      - { name: project, label: Project page, type: string, description: "Optional. The project's page address, e.g. wincor-nixdorf, to show the quote on that project too." }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
 
   - name: notifications
     label: "Settings → Notifications"
@@ -130,9 +257,39 @@ content:
             label: Form
             type: select
             options:
-              values: [ { value: quote, label: Get a quote }, { value: consultation, label: Book a consultation }, { value: careers, label: Careers }, { value: referral, label: Referral programme }, { value: ecovisions, label: EcoVisions } ]
+              values: [ { value: quote, label: Get a quote }, { value: brief, label: Project brief }, { value: consultation, label: Book a consultation }, { value: careers, label: Careers }, { value: referral, label: Referral programme }, { value: ecovisions, label: EcoVisions } ]
           - { name: emails, label: Email addresses, type: string, list: true }
           - { name: whatsapp, label: "WhatsApp numbers (with 91, e.g. 919820111353)", type: string, list: true }
+
+  - name: estimator
+    label: "Settings → Cost estimator"
+    type: file
+    path: content/settings/estimator.json
+    format: json
+    fields:
+      - name: levels
+        label: Specification levels
+        type: object
+        list: true
+        description: "Rates in ₹ per sq ft. The estimator page goes live once at least one level has both rates filled in."
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: note, label: What it includes, type: text }
+          - { name: min, label: "From (₹ per sq ft)", type: number }
+          - { name: max, label: "To (₹ per sq ft)", type: number }
+      - name: addons
+        label: Add-ons
+        type: object
+        list: true
+        description: "Optional extras visitors can tick, in ₹ per sq ft. Left out until both rates are filled in."
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: min, label: "From (₹ per sq ft)", type: number }
+          - { name: max, label: "To (₹ per sq ft)", type: number }
+      - { name: minArea, label: Smallest area (sq ft), type: number }
+      - { name: maxArea, label: Largest area (sq ft), type: number }
+      - { name: defaultArea, label: Starting area (sq ft), type: number }
+      - { name: disclaimer, label: Small print, type: text }
 
   - name: site
     label: "Settings → Site"

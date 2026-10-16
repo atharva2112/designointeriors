@@ -1,0 +1,44 @@
+{
+  "title": "Project management & procurement",
+  "summary": "Budgets, estimates, procurement and site management, run to an agreed timeline.",
+  "intro": "Behind every handover is a budget, a procurement plan and a site run day by day. We manage all three, drawing on three decades of suppliers, contractors and craftsmen who share our standards.",
+  "image": "/media/projects/corporate-headquarters/lift-lobby-c323d9d.webp",
+  "points": [
+    {
+      "title": "Estimates you can plan with",
+      "text": "An approximate estimate after the first call, then a detailed estimate after site measurements."
+    },
+    {
+      "title": "A trusted supply chain",
+      "text": "Materials and furniture from local and international brands, through a network built over 30 years."
+    },
+    {
+      "title": "Managed sites",
+      "text": "Installation and site management run under ISO 9001 and ISO 45001 practices."
+    },
+    {
+      "title": "Local sourcing",
+      "text": "Working with local artisans and suppliers cuts transport emissions."
+    }
+  ],
+  "includes": [
+    "Budgeting and estimates",
+    "Procurement",
+    "Trade and supplier coordination",
+    "Installation and site management",
+    "Quality and safety checks",
+    "Timeline tracking to handover"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education"
+  ],
+  "projects": [],
+  "faqs": [],
+  "metaDescription": "Interior project management and procurement in Mumbai: budgets, estimates, sourcing and site management to an agreed timeline.",
+  "order": 4,
+  "hidden": false
+}

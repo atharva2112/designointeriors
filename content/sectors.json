@@ -3,48 +3,315 @@
     "id": "corporate",
     "name": "Corporate Offices",
     "blurb": "Headquarters, branch networks, R&D floors and boardrooms.",
-    "image": "/media/sectors/hcc-1.webp"
+    "image": "/media/sectors/hcc-1.webp",
+    "title": "Corporate office interiors",
+    "intro": "Headquarters, branch networks, R&D floors and boardrooms, planned around how your teams work and delivered under one contract, from the first site survey to handover.",
+    "points": [
+      {
+        "title": "One point of accountability",
+        "text": "One team carries design, civil work, joinery, electrical and finishes, so there is one contract, one timeline and one person to call."
+      },
+      {
+        "title": "Planned around your teams",
+        "text": "Layouts start from your teams, headcount and meeting needs, and are reviewed in 3D before anything is built."
+      },
+      {
+        "title": "Safe, clean sites",
+        "text": "ISO 45001 practices keep sites safe and hygienic, including in buildings that are already occupied."
+      },
+      {
+        "title": "Delivered and backed",
+        "text": "45-day timelines and a 10-year warranty, run under ISO 9001 quality management."
+      }
+    ],
+    "deliverables": [
+      "Reception and lift lobbies",
+      "Open workstations and team areas",
+      "Cabins and leadership suites",
+      "Boardrooms, conference and townhall rooms",
+      "Glass partitions and acoustic treatment",
+      "Pantries and breakout spaces",
+      "Lighting, electrical and smart controls",
+      "Branch and multi-site roll-outs"
+    ],
+    "clients": [
+      "Castrol India, R&D — Wadala",
+      "Castrol India — White House, Mumbai",
+      "Visible Alpha India — Kohinoor City",
+      "Wincor Nixdorf — Kohinoor City",
+      "Essel Group — Kohinoor City and Aurangabad",
+      "Hansa Cequity — Kohinoor City",
+      "Practo — Kohinoor City",
+      "Laerdal — Kohinoor City",
+      "Edelweiss — Kohinoor City",
+      "Aban Lloyd Chiles Offshore — Santacruz",
+      "Kuber Mutual Benefits — 6 branches",
+      "Geno Pharmaceuticals — Goa and Andheri"
+    ],
+    "faqs": [
+      {
+        "question": "Can you work while our office stays open?",
+        "answer": "Yes. Our ISO 45001 practices cover safety and hygiene in buildings that are already in use, and we plan the order of work with you so your teams can keep working."
+      },
+      {
+        "question": "How long does an office fit-out take?",
+        "answer": "It depends on the area and the scope of work. We agree the timeline with you before work starts, and work to 45-day timelines wherever the scope allows."
+      },
+      {
+        "question": "Do you sign NDAs?",
+        "answer": "Yes. Several of our corporate projects are under NDA, and we show them on this site only as Confidential."
+      }
+    ],
+    "metaDescription": "Corporate office interior design and turnkey fit-outs in Mumbai: reception, workstations, boardrooms and multi-site roll-outs, delivered under one contract.",
+    "hidden": false
   },
   {
     "id": "retail",
     "name": "Retail & Showrooms",
     "blurb": "Flagship showrooms, supermarkets and multi-store roll-outs.",
-    "image": "/media/sectors/interior-design-for-showroom.webp"
+    "image": "/media/sectors/interior-design-for-showroom.webp",
+    "title": "Retail & showroom interiors",
+    "intro": "Flagship showrooms, multi-store roll-outs and brand spaces that show the product well and stand up to daily footfall.",
+    "points": [
+      {
+        "title": "Product first",
+        "text": "Display walls, lighting and circulation planned around what you sell and how customers move through the store."
+      },
+      {
+        "title": "Repeatable roll-outs",
+        "text": "One design carried consistently across many stores, as in our eight-store roll-out for S.S. Communication."
+      },
+      {
+        "title": "Durable finishes",
+        "text": "Materials chosen for heavy daily use and easy upkeep."
+      },
+      {
+        "title": "One timeline to opening",
+        "text": "Design, joinery, electrical and finishes under one team and one contract."
+      }
+    ],
+    "deliverables": [
+      "Display walls and fixtures",
+      "Display and accent lighting",
+      "Customer lounges and consultation areas",
+      "Counters and service points",
+      "Storage and back-of-house",
+      "Multi-store roll-outs"
+    ],
+    "clients": [
+      "S.S. Communication — 8 stores, Mira Road to Kandivali",
+      "Wincor Nixdorf — showroom reception, Kohinoor City",
+      "Kuber Marketing — New Delhi",
+      "Rock ’n Raaga music showroom — Calangute, Goa",
+      "Finishing Touch tile showroom — Panjim, Goa"
+    ],
+    "faqs": [
+      {
+        "question": "Can you roll one design out across several stores?",
+        "answer": "Yes. We designed and built eight stores for S.S. Communication, from Mira Road to Kandivali, to one consistent design."
+      }
+    ],
+    "metaDescription": "Showroom and retail interior design in Mumbai and Goa: display walls, lighting, customer lounges and multi-store roll-outs, built turnkey.",
+    "hidden": false
   },
   {
     "id": "hospitality",
     "name": "Hospitality",
     "blurb": "Hotels, restaurants, bars and clubhouses.",
-    "image": "/media/sectors/interior-designer-for-restaurants.webp"
+    "image": "/media/sectors/interior-designer-for-restaurants.webp",
+    "title": "Hospitality interiors",
+    "intro": "Hotels, restaurants, bars and clubhouses with warm lighting, durable finishes and layouts that work for guests and staff alike.",
+    "points": [
+      {
+        "title": "Atmosphere",
+        "text": "Lighting and materials that set the mood from day to night."
+      },
+      {
+        "title": "Built for service",
+        "text": "Layouts that keep guest areas and service routes working together."
+      },
+      {
+        "title": "Durable finishes",
+        "text": "Finishes that hold up to constant use and cleaning."
+      },
+      {
+        "title": "One contract",
+        "text": "Design, joinery, electrical and finishes under one team, with one timeline to opening."
+      }
+    ],
+    "deliverables": [
+      "Restaurant and bar interiors",
+      "Hotel interiors",
+      "Clubhouses and lounges",
+      "Bespoke bars and joinery",
+      "Lighting design",
+      "Acoustic treatment"
+    ],
+    "clients": [
+      "Hotel Centaur — Vile Parle",
+      "Hotel Golden Wheel — Santacruz",
+      "Royal Palms Golf & Country Club — Goregaon",
+      "Hotel Subway — Juhu",
+      "Club X’treme — Campal, Goa",
+      "Bar-1 — Panjim, Goa",
+      "Hotel Gloria Anne — Candolim, Goa",
+      "National Bakery — Mapusa, Goa",
+      "Hotel Appetite"
+    ],
+    "faqs": [],
+    "metaDescription": "Hotel, restaurant, bar and clubhouse interiors in Mumbai and Goa, designed and built turnkey by Designo Interiors.",
+    "hidden": false
   },
   {
     "id": "education",
     "name": "Education",
     "blurb": "University buildings and institutional campuses.",
-    "image": ""
+    "image": "",
+    "title": "Education interiors",
+    "intro": "University buildings and institutional campuses, built for daily use by large numbers of people.",
+    "points": [
+      {
+        "title": "Built for heavy use",
+        "text": "Materials and joinery that last through years of daily use."
+      },
+      {
+        "title": "Institutional experience",
+        "text": "Work for universities and a municipal corporation, from Mumbai to Goa."
+      },
+      {
+        "title": "One contract",
+        "text": "Design, civil work, joinery, electrical and finishes under one team."
+      }
+    ],
+    "deliverables": [
+      "Administrative and faculty offices",
+      "Meeting and seminar rooms",
+      "Reception and common areas",
+      "Lighting, electrical and acoustics"
+    ],
+    "clients": [
+      "Goa University — Taleigao, 12,000 sq ft",
+      "D Y Patil University",
+      "Marmugaon Municipal Corporation — Vasco, 7,500 sq ft"
+    ],
+    "faqs": [],
+    "metaDescription": "Interiors for universities and institutions in Mumbai and Goa, designed and built turnkey by Designo Interiors.",
+    "hidden": false
   },
   {
     "id": "fitness",
     "name": "Fitness Centres",
     "blurb": "Gyms and wellness floors that take heavy daily use.",
-    "image": ""
+    "image": "",
+    "title": "Fitness centre interiors",
+    "intro": "Gyms and wellness floors that take heavy daily use and stay easy to run.",
+    "points": [
+      {
+        "title": "Built for heavy use",
+        "text": "Flooring, finishes and joinery chosen to take equipment and constant use."
+      },
+      {
+        "title": "Easy to run",
+        "text": "Layouts that keep the floor open, safe and easy to supervise."
+      },
+      {
+        "title": "One contract",
+        "text": "Design, civil work, electrical and finishes under one team."
+      }
+    ],
+    "deliverables": [
+      "Workout floors",
+      "Reception and lounges",
+      "Changing rooms",
+      "Lighting and electrical"
+    ],
+    "clients": [],
+    "faqs": [],
+    "metaDescription": "Gym and fitness centre interiors in Mumbai, designed and built turnkey by Designo Interiors.",
+    "hidden": false
   },
   {
     "id": "healthcare",
     "name": "Healthcare",
     "blurb": "Nursing homes and clinics planned around hygiene and flow.",
-    "image": "/media/sectors/hospital-interior-designers.webp"
+    "image": "/media/sectors/hospital-interior-designers.webp",
+    "title": "Healthcare interiors",
+    "intro": "Clinics, nursing homes and healthcare offices, planned around hygiene, patient flow and calm.",
+    "points": [
+      {
+        "title": "Hygiene first",
+        "text": "Surfaces and details chosen to be easy to clean, with ISO 45001 practices on site."
+      },
+      {
+        "title": "Clear patient flow",
+        "text": "Reception, waiting and treatment areas laid out so patients and staff move easily."
+      },
+      {
+        "title": "Calm spaces",
+        "text": "Light, colour and acoustics that keep spaces calm for patients and staff."
+      }
+    ],
+    "deliverables": [
+      "Reception and waiting areas",
+      "Consultation and treatment rooms",
+      "Nursing home interiors",
+      "Healthcare offices",
+      "Lighting and acoustics"
+    ],
+    "clients": [
+      "Shree Nursing Home — Shivaji Park",
+      "Metropolis Healthcare",
+      "Practo — Kohinoor City",
+      "Geno Pharmaceuticals — Goa and Andheri"
+    ],
+    "faqs": [
+      {
+        "question": "Can you work in a clinic that stays open?",
+        "answer": "Yes. Our ISO 45001 practices cover safety and hygiene in buildings that are already in use, and we plan the order of work with you so your teams can keep working."
+      }
+    ],
+    "metaDescription": "Clinic, nursing home and healthcare office interiors in Mumbai, planned around hygiene and patient flow.",
+    "hidden": false
   },
   {
     "id": "studios",
     "name": "Studios",
     "blurb": "Recording and production rooms with acoustic treatment.",
-    "image": "/media/sectors/interior-design-for-music-studio.webp"
+    "image": "/media/sectors/interior-design-for-music-studio.webp",
+    "title": "Studio interiors",
+    "intro": "Recording and production rooms with acoustic treatment, built around how the room has to sound.",
+    "points": [
+      {
+        "title": "Acoustics first",
+        "text": "Isolation and treatment planned before finishes, so the room performs."
+      },
+      {
+        "title": "Built for long sessions",
+        "text": "Comfortable, well-lit rooms for long working days."
+      },
+      {
+        "title": "One contract",
+        "text": "Design, civil work, joinery and electrical under one team."
+      }
+    ],
+    "deliverables": [
+      "Recording and control rooms",
+      "Acoustic isolation and treatment",
+      "Lighting and electrical",
+      "Joinery and equipment furniture"
+    ],
+    "clients": [
+      "Recording studio for A.R. Rahman — Lotus Grandeur"
+    ],
+    "faqs": [],
+    "metaDescription": "Recording and production studio interiors with acoustic treatment, designed and built by Designo Interiors.",
+    "hidden": false
   },
   {
     "id": "residential",
     "name": "Residential",
     "blurb": "Apartments, bungalows, holiday homes and building lobbies.",
-    "image": "/media/sectors/interior-design-for-living-room.webp"
+    "image": "/media/sectors/interior-design-for-living-room.webp",
+    "hidden": true
   }
 ]

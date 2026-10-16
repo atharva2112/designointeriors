@@ -1,21 +1,119 @@
 {
   "wall": [
-    "Castrol India",
-    "Wincor Nixdorf",
-    "Laerdal",
-    "Visible Alpha",
-    "Essel Group",
-    "Practo",
-    "Hansa Cequity",
-    "Edelweiss",
-    "Geno Pharmaceuticals",
-    "Goa University",
-    "Kuber Group",
-    "Royal Palms",
-    "Hotel Centaur",
-    "Aban Lloyd Chiles Offshore",
-    "S.S. Communication",
-    "A.R. Rahman Studio"
+    {
+      "name": "Mumbai International Airport",
+      "logo": "/media/clients/mumbai-airport.webp"
+    },
+    {
+      "name": "Jio World Centre",
+      "logo": "/media/clients/jio-world-centre.webp"
+    },
+    {
+      "name": "JW Marriott",
+      "logo": "/media/clients/jw-marriott.webp"
+    },
+    {
+      "name": "Airtel",
+      "logo": "/media/clients/airtel.webp"
+    },
+    {
+      "name": "Jio",
+      "logo": "/media/clients/jio.webp"
+    },
+    {
+      "name": "Castrol India",
+      "logo": "/media/clients/castrol.webp"
+    },
+    {
+      "name": "Kraft",
+      "logo": "/media/clients/kraft.webp"
+    },
+    {
+      "name": "Wincor Nixdorf",
+      "logo": "/media/clients/wincor-nixdorf.webp"
+    },
+    {
+      "name": "Laerdal",
+      "logo": "/media/clients/laerdal.webp"
+    },
+    {
+      "name": "Visible Alpha",
+      "logo": "/media/clients/visible-alpha.webp"
+    },
+    {
+      "name": "Edelweiss",
+      "logo": "/media/clients/edelweiss.webp"
+    },
+    {
+      "name": "Essel Group",
+      "logo": "/media/clients/essel-group.webp"
+    },
+    {
+      "name": "Metropolis Healthcare",
+      "logo": "/media/clients/metropolis-healthcare.webp"
+    },
+    {
+      "name": "Practo",
+      "logo": "/media/clients/practo.webp"
+    },
+    {
+      "name": "Hiranandani",
+      "logo": "/media/clients/hiranandani.webp"
+    },
+    {
+      "name": "K Raheja Corp Homes",
+      "logo": "/media/clients/k-raheja-corp-homes.webp"
+    },
+    {
+      "name": "Dosti Realty",
+      "logo": "/media/clients/dosti-realty.webp"
+    },
+    {
+      "name": "D Y Patil University",
+      "logo": "/media/clients/dy-patil-university.webp"
+    },
+    {
+      "name": "Goa University",
+      "logo": "/media/clients/goa-university.webp"
+    },
+    {
+      "name": "Sequretek",
+      "logo": "/media/clients/sequretek.webp"
+    },
+    {
+      "name": "Hansa Cequity",
+      "logo": "/media/clients/hansa-cequity.webp"
+    },
+    {
+      "name": "Geno Pharmaceuticals",
+      "logo": "/media/clients/geno-pharmaceuticals.webp"
+    },
+    {
+      "name": "Aban Lloyd Chiles Offshore",
+      "logo": "/media/clients/aban-offshore.webp"
+    },
+    {
+      "name": "Kuber Group",
+      "logo": "/media/clients/kuber-group.webp"
+    },
+    {
+      "name": "Royal Palms",
+      "logo": "/media/clients/royal-palms.webp"
+    },
+    {
+      "name": "A.R. Rahman Studio",
+      "logo": "/media/clients/ar-rahman.webp"
+    },
+    {
+      "name": "Novo",
+      "logo": "/media/clients/novo.webp"
+    },
+    {
+      "name": "Hotel Centaur"
+    },
+    {
+      "name": "S.S. Communication"
+    }
   ],
   "offices": [
     {

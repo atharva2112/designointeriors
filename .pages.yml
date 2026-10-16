@@ -77,7 +77,14 @@ content:
     path: content/clients.json
     format: json
     fields:
-      - { name: wall, label: Homepage “Trusted by” names, type: string, list: true }
+      - name: wall
+        label: Client logos (homepage “Trusted by” and top of this page)
+        type: object
+        list: true
+        description: "Drag to reorder. The homepage scrolls the clients that have a logo; the Clientele page lists all of them, showing the name where there is no logo."
+        fields:
+          - { name: name, label: Client, type: string, required: true }
+          - { name: logo, label: Logo, type: image, description: "SVG or a PNG with a transparent background. Shown in grey, in colour on hover." }
       - name: offices
         label: Offices & institutions
         type: object

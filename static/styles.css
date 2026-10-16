@@ -330,9 +330,16 @@ html:not(.motion) .cover__after,html:not(.motion) .cover__cue{display:none}
 .feat:hover .ar{transform:translateX(5px)}
 
 /* ---------- lists ---------- */
-.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,260px),1fr))}
-.wall>div{padding:24px 20px 24px 0;border-bottom:1px solid var(--hair);font:300 clamp(24px,2.2vw,32px)/1.15 var(--display);transition:color .2s}
-.wall>div:hover{color:var(--green)}
+.wall{display:grid;grid-template-columns:repeat(auto-fill,minmax(min(100%,200px),1fr))}
+.wall>div{display:flex;flex-direction:column;gap:12px;padding:26px 20px 22px 0;border-bottom:1px solid var(--hair)}
+.wall__mark{display:flex;align-items:center;min-height:96px}
+.wall__mark--name{font:300 clamp(24px,2.2vw,32px)/1.15 var(--display);transition:color .2s}
+.wall>div:hover .wall__mark--name{color:var(--green)}
+.wall .logo{font-size:clamp(50px,4.4vw,62px);object-position:left center}
+@media (max-width:520px){.wall{grid-template-columns:repeat(2,minmax(0,1fr))}.wall>div{padding-right:14px}.wall__mark{min-height:84px}.wall .logo{font-size:min(46px,11.5vw)}}
+/* Client logos sit in greyscale so they read as one set, and take their own colours on hover. */
+.logo{display:block;max-width:100%;object-fit:contain;filter:grayscale(1) contrast(1.05);opacity:.68;mix-blend-mode:multiply;transition:filter .35s,opacity .35s}
+.logo:hover,.wall>div:hover .logo{filter:none;opacity:1}
 .ticks>*{display:flex;justify-content:space-between;align-items:baseline;gap:16px;padding:17px 0;border-bottom:1px solid var(--hair);font-size:16px;color:var(--ink)}
 a.ticks>*,.ticks>a{transition:color .2s}
 .ticks>a:hover{color:var(--green)}
@@ -356,6 +363,7 @@ a.ticks>*,.ticks>a{transition:color .2s}
 .marquee__set{display:flex;align-items:center}
 .marquee__set span{display:inline-flex;align-items:center;gap:clamp(26px,3vw,52px);padding-right:clamp(26px,3vw,52px);font:300 clamp(30px,3.5vw,56px)/1.25 var(--display);white-space:nowrap;color:var(--ink)}
 .marquee__set svg{height:.62em;width:auto;fill:var(--green)}
+.marquee__set .logo{font-size:clamp(46px,4.6vw,66px)}
 @keyframes marquee{to{transform:translateX(-50%)}}
 html:not(.motion) .marquee{-webkit-mask-image:none;mask-image:none}
 html:not(.motion) .marquee__row{animation:none;width:auto;padding:0 var(--px)}

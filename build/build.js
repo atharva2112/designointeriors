@@ -43,6 +43,37 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
 const fmtDate = (d) => { const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(d || ''); return m ? (+m[3]) + ' ' + MONTHS[+m[2] - 1] + ' ' + m[1] : (d || ''); };
 const map = (arr, fn) => (arr || []).map(fn).join('');
 
+/* Pixel size of a PNG, GIF, JPEG, WebP, AVIF or SVG, so every client logo can be given the same visual weight. */
+function imageSize(b) {
+  if (!b || b.length < 30) return null;
+  if (b.readUInt32BE(0) === 0x89504e47) return [b.readUInt32BE(16), b.readUInt32BE(20)];
+  if (b.toString('ascii', 0, 3) === 'GIF') return [b.readUInt16LE(6), b.readUInt16LE(8)];
+  if (b.toString('ascii', 0, 4) === 'RIFF' && b.toString('ascii', 8, 12) === 'WEBP') {
+    const t = b.toString('ascii', 12, 16);
+    if (t === 'VP8X') return [1 + b.readUIntLE(24, 3), 1 + b.readUIntLE(27, 3)];
+    if (t === 'VP8 ') return [b.readUInt16LE(26) & 0x3fff, b.readUInt16LE(28) & 0x3fff];
+    if (t === 'VP8L') { const n = b.readUInt32LE(21); return [1 + (n & 0x3fff), 1 + ((n >> 14) & 0x3fff)]; }
+    return null;
+  }
+  if (b.toString('ascii', 4, 8) === 'ftyp') { const i = b.indexOf('ispe'); return i > 0 && i + 16 <= b.length ? [b.readUInt32BE(i + 8), b.readUInt32BE(i + 12)] : null; }
+  if (b[0] === 0xff && b[1] === 0xd8) {
+    for (let i = 2; i + 9 < b.length;) {
+      if (b[i] !== 0xff) { i++; continue; }
+      const m = b[i + 1];
+      if (m >= 0xc0 && m <= 0xcf && m !== 0xc4 && m !== 0xc8 && m !== 0xcc) return [b.readUInt16BE(i + 7), b.readUInt16BE(i + 5)];
+      i += 2 + b.readUInt16BE(i + 2);
+    }
+    return null;
+  }
+  const svg = /<svg\b[^>]*>/i.exec(b.toString('utf8', 0, Math.min(b.length, 6000)));
+  if (!svg) return null;
+  const vb = /viewBox\s*=\s*["']\s*[-\d.]+[\s,]+[-\d.]+[\s,]+([\d.]+)[\s,]+([\d.]+)/i.exec(svg[0]);
+  const w = /\swidth\s*=\s*["']([\d.]+)/i.exec(svg[0]), h = /\sheight\s*=\s*["']([\d.]+)/i.exec(svg[0]);
+  return vb ? [+vb[1], +vb[2]] : w && h ? [+w[1], +h[1]] : null;
+}
+/* Logo box in em: a square mark and a long wordmark come out with roughly the same presence. */
+const logoBox = (size) => { const r = size && size[0] > 0 && size[1] > 0 ? Math.min(Math.max(size[0] / size[1], 0.5), 8) : 2.5; return [Math.pow(r, 0.6), Math.pow(r, -0.4)]; };
+
 async function buildSite(io, opts) {
   opts = opts || {};
   const pretty = opts.pretty !== false;
@@ -58,6 +89,9 @@ async function buildSite(io, opts) {
   const notifications = await json('content/settings/notifications.json', { forms: [] });
   const sectors = await json('content/sectors.json');
   const clients = await json('content/clients.json');
+  // "Trusted by" entries are { name, logo }; plain names from older content still work.
+  clients.wall = (clients.wall || []).map((w) => (typeof w === 'string' ? { name: w } : w)).filter((w) => w && w.name);
+  clients.wall.forEach((w) => { let size = null; if (w.logo && io.bytes) { try { size = imageSize(io.bytes(String(w.logo).replace(/^\//, ''))); } catch (e) { /* missing file: default box */ } } w.box = logoBox(size); });
   const byOrder = (a, b) => ((a.order == null ? 999 : a.order) - (b.order == null ? 999 : b.order)) || String(a.name || a.title).localeCompare(String(b.name || b.title));
   const projects = (await collection('content/projects')).sort(byOrder);
   const posts = (await collection('content/journal')).sort((a, b) => String(b.date).localeCompare(String(a.date)));
@@ -125,6 +159,7 @@ function ctx(depth, pretty, site) {
 /* ---------- shared pieces ---------- */
 const btn = (href, text, cls, extra) => `<a class="btn ${cls}" href="${esc(href)}"${extra || ''}>${text}</a>`;
 const head2 = (eyebrow, title, link, extra) => `<div class="headrow"><div><p class="eyebrow">${eyebrow}</p><h2 class="d h2"${extra || ''}>${title}</h2></div>${link || ''}</div>`;
+const logo = (c, w) => `<img class="logo" src="${esc(c.m(w.logo))}" alt="${esc(w.name)}" loading="lazy" decoding="async" style="width:${w.box[0].toFixed(2)}em;height:${w.box[1].toFixed(2)}em">`;
 const img = (c, src, alt, extra) => src ? `<img src="${esc(c.m(src))}" alt="${esc(alt)}"${/loading=/.test(extra || '') ? '' : ' loading="lazy"'} decoding="async"${extra || ''}>` : '';
 const field = (label, name, o) => { o = o || {}; const req = o.required ? ' required' : ''; const star = o.required ? ' *' : '';
   const input = o.rows ? `<textarea name="${name}" rows="${o.rows}"${req}></textarea>` : `<input name="${name}" type="${o.type || 'text'}"${req}${o.placeholder ? ` placeholder="${esc(o.placeholder)}"` : ''}${o.type === 'tel' ? ' autocomplete="tel"' : ''}${o.type === 'email' ? ' autocomplete="email"' : ''}${name === 'name' ? ' autocomplete="name"' : ''}>`;
@@ -225,8 +260,9 @@ const intro = (eyebrow, title, text, lede) => `<section class="intro">${introS()
 function pageHome(c, D) {
   const s = D.site, f = D.featured, sizes = ['l', 's', 's', 'l', 'w'];
   const reel = s.showreel || {};
-  const wall = D.clients.wall || [], half = Math.ceil(wall.length / 2);
-  const names = (list) => map(list, (n) => `<span>${esc(n)}${sUse('')}</span>`);
+  // Once there are enough logos the marquee shows only those; the Clientele page lists everyone.
+  const logos = D.clients.wall.filter((w) => w.logo), wall = logos.length >= 6 ? logos : D.clients.wall, half = Math.ceil(wall.length / 2);
+  const names = (list) => map(list, (w) => `<span>${w.logo ? logo(c, w) : esc(w.name)}${sUse('')}</span>`);
   const row = (list) => `<div class="marquee__row"><div class="marquee__set">${names(list)}</div><div class="marquee__set" aria-hidden="true">${names(list)}</div></div>`;
   const body = `
 <section class="cover" data-hero>
@@ -344,7 +380,7 @@ function pageClientele(c, D) {
   const C = D.clients;
   const body = `
 ${intro('Clientele', 'Who we’ve<br>built for', 'Multinational offices, a university, municipal buildings, hotels, retail chains, a recording studio and more than 65 private homes.')}
-<section class="px" style="padding-bottom:var(--sy)"><div class="wrap wall rule">${map(C.wall, (n) => `<div>${esc(n)}</div>`)}</div></section>
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap wall rule">${map(C.wall, (w) => w.logo ? `<div><span class="wall__mark">${logo(c, w)}</span><span class="label muted">${esc(w.name)}</span></div>` : `<div><span class="wall__mark wall__mark--name">${esc(w.name)}</span></div>`)}</div></section>
 <section class="px sec bg2"><div class="wrap">${head2('Offices &amp; institutions · designed and executed', 'Workplaces', `<span class="label">${(C.offices || []).length} listed</span>`)}<div class="table t-clients rule"><div class="th"><span>No.</span><span>Client</span><span>Location</span><span class="right">Sq ft</span></div>${map(C.offices, (o, i) => `<div><span class="num">${pad(i + 1)}</span><span style="font-size:17px;font-weight:500">${esc(o.name)}</span><span style="font-size:15px">${esc(o.place)}</span><span class="right" style="font-size:14px;font-variant-numeric:tabular-nums">${o.area ? inr(o.area) : '—'}</span></div>`)}</div></div></section>
 <section class="px sec"><div class="wrap">${head2('Beyond the office', 'Hospitality, retail, buildings')}<div class="grid" style="--min:300px;gap:48px 40px">${map(C.groups, (g) => `<div class="rule" style="padding-top:22px"><h3 class="d" style="font-size:34px;line-height:1.05;margin-bottom:12px">${esc(g.name)}</h3>${map(g.items, (it) => `<div style="padding:11px 0;border-bottom:1px solid var(--hair);font-size:16px;line-height:1.45">${esc(it)}</div>`)}</div>`)}</div></div></section>
 <section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8" style="left:auto;right:-6%"')}<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:32px clamp(40px,6vw,104px)"><div style="display:flex;flex-direction:column;gap:12px"><p class="eyebrow">Residential</p><span class="d" style="font-size:clamp(110px,15vw,250px);line-height:.9" data-count>${esc(C.homes)}</span><span class="label" style="color:var(--pale)">Private homes</span></div><p class="lede" style="flex:1 1 380px;max-width:560px">Apartments and bungalows in ${esc(C.homeAreas)}. We keep residential client names private.</p></div></section>`;
@@ -437,6 +473,7 @@ if (typeof require !== 'undefined' && typeof process !== 'undefined' && require.
   copy(path.join(root, 'media'), path.join(root, 'dist/media'));
   buildSite({
     read: (p) => fs.readFileSync(path.join(root, p), 'utf8'),
+    bytes: (p) => fs.readFileSync(path.join(root, p)),
     list: (d) => fs.existsSync(path.join(root, d)) ? fs.readdirSync(path.join(root, d)) : [],
     write: (p, s) => { const f = path.join(root, p); fs.mkdirSync(path.dirname(f), { recursive: true }); fs.writeFileSync(f, s); }
   }, { pretty: process.argv.indexOf('--preview') === -1 }).then((n) => console.log('Built ' + n + ' pages into dist/'), (e) => { console.error(e.message); process.exit(1); });

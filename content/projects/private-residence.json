@@ -4,10 +4,10 @@
   "client": "Private client",
   "area": 2800,
   "summary": "Living, dining and entrance lobby interiors for a family home.",
-  "cover": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20living%20room.jpg/:/rs=w:1800,cg:true,m",
+  "cover": "/media/projects/private-residence/interior-design-for-living-room.webp",
   "gallery": [
-    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/bungalow%20interior%20designer.jpg/:/rs=w:1800,cg:true,m",
-    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20lobbys.jpg/:/rs=w:1800,cg:true,m"
+    "/media/projects/private-residence/bungalow-interior-designer.webp",
+    "/media/projects/private-residence/interior-design-for-lobbys.webp"
   ],
   "featured": false,
   "order": 9,

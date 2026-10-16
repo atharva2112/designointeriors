@@ -8,13 +8,13 @@
   "formsEndpoint": "",
   "showreel": {
     "video": "https://player.vimeo.com/video/813063779?h=f5ecabbdcb&background=1&autoplay=1&loop=1&muted=1&dnt=1",
-    "poster": "https://i.vimeocdn.com/video/1644143992-2ea86e0de2caaeac311d0ad0e14072403a971a7114dad300d3a0f86c1c4cae9b-d_1920x1080?r=pad"
+    "poster": "/media/site/poster.avif"
   },
   "images": {
-    "automation": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Blue-Lit%20Circular%20Conference%20Room.png/:/rs=w:1800,cg:true,m",
-    "sustainability": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Mumbai%20conference%20room%20amid%20tropical%20greenery-.png/:/rs=w:1800,cg:true,m",
-    "vastu": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Sunlit%20window-side%20office-2.png/:/rs=w:1800,cg:true,m",
-    "about": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Tree-filled%20Mumbai%20townhall%20conference%20room-2.png/:/rs=w:1800,cg:true,m",
+    "automation": "/media/site/blue-lit-circular-conference-room.webp",
+    "sustainability": "/media/site/mumbai-conference-room-amid-tropical-greenery.webp",
+    "vastu": "/media/site/sunlit-window-side-office-2.webp",
+    "about": "/media/site/tree-filled-mumbai-townhall-conference-room-2.webp",
     "founder": ""
   },
   "stats": [
@@ -52,15 +52,15 @@
   "brochures": [
     {
       "name": "Commercial credentials",
-      "file": "https://img1.wsimg.com/blobby/go/8d8ce064-80f9-4eee-ae5f-83acb4b71860/downloads/Designo%20Commercial%20Credentials1.pdf?ver=1791072159940"
+      "file": "/media/site/designo-commercial-credentials1.pdf"
     },
     {
       "name": "Retail credentials",
-      "file": "https://img1.wsimg.com/blobby/go/8d8ce064-80f9-4eee-ae5f-83acb4b71860/downloads/Designo%20Retail%20Creds.pdf?ver=1791072159940"
+      "file": "/media/site/designo-retail-creds.pdf"
     },
     {
       "name": "Residential credentials",
-      "file": "https://img1.wsimg.com/blobby/go/8d8ce064-80f9-4eee-ae5f-83acb4b71860/downloads/Designo%20Residential%20Credentials1.pdf?ver=1791072159940"
+      "file": "/media/site/designo-residential-credentials1.pdf"
     }
   ],
   "offices": [

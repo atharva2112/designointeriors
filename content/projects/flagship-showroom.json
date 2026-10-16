@@ -4,9 +4,9 @@
   "client": "Confidential",
   "area": 2500,
   "summary": "Display walls, lighting and a customer lounge for a flagship store.",
-  "cover": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20showroom.jpg/:/rs=w:1800,cg:true,m",
+  "cover": "/media/projects/flagship-showroom/interior-design-for-showroom.webp",
   "gallery": [
-    "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/office-interior-design.jpg/:/rs=w:1800,cg:true,m"
+    "/media/projects/flagship-showroom/office-interior-design.webp"
   ],
   "featured": false,
   "order": 7,

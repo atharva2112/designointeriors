@@ -3,19 +3,19 @@
     "id": "corporate",
     "name": "Corporate Offices",
     "blurb": "Headquarters, branch networks, R&D floors and boardrooms.",
-    "image": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/Hcc-1.png/:/rs=w:1800,cg:true,m"
+    "image": "/media/sectors/hcc-1.webp"
   },
   {
     "id": "retail",
     "name": "Retail & Showrooms",
     "blurb": "Flagship showrooms, supermarkets and multi-store roll-outs.",
-    "image": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20showroom.jpg/:/rs=w:1800,cg:true,m"
+    "image": "/media/sectors/interior-design-for-showroom.webp"
   },
   {
     "id": "hospitality",
     "name": "Hospitality",
     "blurb": "Hotels, restaurants, bars and clubhouses.",
-    "image": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20designer%20for%20restaurants.jpg/:/rs=w:1800,cg:true,m"
+    "image": "/media/sectors/interior-designer-for-restaurants.webp"
   },
   {
     "id": "education",
@@ -33,18 +33,18 @@
     "id": "healthcare",
     "name": "Healthcare",
     "blurb": "Nursing homes and clinics planned around hygiene and flow.",
-    "image": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/hospital-interior-designers.jpg/:/rs=w:1800,cg:true,m"
+    "image": "/media/sectors/hospital-interior-designers.webp"
   },
   {
     "id": "studios",
     "name": "Studios",
     "blurb": "Recording and production rooms with acoustic treatment.",
-    "image": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20music%20studio.jpg/:/rs=w:1800,cg:true,m"
+    "image": "/media/sectors/interior-design-for-music-studio.webp"
   },
   {
     "id": "residential",
     "name": "Residential",
     "blurb": "Apartments, bungalows, holiday homes and building lobbies.",
-    "image": "https://img1.wsimg.com/isteam/ip/8d8ce064-80f9-4eee-ae5f-83acb4b71860/interior%20design%20for%20living%20room.jpg/:/rs=w:1800,cg:true,m"
+    "image": "/media/sectors/interior-design-for-living-room.webp"
   }
 ]

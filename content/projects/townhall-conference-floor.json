@@ -1,5 +1,5 @@
 {
-  "name": "Townhall & Conference Floor",
+  "name": "HCC Ltd",
   "sector": "corporate",
   "client": "Confidential",
   "area": 12000,
@@ -7,8 +7,7 @@
   "cover": "/media/projects/townhall-conference-floor/tree-filled-mumbai-townhall-conference-room-2.webp",
   "gallery": [
     "/media/projects/townhall-conference-floor/mumbai-townhall-conference-room-toward-blank-s.webp",
-    "/media/projects/townhall-conference-floor/mumbai-conference-room-amid-tropical-greenery.webp",
-    "/media/projects/townhall-conference-floor/blue-lit-circular-conference-room.webp"
+    "/media/projects/townhall-conference-floor/mumbai-conference-room-amid-tropical-greenery.webp"
   ],
   "featured": true,
   "order": 4,

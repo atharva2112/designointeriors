@@ -178,6 +178,36 @@ content:
       - { name: metaDescription, label: Google description, type: text }
       - { name: hidden, label: Hide from site, type: boolean, default: false, description: "Hides the sector everywhere: lists, filters, forms and its page." }
 
+  - name: faqs
+    label: FAQ
+    type: file
+    path: content/faqs.json
+    format: json
+    list: true
+    fields:
+      - name: topic
+        label: Topic
+        type: select
+        options:
+          values: [ Getting started, Cost & payment, Timelines, Standards & compliance, During works, After handover ]
+      - { name: question, label: Question, type: string, required: true }
+      - { name: answer, label: Answer, type: text, required: true }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
+  - name: testimonials
+    label: Testimonials
+    type: file
+    path: content/testimonials.json
+    format: json
+    list: true
+    fields:
+      - { name: quote, label: Quote, type: text, required: true, description: "Only publish quotes the client has approved." }
+      - { name: name, label: Name, type: string, required: true }
+      - { name: role, label: Role, type: string, description: "e.g. Head of Administration" }
+      - { name: company, label: Company, type: string }
+      - { name: project, label: Project page, type: string, description: "Optional. The project's page address, e.g. wincor-nixdorf, to show the quote on that project too." }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
   - name: notifications
     label: "Settings → Notifications"
     type: file

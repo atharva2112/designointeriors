@@ -485,6 +485,12 @@ details p{margin:0 0 22px;font-size:15px;line-height:1.65;color:var(--muted)}
 .svc .d{transition:color .2s var(--ease)}
 .svc:hover .d{color:var(--green)}
 .svc .label{margin-top:auto;padding-top:6px}
+.t-compare>*{grid-template-columns:minmax(0,.8fr) minmax(0,1.2fr) minmax(0,1.2fr);padding:20px 0}
+@media (max-width:720px){.t-compare>*{grid-template-columns:1fr 1fr;gap:6px 16px}.t-compare>* :first-child{grid-column:1/-1}.t-compare>.th :first-child{display:none}}
+.quote{margin:0;padding-top:30px;display:flex;flex-direction:column;gap:22px}
+.quote blockquote{margin:0;font-size:clamp(26px,2.4vw,36px);line-height:1.2}
+.quote figcaption{display:flex;flex-direction:column;gap:4px;font-size:15px}
+.quote b{font-weight:500}
 
 /* lightbox */
 .lb{position:fixed;inset:0;z-index:300;display:flex;flex-direction:column;background:rgba(22,33,29,.97);color:#fff;opacity:0;transition:opacity .45s var(--ease)}

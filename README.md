@@ -134,6 +134,7 @@ Landscape JPG or WebP, about 2400 px wide, under 1 MB if possible. Name files cl
 ### Limits worth knowing
 - Gmail accounts can send about 100 alert emails a day. Plenty for enquiries; if you outgrow it, use a Google Workspace account.
 - Uploaded CVs are limited to 5 MB.
+- Any single file on the site (photo, brochure PDF) must be under 25 MB, Cloudflare's limit. A bigger file is left out of the site with a warning in the build log, and its link stops working. Shrink PDFs with a free compressor such as ilovepdf.com/compress_pdf before uploading.
 - The 9 projects, 4 journal posts and 4 jobs included at launch are placeholders. Edit them in the admin.
 
 ---

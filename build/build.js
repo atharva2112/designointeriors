@@ -465,7 +465,10 @@ if (typeof module !== 'undefined') module.exports = { buildSite: buildSite };
 if (typeof require !== 'undefined' && typeof process !== 'undefined' && require.main === module) {
   const fs = require('fs'), path = require('path');
   const root = path.resolve(__dirname, '..');
-  const copy = (from, to) => { if (!fs.existsSync(from)) return; for (const n of fs.readdirSync(from)) { const a = path.join(from, n), b = path.join(to, n); if (fs.statSync(a).isDirectory()) { fs.mkdirSync(b, { recursive: true }); copy(a, b); } else fs.copyFileSync(a, b); } };
+  // Cloudflare won't publish a file over 25 MiB, and one such file fails the whole deploy. Leave it
+  // out (only its own link breaks) and say so, rather than stop every other change going live.
+  const LIMIT = 25 * 1024 * 1024;
+  const copy = (from, to) => { if (!fs.existsSync(from)) return; for (const n of fs.readdirSync(from)) { const a = path.join(from, n), b = path.join(to, n), st = fs.statSync(a); if (st.isDirectory()) { fs.mkdirSync(b, { recursive: true }); copy(a, b); } else if (st.size > LIMIT) console.warn('WARNING: ' + path.relative(root, a) + ' is ' + (st.size / 1048576).toFixed(1) + ' MiB, over the 25 MiB limit for one file, so it was left out of the site. Compress it and upload it again.'); else fs.copyFileSync(a, b); } };
   fs.rmSync(path.join(root, 'dist'), { recursive: true, force: true });
   fs.mkdirSync(path.join(root, 'dist'), { recursive: true });
   copy(path.join(root, 'static'), path.join(root, 'dist'));

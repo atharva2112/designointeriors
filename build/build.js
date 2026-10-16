@@ -159,7 +159,8 @@ function ctx(depth, pretty, site) {
 /* ---------- shared pieces ---------- */
 const btn = (href, text, cls, extra) => `<a class="btn ${cls}" href="${esc(href)}"${extra || ''}>${text}</a>`;
 const head2 = (eyebrow, title, link, extra) => `<div class="headrow"><div><p class="eyebrow">${eyebrow}</p><h2 class="d h2"${extra || ''}>${title}</h2></div>${link || ''}</div>`;
-const logo = (c, w) => `<img class="logo" src="${esc(c.m(w.logo))}" alt="${esc(w.name)}" loading="lazy" decoding="async" style="width:${w.box[0].toFixed(2)}em;height:${w.box[1].toFixed(2)}em">`;
+// eager: the marquee moves logos into view sideways, which lazy loading can miss, leaving gaps.
+const logo = (c, w, eager) => `<img class="logo" src="${esc(c.m(w.logo))}" alt="${esc(w.name)}" ${eager ? 'fetchpriority="low"' : 'loading="lazy"'} decoding="async" style="width:${w.box[0].toFixed(2)}em;height:${w.box[1].toFixed(2)}em">`;
 const img = (c, src, alt, extra) => src ? `<img src="${esc(c.m(src))}" alt="${esc(alt)}"${/loading=/.test(extra || '') ? '' : ' loading="lazy"'} decoding="async"${extra || ''}>` : '';
 const field = (label, name, o) => { o = o || {}; const req = o.required ? ' required' : ''; const star = o.required ? ' *' : '';
   const input = o.rows ? `<textarea name="${name}" rows="${o.rows}"${req}></textarea>` : `<input name="${name}" type="${o.type || 'text'}"${req}${o.placeholder ? ` placeholder="${esc(o.placeholder)}"` : ''}${o.type === 'tel' ? ' autocomplete="tel"' : ''}${o.type === 'email' ? ' autocomplete="email"' : ''}${name === 'name' ? ' autocomplete="name"' : ''}>`;
@@ -262,7 +263,7 @@ function pageHome(c, D) {
   const reel = s.showreel || {};
   // Once there are enough logos the marquee shows only those; the Clientele page lists everyone.
   const logos = D.clients.wall.filter((w) => w.logo), wall = logos.length >= 6 ? logos : D.clients.wall, half = Math.ceil(wall.length / 2);
-  const names = (list) => map(list, (w) => `<span>${w.logo ? logo(c, w) : esc(w.name)}${sUse('')}</span>`);
+  const names = (list) => map(list, (w) => w.logo ? `<span class="mq-logo">${logo(c, w, true)}</span>` : `<span>${esc(w.name)}${sUse('')}</span>`);
   const row = (list) => `<div class="marquee__row"><div class="marquee__set">${names(list)}</div><div class="marquee__set" aria-hidden="true">${names(list)}</div></div>`;
   const body = `
 <section class="cover" data-hero>
@@ -378,9 +379,11 @@ function pageVastu(c, D) {
 
 function pageClientele(c, D) {
   const C = D.clients;
+  // Only clients with a logo appear in the wall; everyone is still listed in the tables below.
+  const wall = C.wall.some((w) => w.logo) ? C.wall.filter((w) => w.logo) : C.wall;
   const body = `
 ${intro('Clientele', 'Who we’ve<br>built for', 'Multinational offices, a university, municipal buildings, hotels, retail chains, a recording studio and more than 65 private homes.')}
-<section class="px" style="padding-bottom:var(--sy)"><div class="wrap wall rule">${map(C.wall, (w) => w.logo ? `<div><span class="wall__mark">${logo(c, w)}</span><span class="label muted">${esc(w.name)}</span></div>` : `<div><span class="wall__mark wall__mark--name">${esc(w.name)}</span></div>`)}</div></section>
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap wall rule">${map(wall, (w) => w.logo ? `<div><span class="wall__mark">${logo(c, w)}</span><span class="label muted">${esc(w.name)}</span></div>` : `<div><span class="wall__mark wall__mark--name">${esc(w.name)}</span></div>`)}</div></section>
 <section class="px sec bg2"><div class="wrap">${head2('Offices &amp; institutions · designed and executed', 'Workplaces', `<span class="label">${(C.offices || []).length} listed</span>`)}<div class="table t-clients rule"><div class="th"><span>No.</span><span>Client</span><span>Location</span><span class="right">Sq ft</span></div>${map(C.offices, (o, i) => `<div><span class="num">${pad(i + 1)}</span><span style="font-size:17px;font-weight:500">${esc(o.name)}</span><span style="font-size:15px">${esc(o.place)}</span><span class="right" style="font-size:14px;font-variant-numeric:tabular-nums">${o.area ? inr(o.area) : '—'}</span></div>`)}</div></div></section>
 <section class="px sec"><div class="wrap">${head2('Beyond the office', 'Hospitality, retail, buildings')}<div class="grid" style="--min:300px;gap:48px 40px">${map(C.groups, (g) => `<div class="rule" style="padding-top:22px"><h3 class="d" style="font-size:34px;line-height:1.05;margin-bottom:12px">${esc(g.name)}</h3>${map(g.items, (it) => `<div style="padding:11px 0;border-bottom:1px solid var(--hair);font-size:16px;line-height:1.45">${esc(it)}</div>`)}</div>`)}</div></div></section>
 <section class="px sec dark relative">${sMark('bigs s-draw', ' data-parallax="8" style="left:auto;right:-6%"')}<div class="wrap" style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:32px clamp(40px,6vw,104px)"><div style="display:flex;flex-direction:column;gap:12px"><p class="eyebrow">Residential</p><span class="d" style="font-size:clamp(110px,15vw,250px);line-height:.9" data-count>${esc(C.homes)}</span><span class="label" style="color:var(--pale)">Private homes</span></div><p class="lede" style="flex:1 1 380px;max-width:560px">Apartments and bungalows in ${esc(C.homeAreas)}. We keep residential client names private.</p></div></section>`;

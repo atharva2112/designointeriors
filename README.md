@@ -118,6 +118,8 @@ Old GoDaddy page addresses redirect to the new pages automatically (`_redirects`
 
 **Blog post** — Admin → Journal → Add an entry → title, category, date, cover, excerpt, body → Save. To publish from another tool instead, see *Automated blog posts* below.
 
+**Client logos** — Admin → Clientele → *Client logos* → add an item → Client name → upload the Logo → Save. Use an SVG, or a PNG with a transparent background, cropped tight to the logo with no white margin. The site shows logos in grey and in colour on hover, and sizes them automatically so a square mark and a long wordmark carry equal weight. Drag items to reorder. The homepage scrolls only the clients that have a logo; the Clientele page lists all of them.
+
 **Job opening** — Admin → Jobs → Add an entry. Tick *Hide (role filled)* when done.
 
 **Change who gets alerts** — Admin → Settings → Notifications → pick the form → add or remove emails and WhatsApp numbers → Save. Changes apply within five minutes. New WhatsApp numbers also need their CallMeBot key (setup step 5).

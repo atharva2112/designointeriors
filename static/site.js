@@ -375,6 +375,28 @@
     r.addEventListener('input', upd); upd();
   }
 
+  // Fit-out cost estimator: area × the chosen specification's rate per sq ft, plus any add-ons
+  var est = $('[data-estimator]');
+  if (est) {
+    var money = function (n) { return n >= 1e7 ? '₹' + (n / 1e7).toFixed(n >= 1e8 ? 0 : 2).replace(/\.?0+$/, '') + ' crore' : '₹' + Math.round(n / 1e5) + ' lakh'; };
+    var area = $('[data-area]', est), levels = $$('[data-level]', est), addons = $$('[data-addon]', est), link = $('[data-brief-link]', est);
+    var band = function (n) { return n < 25e5 ? 'Under ₹25 lakh' : n < 1e7 ? '₹25 lakh – ₹1 crore' : n <= 5e7 ? '₹1 – 5 crore' : 'Above ₹5 crore'; };
+    var calc = function () {
+      var a = +area.value, lv = levels.filter(function (b) { return b.getAttribute('aria-pressed') === 'true'; })[0] || levels[0];
+      var lo = +lv.getAttribute('data-min'), hi = +lv.getAttribute('data-max');
+      addons.forEach(function (x) { if (x.checked) { lo += +x.getAttribute('data-min'); hi += +x.getAttribute('data-max'); } });
+      $('[data-area-out]', est).textContent = a.toLocaleString('en-IN') + ' sq ft';
+      $('[data-level-note]', est).textContent = lv.getAttribute('data-note') || '';
+      $('[data-range]', est).textContent = money(a * lo) + ' – ' + money(a * hi);
+      $('[data-rate]', est).textContent = '₹' + lo.toLocaleString('en-IN') + ' – ₹' + hi.toLocaleString('en-IN') + ' per sq ft';
+      if (link) link.href = est.getAttribute('data-brief') + '?area=' + a + '&budget=' + encodeURIComponent(band(a * (lo + hi) / 2));
+    };
+    area.addEventListener('input', calc);
+    levels.forEach(function (b) { b.addEventListener('click', function () { press(levels, b); calc(); }); });
+    addons.forEach(function (x) { x.addEventListener('change', calc); });
+    calc();
+  }
+
   // Careers: apply buttons + file label
   $$('[data-apply]').forEach(function (b) { b.addEventListener('click', function () { var s = $('select[name="role"]'); if (s) s.value = b.getAttribute('data-apply'); var f = $('#apply'); if (f) window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 100, behavior: motion ? 'smooth' : 'auto' }); }); });
   $$('input[type=file]').forEach(function (inp) { inp.addEventListener('change', function () { var l = inp.parentNode.querySelector('[data-file-label]'); if (l && inp.files[0]) l.textContent = inp.files[0].name; }); });

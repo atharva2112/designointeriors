@@ -185,6 +185,33 @@ content:
       - { name: metaDescription, label: Google description, type: text }
       - { name: hidden, label: Hide from site, type: boolean, default: false, description: "Hides the sector everywhere: lists, filters, forms and its page." }
 
+  - name: locations
+    label: Locations
+    type: collection
+    path: content/locations
+    format: json
+    filename: "{primary}.json"
+    view:
+      primary: name
+      fields: [ image, name, order, hidden ]
+      sort: [ order, name ]
+    fields:
+      - { name: name, label: Area name, type: string, required: true, description: "e.g. Kurla & Kohinoor City. Also becomes the page address." }
+      - { name: title, label: Page heading, type: string, required: true, description: "e.g. Office interiors in Kurla and Kohinoor City" }
+      - { name: intro, label: Introduction, type: text, required: true }
+      - { name: image, label: Image, type: image }
+      - name: points
+        label: Why Designo here
+        type: object
+        list: true
+        fields:
+          - { name: title, label: Heading, type: string }
+          - { name: text, label: Text, type: text }
+      - { name: match, label: Place names to match, type: string, list: true, description: "Clients (Clientele lists) and projects whose location contains any of these words are listed on the page, e.g. Kurla, Kohinoor." }
+      - { name: metaDescription, label: Google description, type: text }
+      - { name: order, label: Order, type: number }
+      - { name: hidden, label: Hide from site, type: boolean, default: false }
+
   - name: faqs
     label: FAQ
     type: file
@@ -233,6 +260,36 @@ content:
               values: [ { value: quote, label: Get a quote }, { value: brief, label: Project brief }, { value: consultation, label: Book a consultation }, { value: careers, label: Careers }, { value: referral, label: Referral programme }, { value: ecovisions, label: EcoVisions } ]
           - { name: emails, label: Email addresses, type: string, list: true }
           - { name: whatsapp, label: "WhatsApp numbers (with 91, e.g. 919820111353)", type: string, list: true }
+
+  - name: estimator
+    label: "Settings → Cost estimator"
+    type: file
+    path: content/settings/estimator.json
+    format: json
+    fields:
+      - name: levels
+        label: Specification levels
+        type: object
+        list: true
+        description: "Rates in ₹ per sq ft. The estimator page goes live once at least one level has both rates filled in."
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: note, label: What it includes, type: text }
+          - { name: min, label: "From (₹ per sq ft)", type: number }
+          - { name: max, label: "To (₹ per sq ft)", type: number }
+      - name: addons
+        label: Add-ons
+        type: object
+        list: true
+        description: "Optional extras visitors can tick, in ₹ per sq ft. Left out until both rates are filled in."
+        fields:
+          - { name: name, label: Name, type: string }
+          - { name: min, label: "From (₹ per sq ft)", type: number }
+          - { name: max, label: "To (₹ per sq ft)", type: number }
+      - { name: minArea, label: Smallest area (sq ft), type: number }
+      - { name: maxArea, label: Largest area (sq ft), type: number }
+      - { name: defaultArea, label: Starting area (sq ft), type: number }
+      - { name: disclaimer, label: Small print, type: text }
 
   - name: site
     label: "Settings → Site"

@@ -1,0 +1,29 @@
+{
+  "name": "Powai & the eastern suburbs",
+  "title": "Office interiors in Powai and the eastern suburbs",
+  "intro": "Our own offices are in Bhandup West and Powai. Nearby work includes Castrol India’s 15,000 sq ft R&D floor in Wadala and offices in Powai, Ghatkopar and Bhandup.",
+  "image": "/media/projects/laerdal/refined-office-with-vivid-red-columns-1.webp",
+  "points": [
+    {
+      "title": "On our doorstep",
+      "text": "Both Designo offices are here, in Bhandup West and Powai."
+    },
+    {
+      "title": "From R&D to small offices",
+      "text": "From Castrol India’s 15,000 sq ft R&D floor to offices of under 1,000 sq ft."
+    }
+  ],
+  "match": [
+    "Powai",
+    "Bhandup",
+    "Ghatkopar",
+    "Wadala",
+    "Vikhroli",
+    "Chembur",
+    "Raheja Vihar",
+    "Hiranandani"
+  ],
+  "metaDescription": "Office interior designers in Powai, Bhandup, Ghatkopar and Wadala, Mumbai, where Designo’s own offices are.",
+  "order": 3,
+  "hidden": false
+}

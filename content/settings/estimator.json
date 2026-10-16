@@ -1,0 +1,38 @@
+{
+  "levels": [
+    {
+      "name": "Essential",
+      "note": "Clean, functional finishes, standard partitions and lighting.",
+      "min": null,
+      "max": null
+    },
+    {
+      "name": "Standard",
+      "note": "Better finishes, glass partitions, acoustic treatment and feature lighting.",
+      "min": null,
+      "max": null
+    },
+    {
+      "name": "Premium",
+      "note": "Bespoke joinery, premium materials and statement spaces.",
+      "min": null,
+      "max": null
+    }
+  ],
+  "addons": [
+    {
+      "name": "Furniture and workstations",
+      "min": null,
+      "max": null
+    },
+    {
+      "name": "Office automation and smart controls",
+      "min": null,
+      "max": null
+    }
+  ],
+  "minArea": 500,
+  "maxArea": 50000,
+  "defaultArea": 5000,
+  "disclaimer": "An indicative range for planning only, not a quotation. Your estimate depends on the site, the scope of work and the specification, and is confirmed after we measure the site."
+}

@@ -24,11 +24,27 @@ content/            ← everything the admin panel edits (JSON)
   settings/site.json           phone, email, stats, brochures, images
   settings/notifications.json  who gets alerted for each form
 media/              photos and PDFs uploaded through the admin
-static/             styles.css, site.js, logo files
+static/             styles.css, site.js, fonts, logo and S-monogram files
 build/build.js      turns content/ into the finished site in dist/
+preview/            a copy of the site with relative links that opens from disk (build with --preview, then copy dist/ here)
 apps-script/Code.gs form handler for the Google Sheet
 .pages.yml          admin panel configuration
 ```
+
+## Design and motion
+
+The site is built on the **Designo Interiors design system** (the brochure system): Cormorant Garamond Light for display lines and numerals, Inter for text, one green (`#2E745A`), deep-green grounds (`#1E4D3B`), hairline rules instead of boxes, square corners and no shadows. The fonts are self-hosted in `static/assets/fonts/`; colours and type live at the top of `static/styles.css`.
+
+The brush-stroke **S** from the lockup is the monogram. `static/assets/s-mark.svg` is an exact trace of `s-mark-green.png`, and `build/build.js` (`S_PATH`) uses it for:
+
+- the home cover, where the S is a window onto the showreel and scrolling walks through it to full screen
+- the outline that draws itself at the top of every page, in the menu and behind the footer
+- the back-to-top button, which fills with green as you read
+- the separators in the client marquee
+
+Other motion: headings rise line by line, photographs open upward and drift with a light parallax, rules draw themselves, stats count up, the practice statement inks in as you scroll, project cards show a "View" label beside the pointer, sector rows show a photo preview, and pages change with a short wipe in browsers that support view transitions.
+
+Motion respects the visitor: with *reduce motion* switched on in their system settings, or without JavaScript, every page renders in its final, still state.
 
 ---
 

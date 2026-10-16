@@ -53,6 +53,12 @@ Other motion: headings rise line by line, photographs open upward and drift with
 
 Motion respects the visitor: with *reduce motion* switched on in their system settings, or without JavaScript, every page renders in its final, still state.
 
+**Icons** are hairline line drawings in `build/icons.js`, mostly from [Lucide](https://lucide.dev) (ISC licence), with the Vastu compass, lotus and grid drawn for the site. `icon('name')` in `build/build.js` places one, and `.ic` in `styles.css` strokes it at 1.25px at any size so it matches the rules and arrows. Services and sectors are matched to icons by page address (`SERVICE_ICONS`) and sector id; a new service or sector added in the admin shows no icon until it's added there. A service or sector without a photo shows its icon on sage instead of an empty box.
+
+**Diagrams**: the Vastu grid (/vastu/), the "Where we work" coast map (/about/) and the payment-stages bar (/fit-out-process/) are drawn in code. Pages without a photo of their own share `static/assets/og-default.png` when linked on social media and in chat apps.
+
+**Photos still to make** are listed with generation prompts in `docs/visual-asset-brief.md`.
+
 ---
 
 ## One-time setup (about an hour)
@@ -132,6 +138,8 @@ Old GoDaddy page addresses redirect to the new pages automatically (`_redirects`
 **Client quote** — Admin → Testimonials → add an item. Only publish quotes the client has approved. Quotes show on the homepage and the Why Designo page, and on a project page too if you enter its page address (e.g. `wincor-nixdorf`).
 
 **Technology services** — Admin → Services → set *Group* to *Technology & systems*. Those pages are listed on the Technology page (/technology/), in the header's Technology section and in their own footer column; interior services stay on the Services page.
+
+**Page photos** — Admin → Settings → Site → *Page images*. Besides the banners already in use, there are optional spots for the fit-out process page (banner, and "working around your team"), EcoVisions initiatives, the three About columns, the project brief page and a Careers banner. Each appears only once a photo is uploaded. `docs/visual-asset-brief.md` has a prompt and size for each.
 
 **Stock photos** — to use a free photo from Unsplash or Pexels, paste its image link into an image field (add `#a-short-name` at the end to name the file), Save, then run Actions → **Import remote media** on the same branch. It copies the photo into `media/` and points the content at the copy. Swap stock photos for photos of your own installations when you have them.
 

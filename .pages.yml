@@ -334,6 +334,14 @@ content:
           - { name: vastu, label: Vastu, type: image }
           - { name: about, label: About banner, type: image }
           - { name: founder, label: Founder portrait, type: image }
+          - { name: process, label: Fit-out process banner (optional), type: image }
+          - { name: occupied, label: Fit-out process — working around your team (optional), type: image }
+          - { name: initiatives, label: EcoVisions — our initiatives (optional; uses the Vastu photo until set), type: image }
+          - { name: aboutStyle, label: About — our style (optional), type: image }
+          - { name: aboutApproach, label: About — our approach (optional), type: image }
+          - { name: aboutNetwork, label: About — our network (optional), type: image }
+          - { name: brief, label: Project brief page (optional), type: image }
+          - { name: careers, label: Careers banner (optional), type: image }
       - name: showreel
         label: Homepage video
         type: object

@@ -17,7 +17,7 @@ A fast static website with a free admin panel. No website-builder subscription.
 ```
 content/            ← everything the admin panel edits (JSON)
   projects/         one file per project (optional case-study fields)
-  services/         one file per service page (/services/…)
+  services/         one file per service page (/services/…); Group = Interiors or Technology & systems
   locations/        one file per area page (/locations/…)
   journal/          one file per blog post
   jobs/             one file per opening
@@ -104,7 +104,7 @@ For each number that should get alerts (starting with 98201 11353):
 At launch, every photo and brochure in `content/` is still linked from the old GoDaddy site (`img1.wsimg.com`). Those links stop working when the Website Builder plan is cancelled, and Pages CMS can't preview or save an image field that points outside `media/`.
 
 1. GitHub → repository → **Actions** → **Import remote media** → **Run workflow** (branch `main`).
-2. About a minute later it commits every image and PDF into `media/` and updates the content to match. The run's summary lists anything it couldn't download; re-upload those by hand in the admin.
+2. About a minute later it commits every image and PDF (including any Unsplash or Pexels links) into `media/` and updates the content to match. The run's summary lists anything it couldn't download; re-upload those by hand in the admin.
 
 ### 8. Connect the domain
 1. Cloudflare Pages project → Custom domains → Set up → `designointeriors.com` (and `www`).
@@ -130,6 +130,10 @@ Old GoDaddy page addresses redirect to the new pages automatically (`_redirects`
 **Case study** — open a project and fill in *Location*, *Year completed*, *Duration*, *Scope*, and *The challenge* / *Our approach* / *The outcome*. Each one appears on the project page only once it's filled in. *Location* also lists the project on the matching area page.
 
 **Client quote** — Admin → Testimonials → add an item. Only publish quotes the client has approved. Quotes show on the homepage and the Why Designo page, and on a project page too if you enter its page address (e.g. `wincor-nixdorf`).
+
+**Technology services** — Admin → Services → set *Group* to *Technology & systems*. Those pages are listed on the Technology page (/technology/), in the header's Technology section and in their own footer column; interior services stay on the Services page.
+
+**Stock photos** — to use a free photo from Unsplash or Pexels, paste its image link into an image field (add `#a-short-name` at the end to name the file), Save, then run Actions → **Import remote media** on the same branch. It copies the photo into `media/` and points the content at the copy. Swap stock photos for photos of your own installations when you have them.
 
 **Services, sectors and areas** — Admin → Services, Sectors or Locations. Every section on these pages (focus points, scope, clients, questions) is optional and is left out when empty. *Hide from site* on a sector removes it from every list, filter and form; Residential is hidden this way until it gets its own section.
 

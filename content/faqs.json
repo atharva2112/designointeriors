@@ -78,5 +78,25 @@
     "topic": "After handover",
     "question": "Can you specify greener materials?",
     "answer": "Yes. Low-VOC paints and finishes, energy-efficient lighting and appliances, local sourcing and water-saving fixtures are part of how we specify. See Designo EcoVisions for more."
+  },
+  {
+    "topic": "Technology",
+    "question": "Can you install AV, networking and security with the interiors?",
+    "answer": "Yes. Conference AV, networking and IT, CCTV, access control, fire alarm, PA, automation and acoustics are designed and installed by the same team, under the same contract and timeline as the interiors."
+  },
+  {
+    "topic": "Technology",
+    "question": "Which video conferencing platforms do you set up rooms for?",
+    "answer": "Microsoft Teams, Zoom and Google Meet. We match the room equipment to the platform your company already uses."
+  },
+  {
+    "topic": "Technology",
+    "question": "Will you work with our IT and security teams?",
+    "answer": "Yes. We work to your IT and security teams’ standards for equipment, cabling and configuration, and coordinate testing and switchover with them."
+  },
+  {
+    "topic": "Technology",
+    "question": "Can systems be added to an office that is already running?",
+    "answer": "Usually, yes. We survey the site, reuse what still works and plan the installation around your working hours and teams."
   }
 ]

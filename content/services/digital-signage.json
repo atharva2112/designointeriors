@@ -1,0 +1,52 @@
+{
+  "title": "Digital signage & room booking",
+  "group": "technology",
+  "summary": "Screens for receptions and common areas, and booking panels that keep meeting rooms in use.",
+  "intro": "Screens that welcome visitors, share news and guide people around the office, and booking panels outside meeting rooms that show what is free and let people book on the spot. We plan the screens, mounting, power and data with the interior, and set up content scheduling your team can manage.",
+  "image": "",
+  "points": [
+    {
+      "title": "A better first impression",
+      "text": "Reception and lobby screens for welcome messages, brand films and visitor information."
+    },
+    {
+      "title": "Rooms that stay in use",
+      "text": "Booking panels show at a glance which rooms are free, and can release rooms nobody turned up for."
+    },
+    {
+      "title": "Content you control",
+      "text": "Schedule content centrally and update every screen from one place."
+    },
+    {
+      "title": "Neatly integrated",
+      "text": "Screens and panels set into walls and joinery, with power and data planned at layout stage."
+    }
+  ],
+  "includes": [
+    "Reception and lobby screens",
+    "Video walls",
+    "Wayfinding and information displays",
+    "Cafeteria and common-area screens",
+    "Content management and scheduling",
+    "Meeting room booking panels",
+    "Calendar integration with Microsoft 365 or Google Workspace",
+    "Desk and room booking for hybrid offices"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "healthcare",
+    "education"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "Do booking panels work with our calendars?",
+      "answer": "Yes. Booking panels connect to Microsoft 365 or Google Workspace calendars, so a booking made on a panel, in Outlook or in Google Calendar shows everywhere."
+    }
+  ],
+  "metaDescription": "Digital signage, video walls and meeting room booking panels for offices, showrooms and hospitality spaces in Mumbai.",
+  "order": 12,
+  "hidden": false
+}

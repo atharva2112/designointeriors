@@ -1,0 +1,54 @@
+{
+  "title": "Fire alarm & detection",
+  "group": "technology",
+  "summary": "Smoke and heat detection, alarm panels and call points, integrated with your other building systems.",
+  "intro": "Early warning that protects people and property. We design and install fire detection and alarm systems for offices and commercial spaces, coordinated with the ceiling and interior layout, and integrated with access control, PA and air-conditioning so the space responds as one when an alarm is raised.",
+  "image": "",
+  "points": [
+    {
+      "title": "Detection in the right places",
+      "text": "Smoke and heat detectors laid out to suit ceilings, voids and the way each room is used."
+    },
+    {
+      "title": "Designed to the code",
+      "text": "Systems designed to the National Building Code of India and the relevant Indian Standards."
+    },
+    {
+      "title": "An integrated response",
+      "text": "Doors unlock, announcements play and air-conditioning shuts down when the alarm is raised."
+    },
+    {
+      "title": "Clear at a glance",
+      "text": "Addressable panels show exactly which device raised the alarm."
+    }
+  ],
+  "includes": [
+    "Smoke, heat and multi-sensor detectors",
+    "Addressable and conventional fire alarm panels",
+    "Manual call points",
+    "Hooters, sounders and strobes",
+    "Detection in ceiling and floor voids",
+    "Integration with access control, PA and air-conditioning",
+    "Testing and commissioning",
+    "Maintenance and periodic testing"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "education",
+    "fitness",
+    "healthcare",
+    "studios"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "Will the office system work with our building’s fire alarm?",
+      "answer": "Yes. We coordinate with your building management so the office system works with the building’s main fire alarm and meets its fit-out rules."
+    }
+  ],
+  "metaDescription": "Fire alarm and detection systems for offices and commercial interiors in Mumbai, integrated with access control, PA and air-conditioning.",
+  "order": 17,
+  "hidden": false
+}

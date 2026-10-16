@@ -1,0 +1,60 @@
+{
+  "title": "Conference & meeting room AV",
+  "group": "technology",
+  "summary": "Video conferencing, displays, audio and control for boardrooms, meeting rooms and townhalls.",
+  "intro": "Meeting rooms that work the moment people walk in. We design and install video conferencing, displays, microphones, speakers and control for every room size, from huddle rooms to boardrooms and townhalls, and build them into the interior so cables, racks and equipment disappear.",
+  "image": "/media/projects/townhall-conference-floor/mumbai-townhall-conference-room-toward-blank-s.webp",
+  "points": [
+    {
+      "title": "Built for hybrid meetings",
+      "text": "Cameras, microphones and speakers placed so people in the room and on the call see and hear each other clearly."
+    },
+    {
+      "title": "Works with your platform",
+      "text": "Rooms set up for Microsoft Teams, Zoom or Google Meet, matched to the platform your company already uses."
+    },
+    {
+      "title": "One touch to start",
+      "text": "Simple room controls and wireless presentation, so meetings start on time without a call to IT."
+    },
+    {
+      "title": "Designed with the room",
+      "text": "Screen sizes, sightlines, lighting and acoustics planned with the interior, not added afterwards."
+    }
+  ],
+  "includes": [
+    "Video conferencing for Microsoft Teams, Zoom and Google Meet rooms",
+    "Displays, video walls and projection",
+    "Conference cameras",
+    "Ceiling, table and gooseneck microphones",
+    "Speakers, amplifiers and audio processing (DSP)",
+    "Wireless presentation and screen sharing",
+    "Room control panels and one-touch join",
+    "Boardroom, training room and townhall AV",
+    "AV racks, cable management and furniture integration",
+    "Testing, commissioning and user training"
+  ],
+  "sectors": [
+    "corporate",
+    "education",
+    "hospitality",
+    "healthcare"
+  ],
+  "projects": [
+    "townhall-conference-floor",
+    "wincor-nixdorf"
+  ],
+  "faqs": [
+    {
+      "question": "Which video conferencing platforms do you set rooms up for?",
+      "answer": "Microsoft Teams, Zoom and Google Meet. We match the room equipment to the platform your company already uses."
+    },
+    {
+      "question": "Can you upgrade AV in an existing meeting room?",
+      "answer": "Yes. We survey the room, reuse what still works, and plan cabling and mounting to keep civil work to a minimum."
+    }
+  ],
+  "metaDescription": "Conference room AV and video conferencing in Mumbai: Microsoft Teams, Zoom and Google Meet rooms, displays, audio and control for boardrooms and townhalls.",
+  "order": 11,
+  "hidden": false
+}

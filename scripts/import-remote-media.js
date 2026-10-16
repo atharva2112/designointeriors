@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 /*
-  Copies every image and PDF that content/ hot-links from another site into media/, and points
-  the content at the copy.
+  Copies every image and PDF that content/ hot-links from another site (GoDaddy, Vimeo, Unsplash,
+  Pexels) into media/, and points the content at the copy.
 
   Run by .github/workflows/import-media.yml. Why it matters:
     - Pages CMS refuses to save an image or file field that doesn't start with "media/", so
@@ -14,7 +14,9 @@ const fs = require('fs');
 const path = require('path');
 const { ROOT, fetchFile, save } = require('./lib/media');
 
-const HOSTS = ['img1.wsimg.com', 'i.vimeocdn.com'].concat(process.argv.slice(2));
+// Stock photo links (Unsplash, Pexels) can be pasted into content too; a "#name" at the end of a
+// link becomes the file name, e.g. https://images.pexels.com/photos/123/pexels-photo-123.jpeg#server-rack
+const HOSTS = ['img1.wsimg.com', 'i.vimeocdn.com', 'unsplash.com', 'images.unsplash.com', 'images.pexels.com', 'www.pexels.com'].concat(process.argv.slice(2));
 const URL_RE = /https?:\/\/[^\s"'<>()]+/g;
 
 const files = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((d) => d.isDirectory() ? files(path.join(dir, d.name)) : d.name.endsWith('.json') ? [path.join(dir, d.name)] : []);

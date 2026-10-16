@@ -1,0 +1,45 @@
+{
+  "title": "PA & background music",
+  "group": "technology",
+  "summary": "Zoned announcements, paging and background music, clear in every space and easy to control.",
+  "intro": "Clear announcements and the right music in every space. We design zoned public address and background music systems for offices, showrooms, restaurants and gyms, with ceiling and wall speakers that blend into the interior and simple controls for each zone.",
+  "image": "",
+  "points": [
+    {
+      "title": "Zoned control",
+      "text": "Different music and volume for reception, cafeteria, work floors and outdoor areas."
+    },
+    {
+      "title": "Clear announcements",
+      "text": "Paging from reception or a desk microphone to one zone or the whole floor."
+    },
+    {
+      "title": "Ready for emergencies",
+      "text": "Evacuation announcements linked to the fire alarm system."
+    },
+    {
+      "title": "Speakers that disappear",
+      "text": "Ceiling and wall speakers chosen to suit the interior and the room’s acoustics."
+    }
+  ],
+  "includes": [
+    "Ceiling, wall and pendant speakers",
+    "Amplifiers and zone controllers",
+    "Paging microphones",
+    "Background music sources and streaming",
+    "Emergency announcements and fire alarm integration",
+    "Volume and source controls for each zone"
+  ],
+  "sectors": [
+    "corporate",
+    "retail",
+    "hospitality",
+    "fitness",
+    "education"
+  ],
+  "projects": [],
+  "faqs": [],
+  "metaDescription": "PA, paging and background music systems for offices, showrooms, restaurants and gyms in Mumbai, with zoned control and fire alarm integration.",
+  "order": 18,
+  "hidden": false
+}

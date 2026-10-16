@@ -23,7 +23,7 @@ on:
         description: Category
         required: true
         type: choice
-        options: [Workplace, Vastu, Sustainability, Intelligent Living, News]
+        options: [Workplace, Vastu, Sustainability, Technology, News]
       body:
         description: Body (Markdown or HTML)
         required: true

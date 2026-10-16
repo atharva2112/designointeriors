@@ -7,7 +7,7 @@
 
     {
       "title":    "Required",
-      "category": "Workplace | Vastu | Sustainability | Intelligent Living | News",
+      "category": "Workplace | Vastu | Sustainability | Technology | News",
       "date":     "2026-10-16 (optional, defaults to today in India)",
       "excerpt":  "One sentence (optional, taken from the first paragraph if left out)",
       "body":     "Markdown or HTML",
@@ -23,7 +23,7 @@ const fs = require('fs');
 const path = require('path');
 const { ROOT, slugify, download } = require('./lib/media');
 
-const FALLBACK_CATEGORIES = ['Workplace', 'Vastu', 'Sustainability', 'Intelligent Living', 'News'];
+const FALLBACK_CATEGORIES = ['Workplace', 'Vastu', 'Sustainability', 'Technology', 'News'];
 
 // Reads the category list from .pages.yml so a category added in the admin config is accepted here too.
 function categories() {

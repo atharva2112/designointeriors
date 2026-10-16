@@ -1,0 +1,44 @@
+{
+  "_note": "Temporary: stock photo candidates for the technology pages, downloaded by the Import remote media workflow for review. Delete after choosing.",
+  "networking": [
+    "https://images.pexels.com/photos/5073493/pexels-photo-5073493.jpeg?auto=compress&cs=tinysrgb&w=2000#net-patch-panel",
+    "https://images.pexels.com/photos/4716292/pexels-photo-4716292.jpeg?auto=compress&cs=tinysrgb&w=2000#net-blue-cables-server",
+    "https://images.pexels.com/photos/6466141/pexels-photo-6466141.jpeg?auto=compress&cs=tinysrgb&w=2000#net-server-rack",
+    "https://images.pexels.com/photos/5658532/pexels-photo-5658532.jpeg?auto=compress&cs=tinysrgb&w=2000#net-colour-patch-cables",
+    "https://images.pexels.com/photos/2881233/pexels-photo-2881233.jpeg?auto=compress&cs=tinysrgb&w=2000#net-cables-server-closeup"
+  ],
+  "cctv": [
+    "https://images.pexels.com/photos/7508684/pexels-photo-7508684.jpeg?auto=compress&cs=tinysrgb&w=2000#cctv-dome-ceiling",
+    "https://images.pexels.com/photos/5589597/pexels-photo-5589597.jpeg?auto=compress&cs=tinysrgb&w=2000#cctv-white-black",
+    "https://unsplash.com/photos/xJc--frJbuw/download?force=true&w=2000#cctv-white-box-wall"
+  ],
+  "access": [
+    "https://images.pexels.com/photos/13657444/pexels-photo-13657444.jpeg?auto=compress&cs=tinysrgb&w=2000#access-card-reader-hand",
+    "https://images.pexels.com/photos/13657415/pexels-photo-13657415.jpeg?auto=compress&cs=tinysrgb&w=2000#access-card-reader-woman",
+    "https://images.pexels.com/photos/37538043/pexels-photo-37538043.jpeg?auto=compress&cs=tinysrgb&w=2000#access-fingerprint"
+  ],
+  "fire": [
+    "https://images.pexels.com/photos/13060860/pexels-photo-13060860.jpeg?auto=compress&cs=tinysrgb&w=2000#fire-alarm-control"
+  ],
+  "automation": [
+    "https://images.pexels.com/photos/17536106/pexels-photo-17536106.jpeg?auto=compress&cs=tinysrgb&w=2000#auto-wall-button",
+    "https://images.pexels.com/photos/36818203/pexels-photo-36818203.jpeg?auto=compress&cs=tinysrgb&w=2000#auto-smart-thermostat",
+    "https://images.pexels.com/photos/27638181/pexels-photo-27638181.jpeg?auto=compress&cs=tinysrgb&w=2000#auto-thermostat-wall"
+  ],
+  "conference": [
+    "https://images.pexels.com/photos/236730/pexels-photo-236730.jpeg?auto=compress&cs=tinysrgb&w=2000#av-conference-room",
+    "https://images.pexels.com/photos/5511124/pexels-photo-5511124.jpeg?auto=compress&cs=tinysrgb&w=2000#av-meeting-room",
+    "https://images.pexels.com/photos/5103610/pexels-photo-5103610.jpeg?auto=compress&cs=tinysrgb&w=2000#av-conference-room-2"
+  ],
+  "pa": [
+    "https://images.pexels.com/photos/17056964/pexels-photo-17056964.jpeg?auto=compress&cs=tinysrgb&w=2000#pa-event-hall-sound"
+  ],
+  "signage": [
+    "https://images.pexels.com/photos/7427427/pexels-photo-7427427.jpeg?auto=compress&cs=tinysrgb&w=2000#sign-flight-display",
+    "https://images.pexels.com/photos/12094375/pexels-photo-12094375.jpeg?auto=compress&cs=tinysrgb&w=2000#sign-schedule-screen",
+    "https://unsplash.com/photos/b08Pe9MV_eU/download?force=true&w=2000#sign-lobby-elevators"
+  ],
+  "acoustics": [
+    "https://images.pexels.com/photos/248850/pexels-photo-248850.jpeg?auto=compress&cs=tinysrgb&w=2000#acoustic-slat-wall"
+  ]
+}

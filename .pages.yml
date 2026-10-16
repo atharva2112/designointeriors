@@ -46,10 +46,16 @@ content:
     filename: "{primary}.json"
     view:
       primary: title
-      fields: [ image, title, order, hidden ]
+      fields: [ image, title, group, order, hidden ]
       sort: [ order, title ]
     fields:
       - { name: title, label: Title, type: string, required: true, description: "Also becomes the page address, e.g. services/office-fit-out/." }
+      - name: group
+        label: Group
+        type: select
+        default: interiors
+        options:
+          values: [ { value: interiors, label: "Interiors (Services page)" }, { value: technology, label: "Technology & systems (Technology page)" } ]
       - { name: summary, label: Summary, type: text, required: true, description: "One sentence for the Services page, the homepage and the footer." }
       - { name: intro, label: Introduction, type: text, description: "The opening paragraph at the top of the page." }
       - { name: image, label: Image, type: image }
@@ -95,7 +101,7 @@ content:
         label: Category
         type: select
         options:
-          values: [ Workplace, Vastu, Sustainability, Intelligent Living, News ]
+          values: [ Workplace, Vastu, Sustainability, Technology, News ]
       - { name: date, label: Date, type: date, required: true }
       - { name: cover, label: Cover image, type: image }
       - { name: excerpt, label: Excerpt, type: text, required: true, description: "One sentence shown on the Journal page." }
@@ -322,7 +328,8 @@ content:
         label: Page images
         type: object
         fields:
-          - { name: automation, label: Intelligent Living, type: image }
+          - { name: automation, label: Workplace technology (homepage), type: image }
+          - { name: technology, label: Technology page banner, type: image }
           - { name: sustainability, label: EcoVisions, type: image }
           - { name: vastu, label: Vastu, type: image }
           - { name: about, label: About banner, type: image }

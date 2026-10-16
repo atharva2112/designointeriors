@@ -1,0 +1,52 @@
+{
+  "title": "Access control & visitor management",
+  "group": "technology",
+  "summary": "Card, biometric and mobile access for doors and entrances, with visitor management and attendance.",
+  "intro": "Control who goes where, and know who is in the building. We install card, biometric and mobile readers, door hardware and turnstiles, set up access levels for every team, and connect visitor management and attendance so reception and HR work from the same system.",
+  "image": "",
+  "points": [
+    {
+      "title": "The right access for every team",
+      "text": "Access levels by person, team and time, changed centrally when people join, move or leave."
+    },
+    {
+      "title": "Secure entrances",
+      "text": "Readers, electromagnetic locks, exit buttons, and turnstiles or flap barriers where footfall is high."
+    },
+    {
+      "title": "Visitors welcomed and recorded",
+      "text": "Visitor registration, badges and host alerts at reception."
+    },
+    {
+      "title": "Safe in an emergency",
+      "text": "Doors release automatically when the fire alarm sounds."
+    }
+  ],
+  "includes": [
+    "Card and RFID readers",
+    "Biometric readers: fingerprint and face recognition",
+    "Mobile and PIN access",
+    "Door controllers, electromagnetic locks and exit buttons",
+    "Turnstiles and flap barriers",
+    "Visitor management and badges",
+    "Attendance integration for HR and payroll",
+    "Fire alarm release and CCTV integration"
+  ],
+  "sectors": [
+    "corporate",
+    "healthcare",
+    "education",
+    "fitness",
+    "hospitality"
+  ],
+  "projects": [],
+  "faqs": [
+    {
+      "question": "Can access control link to our attendance or HR system?",
+      "answer": "Yes. Attendance data from the readers can be exported to, or integrated with, your HR and payroll system."
+    }
+  ],
+  "metaDescription": "Access control and visitor management for offices in Mumbai: card, biometric and mobile readers, turnstiles, door hardware and attendance integration.",
+  "order": 16,
+  "hidden": false
+}

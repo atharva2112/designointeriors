@@ -242,7 +242,7 @@ function footer(c, D, cta) {
   ${cta ? `<div class="ftr__cta"><div class="wrap"><div><p class="eyebrow">Free first consultation · Online or in person</p><h2 class="d">Start a project.</h2></div><div class="btns">${btn(c.u('contact/', '#quote'), 'Get a quote <span>→</span>', 'btn--light')}${btn('https://wa.me/' + s.whatsapp, 'WhatsApp', 'btn--line-light', ' target="_blank" rel="noopener"')}${btn('tel:' + s.phoneLink, esc(s.phone), 'btn--line-light')}</div></div></div>` : ''}
   <div class="ftr__cols"><div class="wrap">
     <div class="ftr__grid">
-      <div><img src="${c.a('assets/logo-light-sm.png')}" alt="Designo Interiors" width="480" height="290" style="height:76px;width:auto"><p style="margin:8px 0 0;max-width:260px;font-size:14px;color:var(--pale)">Turnkey corporate and residential interiors in Mumbai since 1991.</p></div>
+      <div><img class="ftr__logo" src="${c.a('assets/logo-light-sm.png')}" alt="Designo Interiors" width="480" height="290"><p style="margin:8px 0 0;max-width:260px;font-size:14px;color:var(--pale)">Turnkey corporate and residential interiors in Mumbai since 1991.</p></div>
       <div><span class="label">Studio</span><a href="${c.u('projects/')}">Projects</a><a href="${c.u('services/')}">Services</a><a href="${c.u('about/')}">About &amp; certifications</a><a href="${c.u('clientele/')}">Clientele</a><a href="${c.u('journal/')}">Journal</a></div>
       <div><span class="label">More</span><a href="${c.u('sustainability/')}">EcoVisions</a><a href="${c.u('vastu/')}">Vastu Shastra</a><a href="${c.u('referral/')}">Referral programme</a><a href="${c.u('careers/')}">Careers</a><a href="${c.u('contact/')}">Contact</a></div>
       ${map(s.offices, (o) => `<div><span class="label">${esc(o.name)}</span><span>${esc(o.address)}</span><a class="dir" href="https://maps.google.com/?q=${encodeURIComponent(o.mapQuery || o.address)}" target="_blank" rel="noopener">Directions ↗</a></div>`)}
@@ -264,7 +264,7 @@ function pageHome(c, D) {
   // Once there are enough logos the marquee shows only those; the Clientele page lists everyone.
   const logos = D.clients.wall.filter((w) => w.logo), wall = logos.length >= 6 ? logos : D.clients.wall, half = Math.ceil(wall.length / 2);
   const names = (list) => map(list, (w) => w.logo ? `<span class="mq-logo">${logo(c, w, true)}</span>` : `<span>${esc(w.name)}${sUse('')}</span>`);
-  const row = (list) => `<div class="marquee__row"><div class="marquee__set">${names(list)}</div><div class="marquee__set" aria-hidden="true">${names(list)}</div></div>`;
+  const row = (list) => `<div class="marquee__row" tabindex="0"><div class="marquee__set">${names(list)}</div><div class="marquee__set" aria-hidden="true">${names(list)}</div></div>`;
   const body = `
 <section class="cover" data-hero>
   <div class="cover__stick">

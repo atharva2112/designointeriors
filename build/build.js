@@ -133,6 +133,7 @@ async function buildSite(io, opts) {
   page('why-designo/', (c) => pageWhy(c, D));
   page('fit-out-process/', (c) => pageProcess(c, D));
   page('faq/', (c) => pageFaq(c, D));
+  page('project-brief/', (c) => pageBrief(c, D));
   page('about/', (c) => pageAbout(c, D));
   page('sustainability/', (c) => pageSustainability(c, D));
   page('vastu/', (c) => pageVastu(c, D));
@@ -263,7 +264,7 @@ function footer(c, D, cta) {
       <div><span class="label">Services</span>${map(D.services, (x) => `<a href="${c.u('services/' + x.slug + '/')}">${esc(x.title)}</a>`)}</div>
       <div><span class="label">Sectors</span>${map(D.sectors, (x) => `<a href="${c.u('sectors/' + x.id + '/')}">${esc(x.name)}</a>`)}</div>
       <div><span class="label">Company</span><a href="${c.u('projects/')}">Projects</a><a href="${c.u('about/')}">About &amp; certifications</a><a href="${c.u('clientele/')}">Clientele</a><a href="${c.u('sustainability/')}">EcoVisions</a><a href="${c.u('vastu/')}">Vastu Shastra</a><a href="${c.u('journal/')}">Journal</a><a href="${c.u('careers/')}">Careers</a><a href="${c.u('referral/')}">Referral programme</a></div>
-      <div><span class="label">Resources</span><a href="${c.u('why-designo/')}">Why Designo</a><a href="${c.u('fit-out-process/')}">Fit-out process</a><a href="${c.u('faq/')}">FAQ</a><a href="${c.u('contact/')}">Contact</a></div>
+      <div><span class="label">Resources</span><a href="${c.u('why-designo/')}">Why Designo</a><a href="${c.u('fit-out-process/')}">Fit-out process</a><a href="${c.u('faq/')}">FAQ</a><a href="${c.u('project-brief/')}">Send a brief</a><a href="${c.u('contact/')}">Contact</a></div>
       ${map(s.offices, (o) => `<div><span class="label">${esc(o.name)}</span><span>${esc(o.address)}</span><a class="dir" href="https://maps.google.com/?q=${encodeURIComponent(o.mapQuery || o.address)}" target="_blank" rel="noopener">Directions ↗</a></div>`)}
       <div><span class="label">Contact</span><a href="tel:${esc(s.phoneLink)}">${esc(s.phone)}</a><a href="mailto:${esc(s.email)}" style="word-break:break-all">${esc(s.email)}</a><span style="color:var(--pale);font-size:14px">${esc(s.hours)}</span></div>
     </div>
@@ -314,7 +315,8 @@ ${testimonials(c, D, 'Clients')}
 </div></section>
 <section class="sec"><div class="wrap px" style="box-sizing:content-box">${head2('Clientele', 'Trusted by', `<a class="link" href="${c.u('clientele/')}">Full client list →</a>`)}</div><div class="marquee" role="region" aria-label="Selected clients">${row(wall.slice(0, half))}${row(wall.slice(half))}</div></section>
 <section class="px sec dark relative"><div class="wrap">${head2('Certified', 'Three ISO standards on every project', `<a class="link" href="${c.u('about/', '#certifications')}">Certifications →</a>`, ' style="max-width:900px"')}<div class="iso">${map(CERTS, (x) => `<div class="iso__item rule"><img src="${c.a('assets/' + x[4])}" alt="${x[0]} certification mark" width="${x[5]}" height="${x[6]}" loading="lazy"><span class="d">${x[0]}</span><span class="label">${x[1]}</span><span class="small" style="color:var(--pale)">${x[2]}</span></div>`)}</div>${brochures(c, D, true)}</div></section>
-<section class="px sec" id="quote"><div class="wrap split"><div class="l" style="flex:5 1 360px"><p class="eyebrow">Get a quote</p><h2 class="d h2">Tell us about your space</h2><p class="p" style="max-width:440px">A few details are enough to start. We’ll get back to you with next steps and a time for a free consultation.</p>${contactRows(D)}</div><div class="r">${quoteForm(c, D, false)}</div></div></section>`;
+${planning(c)}
+<section class="px sec bg2" id="quote"><div class="wrap split"><div class="l" style="flex:5 1 360px"><p class="eyebrow">Get a quote</p><h2 class="d h2">Tell us about your space</h2><p class="p" style="max-width:440px">A few details are enough to start. We’ll get back to you with next steps and a time for a free consultation.</p>${contactRows(D)}</div><div class="r">${quoteForm(c, D, false)}</div></div></section>`;
   return shell(c, D, { title: 'Designo Interiors — Office & Commercial Interior Designers in Mumbai', desc: 'Turnkey office and commercial interiors in Mumbai since 1991: design, build and handover under one contract. ISO 9001, 14001 and 45001 certified.', tone: 'cover', page: '', body: body, image: reel.poster, preconnect: reel.video ? 'https://player.vimeo.com' : '' });
 }
 
@@ -335,13 +337,16 @@ function pageProjects(c, D) {
 }
 
 function pageProject(c, D, p, next) {
+  const story = [['The challenge', p.challenge], ['Our approach', p.solution], ['The outcome', p.outcome]].filter((x) => x[1]);
   const body = `
 <section class="intro" style="padding-top:clamp(36px,4vw,60px)">${introS()}<div class="wrap wrap--free">
   ${crumbs(c, [['projects/', 'Projects']].concat(D.sectorById[p.sector] ? [['sectors/' + p.sector + '/', p.sectorName]] : []).concat([[null, p.name]]))}
-  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:40px clamp(40px,6vw,104px);margin-top:clamp(32px,4vw,56px)"><h1 class="d" style="flex:7 1 560px;font-size:clamp(60px,9vw,156px);line-height:.96;letter-spacing:-.012em">${esc(p.name)}</h1><div style="flex:4 1 320px;display:flex;flex-direction:column;gap:24px"><p class="lede" style="font-size:19px">${esc(p.summary)}</p><dl class="rule">${p.client ? `<div class="kv"><dt>Client</dt><dd>${esc(p.client)}</dd></div>` : ''}<div class="kv"><dt>Sector</dt><dd>${esc(p.sectorName)}</dd></div>${p.areaLabel ? `<div class="kv"><dt>Area</dt><dd>${esc(p.areaLabel)}</dd></div>` : ''}</dl></div></div>
+  <div style="display:flex;flex-wrap:wrap;align-items:flex-end;gap:40px clamp(40px,6vw,104px);margin-top:clamp(32px,4vw,56px)"><h1 class="d" style="flex:7 1 560px;font-size:clamp(60px,9vw,156px);line-height:.96;letter-spacing:-.012em">${esc(p.name)}</h1><div style="flex:4 1 320px;display:flex;flex-direction:column;gap:24px"><p class="lede" style="font-size:19px">${esc(p.summary)}</p><dl class="rule">${p.client ? `<div class="kv"><dt>Client</dt><dd>${esc(p.client)}</dd></div>` : ''}<div class="kv"><dt>Sector</dt><dd>${esc(p.sectorName)}</dd></div>${p.areaLabel ? `<div class="kv"><dt>Area</dt><dd>${esc(p.areaLabel)}</dd></div>` : ''}${map([['Location', p.location], ['Year', p.year], ['Duration', p.duration], ['Scope', (p.scope || []).filter(Boolean).join(', ')]], (x) => x[1] ? `<div class="kv"><dt>${x[0]}</dt><dd>${esc(x[1])}</dd></div>` : '')}</dl></div></div>
 </div></section>
 <section class="px"><div class="wrap">${p.photos[0] ? `<button type="button" class="zoom r169" data-shot="${esc(c.m(p.photos[0]))}" aria-label="Enlarge photo 1" data-cursor="Enlarge">${img(c, p.photos[0], p.name, ' loading="eager" data-parallax="8"')}</button>` : ''}${p.photos.length > 1 ? `<div class="gallery">${map(p.photos.slice(1), (src, i) => `<button type="button" class="zoom r75" data-shot="${esc(c.m(src))}" aria-label="Enlarge photo ${i + 2}" data-cursor="Enlarge">${img(c, src, p.name + ' — photo ' + (i + 2))}</button>`)}</div>` : ''}</div></section>
-<section class="px" style="padding-top:clamp(40px,5vw,64px)"><div class="wrap rule rule--soft" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:26px"><span class="label muted">${p.photos.length} photo${p.photos.length === 1 ? '' : 's'} · Click any photo to enlarge</span>${btn(c.u('contact/', '#quote'), 'Plan a similar project <span>→</span>', 'btn--dark')}</div></section>
+<section class="px" style="padding-top:clamp(40px,5vw,64px)"><div class="wrap rule rule--soft" style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:16px;padding-top:26px"><span class="label muted">${p.photos.length} photo${p.photos.length === 1 ? '' : 's'} · Click any photo to enlarge</span>${btn(c.u('project-brief/') + '?type=' + encodeURIComponent(p.sectorName), 'Plan a similar project <span>→</span>', 'btn--dark')}</div></section>
+${story.length ? `<section class="px sec-top"><div class="wrap">${head2('The project', 'Brief, approach, result')}<div class="grid" style="--min:280px;gap:0 32px">${map(story, (x) => `<div class="col rule"><span class="label green">${x[0]}</span><p class="p p-lg" style="color:var(--ink)">${esc(x[1])}</p></div>`)}</div></div></section>` : ''}
+${testimonials(c, D, 'Client', D.testimonials.filter((t) => t.project === p.slug))}
 ${next && next !== p ? `<section class="px sec"><a class="wrap next" href="${c.u('projects/' + next.slug + '/')}" data-cursor="Next project"><div style="flex:6 1 420px;display:flex;flex-direction:column;gap:22px"><span class="eyebrow">Next project · ${esc(next.sectorName)}</span><span class="d">${esc(next.name)} →</span></div><div class="img r75" style="flex:5 1 360px">${img(c, next.cover, next.name, ' data-parallax="8"')}</div></a></section>` : '<div class="sec-top"></div>'}`;
   return shell(c, D, { title: p.name + ' — Designo Interiors', desc: p.summary, active: 'projects', body: body, image: p.cover });
 }
@@ -393,7 +398,7 @@ function pageLanding(c, D, o) {
   const body = `
 <section class="intro" style="padding-top:clamp(36px,4vw,60px)">${introS()}<div class="wrap wrap--free">
   ${crumbs(c, o.crumbs)}
-  <div class="lhead"><div class="lhead__t"><p class="eyebrow">${o.eyebrow}</p><h1 class="d">${esc(o.h1)}</h1></div><div class="lhead__r"><p class="lede">${esc(o.lede)}</p><div class="btns">${btn(c.u('contact/', '#quote'), 'Get a quote <span>→</span>', 'btn--dark')}${btn(c.u('contact/', '#consult'), 'Book a consultation', 'btn--line')}</div></div></div>
+  <div class="lhead"><div class="lhead__t"><p class="eyebrow">${o.eyebrow}</p><h1 class="d">${esc(o.h1)}</h1></div><div class="lhead__r"><p class="lede">${esc(o.lede)}</p><div class="btns">${btn(c.u('project-brief/') + (o.briefType ? '?type=' + encodeURIComponent(o.briefType) : ''), 'Send a brief <span>→</span>', 'btn--dark')}${btn(c.u('contact/', '#consult'), 'Book a consultation', 'btn--line')}</div></div></div>
 </div></section>
 ${o.image ? `<section class="px"><div class="wrap img lhero">${img(c, o.image, o.h1, ' loading="eager" data-parallax="10"')}</div></section>` : ''}
 ${parts.filter(Boolean).join('\n')}`;
@@ -409,7 +414,7 @@ function pageSector(c, D, x) {
     crumbs: [['sectors/', 'Sectors'], [null, x.name]],
     eyebrow: 'Sector · ' + x.index, h1: x.title || x.name, lede: x.intro || x.blurb, image: x.image,
     points: x.points, pointsEyebrow: 'What matters', pointsTitle: 'What we focus on',
-    items: x.deliverables, itemsTitle: 'What we design and build',
+    items: x.deliverables, itemsTitle: 'What we design and build', briefType: x.name,
     projects: projects, projectsTitle: 'Recent work', projectsLink: `<a class="link" href="${c.u('projects/')}?sector=${esc(x.id)}">All ${projects.length} in the index →</a>`,
     clients: x.clients,
     related: services.map((v) => [c.u('services/' + v.slug + '/'), v.title]), relatedEyebrow: 'Services', relatedTitle: 'How we can help',
@@ -497,6 +502,30 @@ function testimonials(c, D, eyebrow, list) {
   return `<section class="px sec"><div class="wrap">${head2(eyebrow || 'Clients', 'In their words')}<div class="grid" style="--min:340px;gap:48px 40px">${map(list, (t) => `<figure class="quote rule"><blockquote class="d">“${esc(t.quote)}”</blockquote><figcaption><b>${esc(t.name)}</b><span class="muted">${esc([t.role, t.company].filter(Boolean).join(', '))}</span></figcaption></figure>`)}</div></div></section>`;
 }
 
+function pageBrief(c, D) {
+  const scope = ['Design and 3D views', 'Civil and interior works', 'Furniture and joinery', 'Electrical and lighting', 'Office automation', 'Vastu review', 'Maintenance after handover'];
+  const part = (label) => `<span class="full label green" style="padding-bottom:12px;border-bottom:1px solid var(--ink);margin-top:8px">${label}</span>`;
+  const body = `
+${intro('Project brief · RFP', 'Send us<br>your brief', 'For new offices, relocations, refurbishments and RFPs. Share the site, the spaces you need and your timeline, and attach a floor plan or tender document if you have one.', true)}
+<section class="px" style="padding-bottom:var(--sy)"><div class="wrap split">
+  <div class="l" style="flex:4 1 300px"><p class="eyebrow">What happens next</p><div class="ticks rule">${map(['We review your brief and drawings', 'We call you to talk it through', 'An approximate estimate, then a site visit', 'A detailed estimate and 3D views'], (x, i) => `<div><span>${x}</span><span class="num">${pad(i + 1)}</span></div>`)}</div><p class="p small">Prefer to talk first? <a href="${c.u('contact/', '#consult')}">Book a free consultation →</a></p>${contactRows(D)}</div>
+  <div class="r"><form class="form" data-form="brief" data-max-mb="10">${hp}
+    ${part('About you')}${field('Name', 'name', { required: true })}${field('Company', 'company', { required: true })}${field('Designation', 'designation')}${field('Email', 'email', { type: 'email', required: true })}${field('Phone', 'phone', { type: 'tel', required: true })}
+    ${part('The site')}${field('Site location', 'location', { placeholder: 'e.g. Kohinoor City, Kurla' })}${field('Building', 'building')}${field('Area (sq ft)', 'area', { required: true })}${field('Floors', 'floors', { placeholder: 'e.g. 3rd and 4th' })}${select('Current state of the site', 'state', ['Not sure', 'Bare shell', 'Warm shell', 'Existing fit-out to refurbish'])}${select('Project type', 'type', projectTypes(D))}
+    ${part('What you need')}${field('Headcount', 'headcount', { placeholder: 'People using the space' })}${select('Budget', 'budget', ['Not sure yet', 'Under ₹25 lakh', '₹25 lakh – ₹1 crore', '₹1 – 5 crore', 'Above ₹5 crore'])}${field('Key spaces', 'spaces', { rows: 3, full: true, placeholder: 'e.g. 60 workstations, 6 cabins, 2 meeting rooms, a boardroom and a pantry' })}
+    <fieldset class="full scope"><legend class="label muted">Scope</legend>${map(scope, (x) => `<label class="check"><input type="checkbox" name="scope" value="${esc(x)}">${esc(x)}</label>`)}</fieldset>
+    ${part('Timeline')}${select('Possession of the site', 'possession', ['Not sure yet', 'Already have it', 'In 1–3 months', 'In 3–6 months', 'Later'])}${field('Target move-in', 'movein', { placeholder: 'e.g. March 2027' })}
+    <label class="upload full"><span style="display:flex;flex-direction:column;gap:6px"><span class="label">Floor plan or RFP</span><span data-file-label>PDF, image, DWG, Word or Excel, up to 10 MB</span></span><span class="label green">Choose file ↑</span><input type="file" name="plan" accept=".pdf,.jpg,.jpeg,.png,.webp,.dwg,.dxf,.doc,.docx,.xls,.xlsx"></label>
+    ${field('Anything else we should know', 'message', { rows: 4, full: true })}
+    <div class="form__end"><label class="check"><input type="checkbox" name="updates" value="Yes">Send me occasional updates.</label><button class="btn btn--dark" type="submit">Send brief <span>→</span></button></div>
+  </form>${done('Brief received', 'Thank you. We’ll review it and call you.')}</div>
+</div></section>`;
+  return shell(c, D, { title: 'Send a Project Brief or RFP — Designo Interiors', desc: 'Send Designo Interiors your office or commercial fit-out brief or RFP, with floor plans, and get an estimate and a free consultation.', page: 'project-brief/', body: body, cta: false });
+}
+
+// "Planning a fit-out?" links on the home page, for visitors who aren't ready to ask for a quote.
+const planning = (c) => `<section class="px sec"><div class="wrap">${head2('Planning a fit-out?', 'Start here')}<div class="cells" style="--min:240px">${map([['fit-out-process/', 'The fit-out process', 'Every stage from brief to handover, and what you receive at each.', 'Read the guide'], ['why-designo/', 'Why Designo', 'One contract, three ISO certifications and a 10-year warranty.', 'See why'], ['faq/', 'FAQ', 'Cost, timelines, standards and working in occupied offices.', 'Read answers'], ['project-brief/', 'Send a brief', 'Share your site, spaces and timeline, with drawings or an RFP.', 'Send a brief']], (x) => `<a href="${c.u(x[0])}" class="svc"><span class="label green">${x[3]} →</span><h3 class="d h4">${x[1]}</h3><span class="p small">${x[2]}</span></a>`)}</div></div></section>`;
+
 function pageAbout(c, D) {
   const s = D.site;
   const body = `
@@ -565,7 +594,7 @@ function pageContact(c, D) {
       <div class="form__end rule rule--soft" style="padding-top:26px"><span class="label green" data-summary></span><button class="btn btn--dark" type="submit">Confirm booking <span>→</span></button></div>
     </form>${done('Consultation requested', 'Thank you. We’ll confirm by phone.')}</div>
   </div>
-</div></section>
+</div><p class="wrap small" style="margin-top:22px">Larger project, or an RFP to share? <a href="${c.u('project-brief/')}">Send a detailed brief with drawings →</a></p></section>
 <section class="px sec bg2"><div class="wrap">${head2('Offices', 'See us in person')}<div class="grid" style="--min:420px;gap:24px">${map(s.offices, (o) => `<div style="background:#fff;display:flex;flex-direction:column"><iframe class="map" title="Map — ${esc(o.name)} office" src="https://www.google.com/maps?q=${encodeURIComponent(o.mapQuery || o.address)}&amp;output=embed" loading="lazy"></iframe><div style="padding:30px;display:flex;flex-wrap:wrap;justify-content:space-between;align-items:flex-end;gap:16px"><div style="display:flex;flex-direction:column;gap:10px"><span class="d" style="font-size:38px;line-height:1.05">${esc(o.name)}</span><span class="muted" style="font-size:16px;line-height:1.55;max-width:320px">${esc(o.address)}</span></div><a class="link" href="https://maps.google.com/?q=${encodeURIComponent(o.mapQuery || o.address)}" target="_blank" rel="noopener">Directions ↗</a></div></div>`)}</div></div></section>`;
   return shell(c, D, { title: 'Contact & Quote — Designo Interiors', desc: 'Get a quote or book a free consultation with Designo Interiors. Offices in Bhandup West and Powai, Mumbai.', active: 'contact', page: 'contact/', body: body, cta: false });
 }

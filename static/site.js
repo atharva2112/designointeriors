@@ -379,6 +379,21 @@
   $$('[data-apply]').forEach(function (b) { b.addEventListener('click', function () { var s = $('select[name="role"]'); if (s) s.value = b.getAttribute('data-apply'); var f = $('#apply'); if (f) window.scrollTo({ top: f.getBoundingClientRect().top + window.scrollY - 100, behavior: motion ? 'smooth' : 'auto' }); }); });
   $$('input[type=file]').forEach(function (inp) { inp.addEventListener('change', function () { var l = inp.parentNode.querySelector('[data-file-label]'); if (l && inp.files[0]) l.textContent = inp.files[0].name; }); });
 
+  // Prefill: links such as /project-brief/?type=Hospitality&area=4000 fill in matching fields
+  if (location.search) {
+    var params = new URLSearchParams(location.search);
+    $$('form[data-form]').forEach(function (form) {
+      params.forEach(function (v, k) {
+        if (k === 'website' || k === 'form') return;
+        $$('[name="' + k.replace(/[^\w-]/g, '') + '"]', form).forEach(function (el) {
+          if (el.type === 'checkbox' || el.type === 'radio') { if (el.value === v) el.checked = true; }
+          else if (el.tagName === 'SELECT') { Array.prototype.forEach.call(el.options, function (o) { if (o.value === v || o.text === v) el.value = o.value; }); }
+          else if (el.type !== 'file' && el.type !== 'hidden') el.value = v;
+        });
+      });
+    });
+  }
+
   // Forms → Google Apps Script
   var endpoint = document.body.getAttribute('data-forms');
   var readFile = function (file) { return new Promise(function (res, rej) { var fr = new FileReader(); fr.onload = function () { res({ name: file.name, type: file.type, data: String(fr.result).split(',')[1] }); }; fr.onerror = rej; fr.readAsDataURL(file); }); };
@@ -395,7 +410,8 @@
         data[k] = data[k] ? data[k] + ', ' + v : v;
       });
       if (data.website) return; // honeypot
-      if (file && file.size > 5 * 1024 * 1024) return fail('That file is larger than 5 MB.');
+      var maxMb = +(form.getAttribute('data-max-mb') || 5);
+      if (file && file.size > maxMb * 1024 * 1024) return fail('That file is larger than ' + maxMb + ' MB.');
       if (!endpoint) return fail('The form isn’t connected yet.');
       (file ? readFile(file) : Promise.resolve(null)).then(function (f) {
         if (f) data.file = f;

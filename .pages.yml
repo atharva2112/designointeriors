@@ -25,6 +25,13 @@ content:
       - { name: client, label: Client name, type: string, required: true, description: "Write Confidential for projects under NDA." }
       - { name: area, label: Area (sq ft), type: number, description: "Digits only, e.g. 7500" }
       - { name: summary, label: Summary, type: text, required: true, description: "One or two sentences. Also used for Google." }
+      - { name: location, label: Location, type: string, description: "e.g. Kohinoor City, Kurla. Also places the project on the matching location page." }
+      - { name: year, label: Year completed, type: string }
+      - { name: duration, label: Duration, type: string, description: "e.g. 45 days" }
+      - { name: scope, label: Scope, type: string, list: true, description: "e.g. Design, Civil work, Joinery, Electrical, Furniture" }
+      - { name: challenge, label: The challenge, type: text, description: "Optional case study. What the client needed and what made it hard." }
+      - { name: solution, label: Our approach, type: text }
+      - { name: outcome, label: The outcome, type: text }
       - { name: cover, label: Cover image, type: image, required: true, description: "Best landscape photo, about 2400px wide." }
       - { name: gallery, label: Photo gallery, type: image, list: true, description: "Drag to reorder." }
       - { name: featured, label: Show on homepage, type: boolean, default: false, description: "Keep about five switched on." }
@@ -223,7 +230,7 @@ content:
             label: Form
             type: select
             options:
-              values: [ { value: quote, label: Get a quote }, { value: consultation, label: Book a consultation }, { value: careers, label: Careers }, { value: referral, label: Referral programme }, { value: ecovisions, label: EcoVisions } ]
+              values: [ { value: quote, label: Get a quote }, { value: brief, label: Project brief }, { value: consultation, label: Book a consultation }, { value: careers, label: Careers }, { value: referral, label: Referral programme }, { value: ecovisions, label: EcoVisions } ]
           - { name: emails, label: Email addresses, type: string, list: true }
           - { name: whatsapp, label: "WhatsApp numbers (with 91, e.g. 919820111353)", type: string, list: true }
 

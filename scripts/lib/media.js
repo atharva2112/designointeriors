@@ -18,15 +18,16 @@ const slugify = (s) => String(s || '').normalize('NFKD').replace(/[̀-ͯ]/g, '')
 
 // "…/Sunlit%20window-side%20office-2.png/:/rs=w:1800,cg:true,m" → { name: "sunlit-window-side-office-2", ext: "png" }
 // GoDaddy appends its resize options after "/:/", so everything from there on is ignored.
+// A "#name" fragment, if present, names the file instead (stock photo links carry no useful name).
 function nameFromUrl(url) {
-  let p = '';
-  try { p = new URL(url).pathname; } catch (e) { return { name: 'file', ext: '' }; }
+  let p = '', hash = '';
+  try { const u = new URL(url); p = u.pathname; hash = slugify(decodeURIComponent(u.hash.slice(1))); } catch (e) { return { name: 'file', ext: '' }; }
   p = p.split('/:/')[0].replace(/\/+$/, '');
   let last = p.slice(p.lastIndexOf('/') + 1);
   try { last = decodeURIComponent(last); } catch (e) { /* keep it encoded */ }
   const m = /\.([a-z0-9]{2,4})$/i.exec(last);
   const ext = m && EXTS.includes(m[1].toLowerCase()) ? m[1].toLowerCase().replace('jpeg', 'jpg') : '';
-  return { name: slugify(m ? last.slice(0, -m[0].length) : last) || 'file', ext: ext };
+  return { name: hash || slugify(m ? last.slice(0, -m[0].length) : last) || 'file', ext: ext };
 }
 
 const sha = (buf) => crypto.createHash('sha1').update(buf).digest('hex');

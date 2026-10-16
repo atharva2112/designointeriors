@@ -1,0 +1,130 @@
+# Publishes a Journal post from outside the admin panel.
+#
+# Start it by hand (Actions → Publish journal post → Run workflow), or from Zapier, Make, n8n,
+# Google Apps Script or any HTTP client with one request (see README → "Automated blog posts"):
+#
+#   POST https://api.github.com/repos/<owner>/designointeriors/dispatches
+#   { "event_type": "publish-post", "client_payload": { "title": "…", "category": "Workplace", "body": "…" } }
+#
+# target "drafts" (the default) commits to the drafts branch for review; "live" commits to the
+# live branch. Either way the site is built first, so a post that would break it is never committed.
+name: Publish journal post
+
+on:
+  repository_dispatch:
+    types: [publish-post]
+  workflow_dispatch:
+    inputs:
+      title:
+        description: Title
+        required: true
+        type: string
+      category:
+        description: Category
+        required: true
+        type: choice
+        options: [Workplace, Vastu, Sustainability, Intelligent Living, News]
+      body:
+        description: Body (Markdown or HTML)
+        required: true
+        type: string
+      excerpt:
+        description: Excerpt (one sentence; taken from the first paragraph if empty)
+        type: string
+      cover:
+        description: Cover image link (https://…) or /media/… path
+        type: string
+      date:
+        description: Date as YYYY-MM-DD (today if empty)
+        type: string
+      slug:
+        description: Page address (made from the title if empty)
+        type: string
+      target:
+        description: Where to publish
+        type: choice
+        default: drafts
+        options: [drafts, live]
+      replace:
+        description: Overwrite a post with the same address
+        type: boolean
+        default: false
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-post
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      POST: ${{ github.event_name == 'repository_dispatch' && toJSON(github.event.client_payload) || toJSON(github.event.inputs) }}
+      DEFAULT_BRANCH: ${{ github.event.repository.default_branch }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Choose branch
+        id: branch
+        run: |
+          target=$(node -p 'String(JSON.parse(process.env.POST).target || "drafts").trim().toLowerCase()')
+          case "$target" in
+            live|main) branch="$DEFAULT_BRANCH" ;;
+            drafts|draft) branch=drafts ;;
+            *) echo "::error::target must be \"drafts\" or \"live\" (got \"$target\")"; exit 1 ;;
+          esac
+          if git ls-remote --exit-code --heads origin "$branch" >/dev/null; then
+            git checkout -B "$branch" "origin/$branch"
+          else
+            echo "Branch $branch does not exist yet; creating it from $DEFAULT_BRANCH."
+            git checkout -B "$branch" "origin/$DEFAULT_BRANCH"
+          fi
+          echo "name=$branch" >> "$GITHUB_OUTPUT"
+
+      - name: Install Markdown converter
+        run: npm install --no-save --no-package-lock --no-audit --no-fund marked@18.1.1
+
+      - name: Write the post
+        id: post
+        run: node scripts/publish-post.js
+
+      - name: Check the site still builds
+        run: node build/build.js
+
+      - name: Commit and push
+        env:
+          BRANCH: ${{ steps.branch.outputs.name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898828+github-actions[bot]@users.noreply.github.com"
+          git add content/journal media
+          if git diff --cached --quiet; then echo "Nothing changed."; exit 0; fi
+          node -e 'const p = JSON.parse(process.env.POST); console.log("Journal: " + String(p.title).trim() + "\n\nPublished by the \"Publish journal post\" workflow.")' > "$RUNNER_TEMP/message"
+          git commit -q -F "$RUNNER_TEMP/message"
+          for attempt in 1 2 3; do
+            if git push origin "HEAD:$BRANCH"; then exit 0; fi
+            echo "Push rejected; bringing in the latest $BRANCH and trying again."
+            git pull --rebase origin "$BRANCH"
+          done
+          echo "::error::Could not push to $BRANCH. If $BRANCH requires pull requests, publish with target \"drafts\" instead."
+          exit 1
+
+      - name: Summary
+        env:
+          BRANCH: ${{ steps.branch.outputs.name }}
+          URL: ${{ steps.post.outputs.url }}
+        run: |
+          if [ "$BRANCH" = "$DEFAULT_BRANCH" ]; then
+            echo "Published to the live site. It appears at $URL in about a minute." >> "$GITHUB_STEP_SUMMARY"
+          else
+            echo "Saved to the **$BRANCH** branch for review. To publish it, open a pull request from $BRANCH to $DEFAULT_BRANCH and merge it." >> "$GITHUB_STEP_SUMMARY"
+          fi

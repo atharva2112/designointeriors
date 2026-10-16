@@ -1,0 +1,39 @@
+# One-off: copies every image and PDF that the content hot-links from GoDaddy (img1.wsimg.com)
+# or Vimeo into media/, and points the content at the copies. Run it once from the Actions tab
+# before cancelling the GoDaddy Website Builder plan. Running it again is safe; it only touches
+# links that are still remote.
+name: Import remote media
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+
+      - name: Download images and PDFs into media/
+        run: node scripts/import-remote-media.js
+
+      - name: Check the site still builds
+        run: node build/build.js
+
+      - name: Commit and push
+        env:
+          BRANCH: ${{ github.ref_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898828+github-actions[bot]@users.noreply.github.com"
+          git add content media
+          if git diff --cached --quiet; then echo "Nothing to import."; exit 0; fi
+          git commit -q -m "Move hot-linked images and PDFs into media/" -m "Done by the \"Import remote media\" workflow."
+          git push origin "HEAD:$BRANCH"

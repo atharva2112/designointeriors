@@ -1,0 +1,20 @@
+{
+  "name": "KM Music School",
+  "sector": "studios",
+  "client": "KM Music School",
+  "area": 15000,
+  "summary": "A Music School at Lotus Grandeur, built around acoustic performance.",
+  "cover": "/media/projects/km-music-school/terrace-lounge.webp",
+  "gallery": [
+    "/media/projects/km-music-school/reception.webp",
+    "/media/projects/km-music-school/grand-piano-classroom.webp",
+    "/media/projects/km-music-school/music-classroom.webp",
+    "/media/projects/km-music-school/studio-corridor.webp",
+    "/media/projects/km-music-school/recording-booth.webp",
+    "/media/projects/km-music-school/vocal-booth.webp",
+    "/media/projects/km-music-school/electronic-music-lab.webp"
+  ],
+  "featured": false,
+  "order": 6,
+  "hidden": false
+}

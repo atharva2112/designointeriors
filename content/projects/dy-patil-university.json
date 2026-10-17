@@ -1,0 +1,21 @@
+{
+  "name": "DY Patil University",
+  "sector": "education",
+  "client": "DY Patil University",
+  "summary": "Two tiered auditoriums, a curved lecture hall and a training auditorium, each with a lectern, projection and concealed cove lighting.",
+  "cover": "/media/projects/dy-patil-university/curved-auditorium-01-from-front.webp",
+  "gallery": [
+    "/media/projects/dy-patil-university/curved-auditorium-02-centre-aisle.webp",
+    "/media/projects/dy-patil-university/curved-auditorium-03-towards-lectern.webp",
+    "/media/projects/dy-patil-university/curved-auditorium-04-front-stage-side.webp",
+    "/media/projects/dy-patil-university/training-auditorium-01-from-front.webp",
+    "/media/projects/dy-patil-university/training-auditorium-02-centre-aisle-rear.webp",
+    "/media/projects/dy-patil-university/training-auditorium-03-side-seating.webp",
+    "/media/projects/dy-patil-university/training-auditorium-04-lectern-side.webp",
+    "/media/projects/dy-patil-university/training-auditorium-05-towards-stage.webp",
+    "/media/projects/dy-patil-university/training-auditorium-06-centre-aisle-stage.webp"
+  ],
+  "featured": false,
+  "order": 8,
+  "hidden": false
+}

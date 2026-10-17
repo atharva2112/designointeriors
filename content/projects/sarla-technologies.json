@@ -4,11 +4,15 @@
   "client": "Sarla Technologies",
   "area": 9000,
   "summary": "A reception, glass-partitioned corridors and an open-plan floor for a technology company.",
-  "cover": "/media/projects/sarla-technologies/sarla-technologies-reception-restored-3.webp",
+  "cover": "/media/projects/sarla-technologies/reception.webp",
   "gallery": [
-    "/media/projects/sarla-technologies/refined-glass-partition-office-corridor-4.webp",
-    "/media/projects/sarla-technologies/refined-empty-open-plan-office-2.webp",
-    "/media/projects/sarla-technologies/refined-empty-office-interior-6.webp"
+    "/media/projects/sarla-technologies/glass-partition-corridor.webp",
+    "/media/projects/sarla-technologies/open-plan-office.webp",
+    "/media/projects/sarla-technologies/workstations.webp",
+    "/media/projects/sarla-technologies/office-corridor.webp",
+    "/media/projects/sarla-technologies/wood-workstations.webp",
+    "/media/projects/sarla-technologies/meeting-cabin.webp",
+    "/media/projects/sarla-technologies/manager-cabin.webp"
   ],
   "featured": true,
   "order": 3,

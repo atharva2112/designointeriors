@@ -4,11 +4,12 @@
   "client": "Wincor Nixdorf",
   "area": 7500,
   "summary": "Showroom reception, open workstations and a boardroom for Wincor Nixdorf’s Mumbai office at Kohinoor City.",
-  "location": "Kohinoor City, Kurla",
-  "cover": "/media/projects/wincor-nixdorf/wincor-nixdorf-showroom-reception.webp",
+  "cover": "/media/Polished Office with Yellow Partitions.png",
   "gallery": [
-    "/media/projects/wincor-nixdorf/polished-office-with-yellow-partitions.webp",
-    "/media/projects/wincor-nixdorf/enhanced-boardroom-with-purple-accents.webp"
+    "/media/projects/wincor-nixdorf/enhanced-boardroom-with-purple-accents.webp",
+    "/media/Refined open-plan office corridor.png",
+    "/media/Wincor Nixdorf showroom reception.png",
+    "/media/Blue-Lit Circular Conference Room-1.png"
   ],
   "featured": true,
   "order": 1,

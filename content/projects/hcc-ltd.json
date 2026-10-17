@@ -1,0 +1,19 @@
+{
+  "name": "HCC Ltd",
+  "sector": "corporate",
+  "client": "HCC Ltd",
+  "area": 12000,
+  "summary": "A boardroom with a mural of the Bandra–Worli Sea Link, and a townhall conference room that looks out into the trees.",
+  "cover": "/media/projects/hcc-ltd/townhall-conference-room.webp",
+  "gallery": [
+    "/media/projects/hcc-ltd/townhall-towards-screen.webp",
+    "/media/projects/hcc-ltd/conference-room-greenery.webp",
+    "/media/projects/hcc-ltd/boardroom.webp",
+    "/media/projects/hcc-ltd/boardroom-table.webp",
+    "/media/projects/hcc-ltd/boardroom-sea-link-mural.webp",
+    "/media/projects/hcc-ltd/boardroom-trophy-cabinet.webp"
+  ],
+  "featured": true,
+  "order": 4,
+  "hidden": false
+}

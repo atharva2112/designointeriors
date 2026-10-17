@@ -173,7 +173,7 @@
     "id": "education",
     "name": "Education",
     "blurb": "University buildings and institutional campuses.",
-    "image": "",
+    "image": "/media/projects/dy-patil-university/curved-auditorium-01-from-front.webp",
     "title": "Education interiors",
     "intro": "University buildings and institutional campuses, built for daily use by large numbers of people.",
     "points": [
@@ -211,7 +211,7 @@
     "id": "fitness",
     "name": "Fitness Centres",
     "blurb": "Gyms and wellness floors that take heavy daily use.",
-    "image": "",
+    "image": "/media/projects/extreme-fitness/gym-floor.webp",
     "title": "Fitness centre interiors",
     "intro": "Gyms and wellness floors that take heavy daily use and stay easy to run.",
     "points": [

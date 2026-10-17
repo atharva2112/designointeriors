@@ -1,0 +1,23 @@
+{
+  "name": "Extreme Fitness",
+  "sector": "fitness",
+  "client": "Extreme Fitness",
+  "summary": "A gym floor, strength zone and group-exercise studio, with a reception lounge, café, sauna and recovery rooms.",
+  "cover": "/media/projects/extreme-fitness/gym-floor.webp",
+  "gallery": [
+    "/media/projects/extreme-fitness/strength-zone.webp",
+    "/media/projects/extreme-fitness/training-floor.webp",
+    "/media/projects/extreme-fitness/group-exercise-studio.webp",
+    "/media/projects/extreme-fitness/reception-lounge.webp",
+    "/media/projects/extreme-fitness/cafe.webp",
+    "/media/projects/extreme-fitness/manager-cabin.webp",
+    "/media/projects/extreme-fitness/corridor.webp",
+    "/media/projects/extreme-fitness/sauna.webp",
+    "/media/projects/extreme-fitness/cold-plunge.webp",
+    "/media/projects/extreme-fitness/treatment-room.webp",
+    "/media/projects/extreme-fitness/light-therapy-room.webp"
+  ],
+  "featured": false,
+  "order": 7,
+  "hidden": false
+}

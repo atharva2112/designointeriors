@@ -5,11 +5,13 @@
   "area": 6000,
   "summary": "Reception, circulation and work areas organised around a run of red columns.",
   "location": "Kohinoor City, Kurla",
-  "cover": "/media/projects/laerdal/refined-laerdal-reception-area-4.webp",
+  "cover": "/media/projects/laerdal/reception.webp",
   "gallery": [
-    "/media/projects/laerdal/sunlit-office-corridor-with-red-columns-3.webp",
-    "/media/projects/laerdal/refined-office-with-vivid-red-columns-1.webp",
-    "/media/projects/laerdal/sunlit-window-side-office-2.webp"
+    "/media/projects/laerdal/reception-waiting-area.webp",
+    "/media/projects/laerdal/office-corridor-red-columns.webp",
+    "/media/projects/laerdal/open-office-red-columns.webp",
+    "/media/projects/laerdal/workstations-red-column.webp",
+    "/media/projects/laerdal/window-side-workstations.webp"
   ],
   "featured": true,
   "order": 2,

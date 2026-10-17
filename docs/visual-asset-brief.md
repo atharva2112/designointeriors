@@ -32,7 +32,7 @@ This is every photo the site still needs, page by page. Each one has a generatio
 
 Each technology photo appears in 4 places: the /technology/ card, the /services/ card, the top of its own page, and the "Next system" card.
 
-- [ ] **A1 · Networking & IT** · `media/services/networking-it.webp` · Admin › Services › Networking & IT infrastructure › Image
+- [x] **A1 · Networking & IT** (done: Wegofin server and UPS room) · `media/services/networking-it.webp` · Admin › Services › Networking & IT infrastructure › Image
   > A small, immaculate server and network room inside a modern office. One black 42U network rack stands centre-frame with its door open: neatly dressed patch cables in white and forest green run through horizontal cable managers into patch panels and switches with tiny green status LEDs. White overhead cable tray, light-grey epoxy floor. Through a glass door at the right edge, a soft glimpse of the finished office in oak, plants and warm light. Precise and orderly.
 - [ ] **A2 · CCTV** · `media/services/cctv-surveillance.webp` · Services › CCTV & video surveillance
   > Close, low-angle view of a small white dome IP camera on a smooth white gypsum ceiling at the corner of an office reception, sharp and slightly left of centre. Behind it, softly out of focus (f/2.8): a light-oak reception desk with a white stone top, a forest-green sofa, a tall plant, warm downlights. Discreet security that blends into a refined interior.
@@ -46,9 +46,9 @@ Each technology photo appears in 4 places: the /technology/ card, the /services/
   > Corporate reception and lift lobby. A large portrait-format display sits flush in a light-oak vertical-slat feature wall, showing a soft abstract forest-green to sage gradient (no text). To one side is a glass meeting-room door with a small booking panel glowing green. Terrazzo floor, white stone counter, warm cove light, tall plant.
 - [ ] **A7 · PA & background music** · `media/services/pa-background-music.webp` · Services › PA & background music
   > An empty office cafeteria and breakout space in bright midday light. There is a long oak communal table with sage chairs, a white stone coffee counter, pendants and plants. In the foreground of the oak-slat ceiling, two round flush white ceiling speakers are clearly visible but discreet.
-- [ ] **A8 · Education** · `media/sectors/education.webp` · Admin › Sectors › Education › Image
+- [x] **A8 · Education** (done: DY Patil University auditorium) · `media/sectors/education.webp` · Admin › Sectors › Education › Image
   > A university seminar room in western India. Rows of light-oak tables with forest-green chairs face a blank white projection wall. The ceiling has acoustic panels and linear lights. Tall windows with white louvred shutters are part-open to coconut palms and laterite stone. Bright daylight on a polished stone floor. Durable, orderly, warm.
-- [ ] **A9 · Fitness** · `media/sectors/fitness.webp` · Sectors › Fitness Centres
+- [x] **A9 · Fitness** (done: Extreme Fitness gym floor) · `media/sectors/fitness.webp` · Sectors › Fitness Centres
   > A premium fitness floor in Mumbai: black rubber flooring, a row of treadmills facing full-height windows with a morning city view, a light-oak wall with a full-height mirror, a black dumbbell rack, a sage accent wall, warm linear lights in a dark ceiling. Unbranded equipment. Calm and well organised.
 - [ ] **A10 · Healthcare** (replaces the current low-resolution photo with "REGISTRATION" lettering) · `media/sectors/healthcare.webp` · Sectors › Healthcare
   > A calm clinic reception and waiting area: a curved light-oak counter with a seamless white solid-surface top, sage upholstered bench seating, a pale terrazzo floor, soft cove lighting, plants, and a short corridor to consultation rooms with frosted-glass doors. Bright, hygienic, reassuring. No signage.
@@ -106,6 +106,6 @@ Upload each one in **Settings › Site › Page images** under the field named. 
 ## D. Real photos only: do not generate
 
 - [ ] **Founder portrait** · **4:5, 1600 × 2000** · `media/site/founder.webp` · Page images › Founder portrait. The About page shows an empty box until this is set. Sanjeev M. Haldankar, waist-up, in a finished Designo space or the office. Soft window light from one side, plain warm-white or oak background, relaxed expression, room above the head. A phone in portrait mode is fine if the light is good.
-- [ ] **More project photos.** Recording Studio has 1 photo, Restaurant & Bar has 1 and Flagship Showroom has 2. Add 4 to 8 landscape photos each, shot like the PHOTO STYLE above.
+- [ ] **More project photos.** Area, location and year are still blank for Wegofin, Extreme Fitness, DY Patil University and DY Patil Office (Admin › Projects). Retail and hospitality have no visible projects yet: add a showroom or restaurant with 4 to 8 landscape photos, shot like the PHOTO STYLE above.
 - [ ] **Two missing client logos:** Hotel Centaur and S.S. Communication. SVG, or PNG with a transparent background, cropped tight (Admin › Clientele › Client logos).
 - [ ] *Optional* **Office photos** of Bhandup West and Powai: the building entrance or your reception, 4:3, for the Contact page.

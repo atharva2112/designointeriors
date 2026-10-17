@@ -1,0 +1,25 @@
+{
+  "name": "DY Patil Office",
+  "sector": "corporate",
+  "client": "DY Patil",
+  "summary": "An entrance lobby and lounge, lift lobby, corridor, executive cabin and boardroom in marble, warm wood and bronze.",
+  "cover": "/media/projects/dy-patil-office/entrance-lobby.webp",
+  "gallery": [
+    "/media/projects/dy-patil-office/lobby-lounge-01.webp",
+    "/media/projects/dy-patil-office/lobby-lounge-02.webp",
+    "/media/projects/dy-patil-office/lobby-lounge-03.webp",
+    "/media/projects/dy-patil-office/lift-lobby.webp",
+    "/media/projects/dy-patil-office/corridor.webp",
+    "/media/projects/dy-patil-office/executive-cabin-01-desk.webp",
+    "/media/projects/dy-patil-office/executive-cabin-02-seating-corner.webp",
+    "/media/projects/dy-patil-office/executive-cabin-03-lounge-wall.webp",
+    "/media/projects/dy-patil-office/executive-cabin-04-entry-wall.webp",
+    "/media/projects/dy-patil-office/executive-cabin-05-desk-side.webp",
+    "/media/projects/dy-patil-office/boardroom-01-towards-bookshelves.webp",
+    "/media/projects/dy-patil-office/boardroom-02-towards-display.webp",
+    "/media/projects/dy-patil-office/boardroom-03-side-view.webp"
+  ],
+  "featured": false,
+  "order": 9,
+  "hidden": false
+}

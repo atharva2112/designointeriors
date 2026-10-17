@@ -1,11 +1,10 @@
 {
-  "name": "Recording Studio",
+  "name": "KM Music School",
   "sector": "studios",
-  "client": "A.R. Rahman",
-  "area": 1500,
-  "summary": "A private recording studio at Lotus Grandeur, built around acoustic performance.",
+  "client": "KM Music School",
+  "area": 15000,
+  "summary": "A Music School at Lotus Grandeur, built around acoustic performance.",
   "cover": "/media/projects/recording-studio/interior-design-for-music-studio.webp",
-  "gallery": [],
   "featured": false,
   "order": 6,
   "hidden": false
